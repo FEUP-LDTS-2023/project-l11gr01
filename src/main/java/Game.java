@@ -26,7 +26,6 @@ public class Game {
             screen.setCursorPosition(null);
             screen.startScreen();
 
-
             // Set the default background color to black
             terminal.setBackgroundColor(TextColor.ANSI.BLACK);
             terminal.setForegroundColor(TextColor.ANSI.WHITE);
@@ -35,9 +34,6 @@ public class Game {
             // Centralize the terminal window
             int terminalWindowX = (terminalSize.getColumns() - 30) / 2;
             int terminalWindowY = (terminalSize.getRows() - 5) / 2;
-
-            // Create a TextGUI to handle user input
-            TextGUI textGUI = new MultiWindowTextGUI(screen);
 
             // Draw some "components" of the menu
             drawTitleAndMessage(screen, terminalWindowX, terminalWindowY);
@@ -49,6 +45,9 @@ public class Game {
                 KeyStroke keyStroke = terminal.pollInput();
                 if (keyStroke != null && keyStroke.getKeyType() == KeyType.Enter) {
                     screen.close();
+
+                    //This is the starting level
+                    new Mercury().start();
                     break;
                 }
             }
