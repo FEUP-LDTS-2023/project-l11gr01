@@ -21,11 +21,11 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 - **Win lives for passing level** - For each level the user passes it will receive one extra life.
 
-![img](docs/images/feature1.png)
+![img](project-l11gr01/docs/images/feature1.png)
 
 - **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life.
 
-![img](docs/images/feature2.png)
+![img](project-l11gr01/docs/images/feature2.png)
 
 ### DESIGN
 
