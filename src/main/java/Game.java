@@ -17,7 +17,7 @@ public class Game {
             TerminalSize terminalSize = new TerminalSize(50, 20);
 
             // Initializing the terminal
-            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setTerminalEmulatorTitle("Savior of the Solar System");
+            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setTerminalEmulatorTitle("Saviors of the Solar System");
             terminalFactory.setInitialTerminalSize(terminalSize);
             Terminal terminal = terminalFactory.createTerminal();
 

@@ -18,12 +18,27 @@ public class Spaceship {
         this.position = position;
     }
 
+    public void moveUp(){
+        position.setY(position.getY() - 1);
+    }
+    public void moveDown(){
+        position.setY(position.getY() + 1);
+    }
+
+    public void moveLeft(){
+        position.setX(position.getX() - 1);
+    }
+
+    public void moveRight(){
+        position.setX(position.getX() + 1);
+    }
+
     public void draw(TextGraphics graphics){
         int x = position.getX();
         int y = position.getY();
 
-        graphics.setForegroundColor(TextColor.Factory.fromString("#FF3333"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#FFFF00"));
         graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(position.getX(), position.getY()),"S");
+        graphics.putString(new TerminalPosition(x,y),"S");
     }
 }
