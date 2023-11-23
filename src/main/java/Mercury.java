@@ -1,64 +1,45 @@
 import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import org.w3c.dom.Text;
+import com.googlecode.lanterna.TerminalSize;
 
 import java.io.IOException;
 
 public class Mercury extends Planet {
-    protected Spaceship spaceship;
-    private String backgroundColor;
 
-    public Mercury(){
-        super(new TerminalSize(90, 40), "Planet Mercury", "#536872");
-        spaceship = new Spaceship(new Position(45,20));
-    }
+    private TerminalScreen screen;
+    private static final TextColor backgroundColor = TextColor.Factory.fromString("#536872");
 
+    public Mercury() {
+        try {
+            TerminalSize terminalSize = new TerminalSize(90, 45);
 
-    public void start(){
-        try{
+            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setTerminalEmulatorTitle("Saviors of the Solar System");
+            terminalFactory.setInitialTerminalSize(terminalSize);
+            Terminal terminal = terminalFactory.createTerminal();
 
-            while(true){
-                screen.refresh();
-                processInputs();
-
-                drawFloor();
-                spaceship.draw(screen.newTextGraphics());
-                screen.refresh();
-
-                KeyStroke keyStroke = screen.readInput();
-                if (keyStroke != null && keyStroke.getKeyType() == KeyType.Escape) {
-                    screen.close();
-                    break;
-                }
-            }
+            screen = new TerminalScreen(terminal);
+            screen.setCursorPosition(null);
+            screen.startScreen();
         } catch (IOException e) {
-            e.printStackTrace();}
+            e.printStackTrace();
+        }
     }
 
-    private void processInputs() throws IOException {
-        KeyStroke keyStroke = screen.readInput();
-        if(keyStroke != null){
-            switch(keyStroke.getKeyType()){
-                case ArrowUp:
-                    spaceship.moveUp();
-                    break;
-                case ArrowDown:
-                    spaceship.moveDown();
-                    break;
-                case ArrowLeft:
-                    spaceship.moveLeft();
-                    break;
-                case ArrowRight:
-                    spaceship.moveRight();
-                    break;
-            }
+    @Override
+    public void drawFloor() {
+        try{
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setBackgroundColor(backgroundColor);
+        graphics.setForegroundColor(backgroundColor);
+        graphics.fillRectangle(new TerminalPosition(0, 0), screen.getTerminalSize(), ' ');
+        screen.refresh();
+
+    } catch (IOException e){
+            e.printStackTrace();
         }
     }
 }
