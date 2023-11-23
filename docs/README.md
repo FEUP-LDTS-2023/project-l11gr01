@@ -1,9 +1,9 @@
 ## LDTS_<11><01> - <SAVIORS OF THE SOLAR SYSTEM>
 
-> Include here one or two paragraphs explaining the main idea of the project, followed by a sentence identifying who the authors are.
 
-In this exciting adventure game you shall help the Saviors of the Universe save the solar system from a species of invaders, by annihilating all the invaders and collecting all the tokens throughout the eight different levels (representing the eight planets of the solar system. 
-In each level, until reaching the final level "Planet Earth" (which is the most difficult one), the difficulty level will increase. You will have more invaders to defeat that are more powerful and the abilities of your spaceship will diminish (slower and less missiles). Fortunately, there are some powers that you can catch so you are able to defeat the invaders.
+In this exciting adventure game you shall help the Saviors of the Universe save the solar system from a species of invaders that have the ability to control asteroids, by escaping the asteroids thrown by them and collecting all the tokens throughout the eight different levels (representing the eight planets of the solar system). 
+In each level, until reaching the final level "Planet Earth" (which is the most difficult one), the difficulty level will increase. You will have more asteroids to doge that will travel faster. You'll also have to catch more tokens to save the given planet. At the start you have 3 lives and for each planet you are able to save you'll receive an extra one. 
+You can also catch special tokens that give you an extra life.
 Are you ready to save the solar system from the invaders?
 
 This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira (up202009302@up.pt) and Álvaro Torres (up202208954@up.pt) for LDTS 2023⁄24.
@@ -12,14 +12,20 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 
-**Examples**:
-
-- **Jumping** - The game character will jump when the space bar key is pressed.
-- **Getting hidden coins** - When the game character hits a platform from below (by jumping beneath it) it will smash that segment of the platform and will get any coins that may exist hidden there.
+- **Spaceship movement** - The spaceship can move using the arrow keys.
+- **Asteroids movement** - When the game character hits a platform from below (by jumping beneath it) it will smash that segment of the platform and will get any coins that may exist hidden there.
 
 ### PLANNED FEATURES
 
 > This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
+
+- **Win lives for passing level** - For each level the user passes it will receive one extra life.
+
+![img](project-l11gr01/docs/images/feature1.png)
+
+- **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life.
+
+![img](project-l11gr01/docs/images/feature2.png)
 
 ### DESIGN
 

@@ -1,3 +1,4 @@
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -59,9 +60,9 @@ public class Game {
     private static void drawTitleAndMessage(TerminalScreen screen, int x, int y) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
-        textGraphics.putString(x, y, "Savior of the Solar System");
-        textGraphics.putString(x, y + 2, "Welcome, our Savior");
-        textGraphics.putString(x, y + 3, "Press Enter to start playing!");
+        textGraphics.putString(x, y, "Saviors of the Solar System", SGR.BOLD, SGR.ITALIC);
+        textGraphics.putString(x + 5, y + 2, "Welcome, our Savior");
+        textGraphics.putString(x, y + 4, "Press Enter to start playing!");
     }
 
     private static void drawButton(TerminalScreen screen, int x, int y, String label) {
