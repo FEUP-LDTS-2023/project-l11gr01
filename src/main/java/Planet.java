@@ -3,41 +3,46 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
-public class Planet {
-    protected TerminalScreen screen;
-    protected String backgroundColor;
+public abstract class Planet{
 
-    public Planet(TerminalSize terminalSize, String title, String backgroundColor){
-        this.backgroundColor = backgroundColor;
-        try{
-            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setTerminalEmulatorTitle(title);
-            terminalFactory.setInitialTerminalSize(terminalSize);
-            Terminal terminal = terminalFactory.createTerminal();
+    protected TextColor backgroundColor;
+    protected Spaceship spaceship;
 
-            screen = new TerminalScreen(terminal);
-            screen.startScreen();
+    public Planet(TextGraphics graphics, String backgroundColor, Spaceship spaceship){
+        this.backgroundColor = TextColor.Factory.fromString(backgroundColor);
+        this.spaceship = spaceship;
+        draw(graphics);
+    }
 
+    public void draw(TextGraphics graphics) {
+        //Set Planet's background color
+        graphics.setBackgroundColor(backgroundColor);
+        graphics.setForegroundColor(backgroundColor);
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(90,45), ' ');
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        spaceship.draw(graphics, "S");
+    }
+
+    void processKey(KeyStroke keyStroke) throws IOException {
+        if(keyStroke != null){
+            switch(keyStroke.getKeyType()){
+                case ArrowUp:
+                    spaceship.moveUp();
+                    break;
+                case ArrowDown:
+                    spaceship.moveDown();
+                    break;
+                case ArrowLeft:
+                    spaceship.moveLeft();
+                    break;
+                case ArrowRight:
+                    spaceship.moveRight();
+                    break;
+            }
         }
     }
-
-    public void drawFloor() {
-        TextGraphics graphics = screen.newTextGraphics();
-        graphics.setBackgroundColor(TextColor.Factory.fromString(this.backgroundColor));
-        graphics.setForegroundColor(TextColor.Factory.fromString(this.backgroundColor));
-        graphics.fillRectangle(new TerminalPosition(0, 0), screen.getTerminalSize(), ' ');
-    }
-
-    public String getBackgroundColor(){
-        return backgroundColor;
-    }
-
 }

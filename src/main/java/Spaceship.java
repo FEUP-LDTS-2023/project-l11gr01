@@ -3,19 +3,17 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-public class Spaceship {
-    private Position position;
+public class Spaceship extends Element {
 
-    public Spaceship(Position position){
-        this.position = position;
+    public Spaceship(int x, int y){
+        super(x, y);
     }
 
-    public Position getPosition(){
-        return position;
-    }
-
-    public void setPosition(Position position){
-        this.position = position;
+    @Override
+    public void draw(TextGraphics graphics, String character) {
+        graphics.setForegroundColor(TextColor.Factory.fromString("#FFFF00"));
+        graphics.enableModifiers(SGR.BOLD);
+        graphics.putString(new TerminalPosition(position.getX(), position.getY()), character);
     }
 
     public void moveUp(){
@@ -24,21 +22,10 @@ public class Spaceship {
     public void moveDown(){
         position.setY(position.getY() + 1);
     }
-
     public void moveLeft(){
         position.setX(position.getX() - 1);
     }
-
     public void moveRight(){
         position.setX(position.getX() + 1);
-    }
-
-    public void draw(TextGraphics graphics){
-        int x = position.getX();
-        int y = position.getY();
-
-        graphics.setForegroundColor(TextColor.Factory.fromString("#FFFF00"));
-        graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(x,y),"S");
     }
 }
