@@ -23,7 +23,6 @@ public class Planet {
             screen = new TerminalScreen(terminal);
             screen.startScreen();
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }

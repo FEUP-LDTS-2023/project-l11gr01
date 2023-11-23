@@ -23,7 +23,9 @@ public class Mercury extends Planet {
 
     public void start(){
         try{
+
             while(true){
+                screen.refresh();
                 processInputs();
 
                 drawFloor();
@@ -41,7 +43,7 @@ public class Mercury extends Planet {
     }
 
     private void processInputs() throws IOException {
-        KeyStroke keyStroke = screen.pollInput();
+        KeyStroke keyStroke = screen.readInput();
         if(keyStroke != null){
             switch(keyStroke.getKeyType()){
                 case ArrowUp:

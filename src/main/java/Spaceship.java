@@ -34,11 +34,8 @@ public class Spaceship {
     }
 
     public void draw(TextGraphics graphics){
-        int x = position.getX();
-        int y = position.getY();
-
         graphics.setForegroundColor(TextColor.Factory.fromString("#FFFF00"));
         graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(x,y),"S");
+        graphics.putString(new TerminalPosition(position.getX(), position.getY()),"S");
     }
 }
