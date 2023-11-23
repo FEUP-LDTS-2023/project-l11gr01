@@ -24,19 +24,19 @@ We are going to implement the following features in the given order.
 
 - **Increase difficulty by level** - For each level the user passes the difficulty will increase: more asteroids to doge that will travel faster + more tokens to collect to save the given planet (pass the level).
 
-![img](docs/images/increasedifficulty.png)
+![img](images/increasedifficulty.png)
 
 - **Lose lives** - Whenever the spaceship is hit by an asteroid it loses one life.
 
-![img](docs/images/loselife.png)
+![img](images/loselife.png)
 
 - **Win lives for passing level** - For each level the user passes it will receive one extra life.
 
-![img](docs/images/levellives.png)
+![img](images/levellives.png)
 
 - **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life.
 
-![img](docs/images/extralives.png)
+![img](images/extralives.png)
 
 ### DESIGN
 
