@@ -45,10 +45,10 @@ public class Game {
                 if (keyStroke != null && keyStroke.getKeyType() == KeyType.Enter) {
                     screen.close();
 
-                    //This is the starting level
-                    new Mercury().start();
-
+                    Mercury mercury = new Mercury();
+                    mercury.drawFloor();
                     break;
+
                 }
             }
 
