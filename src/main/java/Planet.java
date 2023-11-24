@@ -14,10 +14,17 @@ public abstract class Planet{
     protected List<Wall> walls;
     protected List<Asteroid> asteroids;
 
+    private long lastAsteroidCreationTime = System.currentTimeMillis();
+
+    private long lastAsteroidMoveTime = System.currentTimeMillis();
+    private long asteroidCreationDelay = 1000; // Milliseconds between each asteroid creation
+    private long asteroidMoveDelay = 100;
+
+
     public Planet(TextColor backgroundColor,String name){
         this.backgroundColor = backgroundColor;
         this.spaceship = new Spaceship();
-        this.walls = new ArrayList<>(210);
+        this.walls = new ArrayList<>();
         this.asteroids = new ArrayList<>();
         this.name = name;
         createWalls();
@@ -35,7 +42,7 @@ public abstract class Planet{
         spaceship.draw(graphics);
         //Draw level name
         graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-        graphics.putString(new TerminalPosition(0,0),name,SGR.BOLD);
+        graphics.putString(new TerminalPosition(1,1),name,SGR.BOLD);
         //Draw asteroids
         for (Asteroid asteroid : asteroids) {
             asteroid.draw(graphics);
@@ -43,14 +50,23 @@ public abstract class Planet{
     }
 
     public void updateAsteroids() {
-        if (asteroids.size() < 3) {
-            Random random = new Random();
-            int x = random.nextInt(1,90);
-            asteroids.add(new Asteroid(x));
+        Random random = new Random();
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
+            if (asteroids.size() < 3) {
+                int x = random.nextInt(1, 90);
+                asteroids.add(new Asteroid(x));
+            }
+            lastAsteroidCreationTime = currentTime;
+        }
+        if (currentTime - lastAsteroidMoveTime > asteroidMoveDelay) {
+            for (Asteroid asteroid : asteroids) {
+                asteroid.moveDown();
+            }
+            lastAsteroidMoveTime = currentTime;
         }
         for (int i = 0; i < asteroids.size(); i++) {
-            asteroids.get(i).moveDown();
-            if (asteroids.get(i).getY() == 45) {
+            if (asteroids.get(i).getY() == 44) {
                 asteroids.remove(i);
             }
         }
@@ -91,13 +107,13 @@ public abstract class Planet{
 
     private void createWalls() {
          //Create walls for the left and right boundaries
-        for (int y = 30; y <= 44; y++) {
+        for (int y = 0; y <= 44; y++) {
             walls.add(new Wall(0, y));
             walls.add(new Wall(89, y));
         }
         // Create walls for the top and bottom boundaries
         for (int x = 0; x <= 89; x++) {
-            walls.add(new Wall(x, 30));
+            walls.add(new Wall(x, 0));
             walls.add(new Wall(x, 44));
         }
     }
