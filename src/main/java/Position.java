@@ -24,4 +24,12 @@ public class Position {
         this.y = y;
     }
 
+    public Boolean equals(Position position) {
+        if (this.getX() == position.getX() && this.getY() == position.getY()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

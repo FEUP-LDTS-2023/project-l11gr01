@@ -1,8 +1,7 @@
-import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.TextColor;
 
 public class Mercury extends Planet {
-    public Mercury(TextGraphics graphics){
-        //Create Planet and start new Spaceship.
-        super(graphics, "#FFFFFF", new Spaceship(45,20));
+    public Mercury(){
+        super(TextColor.Factory.fromString("#353432"),"Mercury");
     }
 }
