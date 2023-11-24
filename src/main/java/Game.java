@@ -9,7 +9,12 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 
+import static com.googlecode.lanterna.input.KeyType.Escape;
+
 public class Game {
+
+    private Spaceship spaceship;
+    private TerminalScreen screen;
 
     public static void main(String[] args) {
         try {
@@ -39,19 +44,21 @@ public class Game {
             drawButton(screen, terminalWindowX + 10, terminalWindowY + 5, "Start");
             screen.refresh();
 
-            // Wait for the user to press Enter
+            // Waiting for the user to press Enter
             while (true) {
                 KeyStroke keyStroke = terminal.pollInput();
+                if(keyStroke != null && keyStroke.getKeyType() == Escape){
+                    screen.close();
+                    break;
+                }
                 if (keyStroke != null && keyStroke.getKeyType() == KeyType.Enter) {
                     screen.close();
 
                     Mercury mercury = new Mercury();
                     mercury.drawFloor();
                     break;
-
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,4 +78,5 @@ public class Game {
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
         textGraphics.putString(x, y, "[" + label + "]");
     }
+
 }
