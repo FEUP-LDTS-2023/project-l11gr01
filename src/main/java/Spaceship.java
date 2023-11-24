@@ -5,7 +5,6 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Spaceship extends Element {
 
-
     public Spaceship(){
         super(new Position(44,39),TextColor.ANSI.YELLOW_BRIGHT);
         image = new BasicTextImage(3,3);
