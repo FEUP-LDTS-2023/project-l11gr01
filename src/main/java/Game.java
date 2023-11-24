@@ -1,4 +1,3 @@
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -10,6 +9,8 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 
 public class Game {
+
+    private static Planet level;
 
     public static void main(String[] args) {
         try {
@@ -33,28 +34,43 @@ public class Game {
             screen.refresh();
 
 
-            KeyStroke keyStroke = screen.readInput();
-            while (keyStroke.getKeyType() != KeyType.EOF) {
-                if (keyStroke.getKeyType() == KeyType.Enter) {
+            boolean running = true;
 
-                    //Start level 1
-                    Planet mercury = new Mercury(graphics);
-                    screen.refresh();
-                    while (keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.EOF) {
-                        keyStroke = screen.readInput();
-                        mercury.processKey(keyStroke);
-                        mercury.draw(graphics);
-                        screen.refresh();
+            while (running) {
+                KeyStroke keyStroke = screen.pollInput();
+                if (keyStroke != null) {
+                    switch (keyStroke.getKeyType()) {
+                        case Enter: {
+                            //Start level 1
+                            level = new Mercury();
+                            do {
+                                level.updateAsteroids();
+                                level.draw(graphics);
+                                screen.refresh();
+                                keyStroke = screen.pollInput();
+                                if (keyStroke != null) {
+                                    processKey(keyStroke);
+                                }
+                            } while (keyStroke == null || (keyStroke.getKeyType() != KeyType.EOF && keyStroke.getKeyType() != KeyType.Escape));
+                            break;
+                        }
+                        case Escape, EOF: {
+                            running = false;
+                            break;
+                        }
                     }
                 }
-                keyStroke = screen.readInput();
             }
-
+            screen.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+
+    private static void processKey(KeyStroke keyStroke) throws IOException {
+        level.processKey(keyStroke);
+    }
 
     private static void drawMenu(TextGraphics graphics, int x, int y) {
 
@@ -62,10 +78,6 @@ public class Game {
         graphics.putString(x, y, "Savior of the Solar System");
         graphics.putString(x, y + 2, "Welcome, our Savior");
         graphics.putString(x, y + 3, "Press Enter to start playing!");
-        graphics.putString(x+10, y+5, "[Start]");
-
+        graphics.putString(x + 10, y + 5, "[Start]");
     }
-
-    private static void drawLevel1Menu() {}
-
 }
