@@ -1,10 +1,11 @@
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
+import com.googlecode.lanterna.screen.TerminalScreen;
+
 import java.io.IOException;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -15,23 +16,44 @@ public abstract class Planet{
     protected Spaceship spaceship;
     protected List<Wall> walls;
     protected List<Asteroid> asteroids;
-    protected List<Token> tokens;
+    protected int tokenCount;
 
+
+
+    protected Token token;
+    protected int asteroidCount;
     private long lastAsteroidCreationTime = System.currentTimeMillis();
-
     private long lastAsteroidMoveTime = System.currentTimeMillis();
     private long asteroidCreationDelay = 1000; // Milliseconds between each asteroid creation
     private long asteroidMoveDelay = 100;
 
 
-    public Planet(TextColor backgroundColor,String name){
+    //Constructor, after calling it need to set asteroidCount.
+    public Planet(TextColor backgroundColor,String name, int tokenCount, int asteroidCount){
         this.backgroundColor = backgroundColor;
-        this.spaceship = new Spaceship();
+        this.tokenCount = tokenCount;
+        this.asteroidCount = asteroidCount;
+        this.spaceship = new Spaceship(backgroundColor);
         this.walls = new ArrayList<>();
         this.asteroids = new ArrayList<>();
-        this.tokens = new ArrayList<>();
         this.name = name;
         createWalls();
+    }
+
+    public void run(TerminalScreen screen) throws IOException {
+        KeyStroke keyStroke;
+        Random random = new Random();
+        token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)),backgroundColor);
+        do {
+            updateToken();
+            updateAsteroids();
+            draw(screen.newTextGraphics());
+            screen.refresh();
+            keyStroke = screen.pollInput();
+            if (keyStroke != null) {
+                processKey(keyStroke);
+            }
+        } while ((tokenCount != 0) && (keyStroke == null) || (keyStroke.getKeyType() != KeyType.EOF && keyStroke.getKeyType() != KeyType.Escape));
     }
 
     public void draw(TextGraphics graphics) {
@@ -42,26 +64,24 @@ public abstract class Planet{
         for (Wall wall : walls) {
             wall.draw(graphics);
         }
-        //Draw spaceship
-        spaceship.draw(graphics);
         //Draw level name
         graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
         graphics.putString(new TerminalPosition(1,1),name,SGR.BOLD);
+        //Draw spaceship
+        spaceship.draw(graphics);
         //Draw asteroids
         for (Asteroid asteroid : asteroids) {
             asteroid.draw(graphics);
         }
-
-        for(Token token : tokens){
-            token.draw(graphics);
-        }
+        //Draw Token
+        token.draw(graphics);
     }
 
     public void updateAsteroids() {
         Random random = new Random();
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
-            if (asteroids.size() < 3) {
+            if (asteroids.size() < asteroidCount) {
                 int x = random.nextInt(1, 90);
                 asteroids.add(new Asteroid(x));
             }
@@ -74,8 +94,10 @@ public abstract class Planet{
             lastAsteroidMoveTime = currentTime;
         }
         for (int i = 0; i < asteroids.size(); i++) {
-            if (asteroids.get(i).getY() == 44) {
-                asteroids.remove(i);
+            for (Position position : asteroids.get(i).getPositions()) {
+                if (position.getY() == 44) {
+                    asteroids.remove(i);
+                }
             }
         }
         verifyAsteroidCollision();
@@ -125,69 +147,81 @@ public abstract class Planet{
         }
     }
 
-    private Boolean canSpaceShipMoveLeft() {
+    private boolean canSpaceShipMoveUp() {
         for (Wall wall : walls) {
-            if (wall.getX() == spaceship.getX()-1 && wall.getY() == spaceship.getY()) {
-                return false;
+            for (Position wallPosition : wall.getPositions()) {
+                for (Position spaceshipPosition : spaceship.getPositions()) {
+                    if (wallPosition.getX() == spaceshipPosition.getX() && wallPosition.getY() == spaceshipPosition.getY()-1) {
+                        return false;
+                    }
+                }
             }
         }
         return true;
     }
 
-    private Boolean canSpaceShipMoveRight() {
+    private boolean canSpaceShipMoveDown() {
         for (Wall wall : walls) {
-            if (wall.getX() == spaceship.getX()+3 && wall.getY() == spaceship.getY()) {
-                return false;
+            for (Position wallPosition : wall.getPositions()) {
+                for (Position spaceshipPosition : spaceship.getPositions()) {
+                    if (wallPosition.getX() == spaceshipPosition.getX() && wallPosition.getY() == spaceshipPosition.getY()+1) {
+                        return false;
+                    }
+                }
             }
         }
         return true;
     }
 
-    private Boolean canSpaceShipMoveUp() {
+    private boolean canSpaceShipMoveLeft() {
         for (Wall wall : walls) {
-            if (wall.getX() == spaceship.getX() && wall.getY() == spaceship.getY()-1) {
-                return false;
+            for (Position wallPosition : wall.getPositions()) {
+                for (Position spaceshipPosition : spaceship.getPositions()) {
+                    if (wallPosition.getX() == spaceshipPosition.getX()-1 && wallPosition.getY() == spaceshipPosition.getY()) {
+                        return false;
+                    }
+                }
             }
         }
         return true;
     }
 
-    private Boolean canSpaceShipMoveDown() {
+    private boolean canSpaceShipMoveRight() {
         for (Wall wall : walls) {
-            if (wall.getX() == spaceship.getX() && wall.getY() == spaceship.getY()+3) {
-                return false;
+            for (Position wallPosition : wall.getPositions()) {
+                for (Position spaceshipPosition : spaceship.getPositions()) {
+                    if (wallPosition.getX() == spaceshipPosition.getX()+1 && wallPosition.getY() == spaceshipPosition.getY()) {
+                        return false;
+                    }
+                }
             }
         }
         return true;
     }
 
-    public List<Token> spawnTokens(int count){
+    public void updateToken(){
         Random random = new Random();
-        ArrayList<Token> tokens = new ArrayList<>();
-        for(int i = 0; i < count; i++){
-            Token newToken;
-            do{
-                newToken = new Token(new Position(random.nextInt(75), random.nextInt(35)), TextColor.Factory.fromString("#999933"));
 
-            } while(tokens.contains(newToken) || newToken.getPosition().equals(spaceship.getPosition()));
-            tokens.add(newToken);
-        }
-
-        return tokens;
-    }
-
-    public void removeTokens() {
-        Iterator<Token> iterator = tokens.iterator();
-        while (iterator.hasNext()) {
-            Token token = iterator.next();
-            if (spaceship.getPosition().equals(token.getPosition())) {
-                iterator.remove(); // Use iterator to safely remove the token
-                break;
+        for (Position spaceshipPosition : spaceship.getPositions()) {
+            if (spaceshipPosition.equals(token.getPositions().get(0))) {
+                token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)),backgroundColor);
+                tokenCount--;
             }
         }
     }
 
-    protected abstract void verifyAsteroidCollision();
+    protected void verifyAsteroidCollision() {
+        for (Asteroid asteroid : asteroids){
+            for (Position asteroidPosition : asteroid.getPositions()) {
+                for (Position spaceshipPosition : spaceship.getPositions()) {
+                    if (spaceshipPosition.equals(asteroidPosition)) {
+                        System.out.println("You weren't able to save the solar system!");
+                        System.exit(0);
+                    }
+                }
+            }
+        }
+    };
 
 }
 

@@ -31,29 +31,21 @@ public class Game {
 
             //Graphics object for outputting to the screen
             TextGraphics graphics = screen.newTextGraphics();
-            drawMenu(graphics, terminalWindowX, terminalWindowY);
-            screen.refresh();
+
 
 
             boolean running = true;
 
             while (running) {
+                drawMenu(graphics, terminalWindowX, terminalWindowY);
+                screen.refresh();
                 KeyStroke keyStroke = screen.pollInput();
                 if (keyStroke != null) {
                     switch (keyStroke.getKeyType()) {
                         case Enter: {
                             //Start level 1
                             level = new Mercury();
-                            level.tokens = level.spawnTokens(5);
-                            do {
-                                level.updateAsteroids();
-                                level.draw(graphics);
-                                screen.refresh();
-                                keyStroke = screen.pollInput();
-                                if (keyStroke != null) {
-                                    processKey(keyStroke);
-                                }
-                            } while (keyStroke == null || (keyStroke.getKeyType() != KeyType.EOF && keyStroke.getKeyType() != KeyType.Escape));
+                            level.run(screen);
                             break;
                         }
                         case Escape, EOF: {
@@ -61,6 +53,7 @@ public class Game {
                             break;
                         }
                     }
+                    //Escrever aqui oque deve acontecer quando coletar as 5 moedas.
                 }
             }
             screen.close();
@@ -72,7 +65,6 @@ public class Game {
 
     private static void processKey(KeyStroke keyStroke) throws IOException {
         level.processKey(keyStroke);
-        level.removeTokens();
     }
 
     private static void drawMenu(TextGraphics graphics, int x, int y) {

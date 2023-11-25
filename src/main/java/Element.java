@@ -1,52 +1,59 @@
+import com.googlecode.lanterna.graphics.BasicTextImage;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextImage;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public abstract class Element {
 
     //Member fields
-    protected Position position;
+    protected List<Position> positions;
     protected TextColor color;
     protected TextImage image;
 
-    //Constructors
-    Element(Position position, TextColor color) {
-        this.position = position;
+    //Constructor, after calling it need to set image and Position(s).
+    Element(TextColor color) {
+        this.positions = new ArrayList<>();
         this.color = color;
     }
 
-    public Position getPosition() {
-        return position;
+    public List<Position> getPositions() {
+        return positions;
     }
     public void setPosition(Position position) {
-        this.position  = position;
+        positions.add(position);
     }
-    public int getX() {return position.getX();}
 
-    public int getY() {return position.getY();}
 
     public void moveUp(){
-        position.setY(position.getY() - 1);
+        for (Position position : positions) {
+            position.setY(position.getY() - 1);
+        }
     }
 
     public void moveDown(){
-        position.setY(position.getY() + 1);
+        for (Position position : positions) {
+            position.setY(position.getY() + 1);
+        }
     }
     public void moveLeft(){
-        position.setX(position.getX() - 1);
+        for (Position position : positions) {
+            position.setX(position.getX() - 1);
+        }
     }
 
     public void moveRight(){
-        position.setX(position.getX() + 1);
+        for (Position position : positions) {
+            position.setX(position.getX() + 1);
+        }
     }
 
     public void draw(TextGraphics graphics) {
-        graphics.setForegroundColor(color);
-        graphics.enableModifiers(SGR.BOLD);
-        graphics.drawImage(new TerminalPosition(position.getX(), position.getY()),image);
+        graphics.drawImage(new TerminalPosition(positions.get(0).getX(),positions.get(0).getY()), image);
     };
 }

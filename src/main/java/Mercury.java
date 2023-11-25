@@ -1,21 +1,7 @@
 import com.googlecode.lanterna.TextColor;
 
-import java.util.Random;
-
 public class Mercury extends Planet {
     public Mercury(){
-        super(TextColor.Factory.fromString("#536872"),"Mercury");
+        super(TextColor.Factory.fromString("#536872"),"Mercury",5,3);
     }
-
-    @Override
-    protected void verifyAsteroidCollision(){
-        for (Asteroid asteroid : asteroids){
-            if (spaceship.getPosition().equals(asteroid.position)){
-                System.out.println("You weren't able to save the solar system!");
-                System.exit(0);
-            }
-        }
-    }
-
-
 }
