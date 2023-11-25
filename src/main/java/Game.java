@@ -12,6 +12,9 @@ import java.io.IOException;
 public class Game {
 
     private static Planet level;
+    private static boolean isLevelRunning = false;
+
+    private static int selectedOption = 0;
 
     public static void main(String[] args) {
         try {
@@ -31,29 +34,39 @@ public class Game {
 
             //Graphics object for outputting to the screen
             TextGraphics graphics = screen.newTextGraphics();
-            drawMenu(graphics, terminalWindowX, terminalWindowY);
-            screen.refresh();
-
 
             boolean running = true;
 
             while (running) {
+                drawMenu(graphics, terminalWindowX, terminalWindowY);
+                screen.refresh();
                 KeyStroke keyStroke = screen.pollInput();
                 if (keyStroke != null) {
                     switch (keyStroke.getKeyType()) {
+                        case ArrowUp: {
+                            selectedOption = (selectedOption - 1 + 3) % 3;
+                            break;
+                        }
+                        case ArrowDown: {
+                            selectedOption = (selectedOption + 1) % 3;
+                            break;
+                        }
                         case Enter: {
-                            //Start level 1
-                            level = new Mercury();
-                            level.tokens = level.spawnTokens(5);
-                            do {
-                                level.updateAsteroids();
-                                level.draw(graphics);
-                                screen.refresh();
-                                keyStroke = screen.pollInput();
-                                if (keyStroke != null) {
-                                    processKey(keyStroke);
+                            switch (selectedOption) {
+                                case 0: {
+                                    level = new Mercury();
+                                    level.run(screen);
+                                    break;
                                 }
-                            } while (keyStroke == null || (keyStroke.getKeyType() != KeyType.EOF && keyStroke.getKeyType() != KeyType.Escape));
+                                case 1: {
+                                    howToPlay(screen.newTextGraphics(), 35,1,screen);
+                                    break;
+                                }
+                                case 2: {
+                                    running = false;
+                                    break;
+                                }
+                            }
                             break;
                         }
                         case Escape, EOF: {
@@ -72,7 +85,6 @@ public class Game {
 
     private static void processKey(KeyStroke keyStroke) throws IOException {
         level.processKey(keyStroke);
-        level.removeTokens();
     }
 
     private static void drawMenu(TextGraphics graphics, int x, int y) {
@@ -81,5 +93,39 @@ public class Game {
         graphics.putString(x + 4, y + 2, "Welcome, our Savior!", SGR.ITALIC);
         graphics.putString(x, y + 4, "Press Enter to start playing!");
         graphics.putString(x + 10, y + 6, "[Start]");
+        graphics.putString(x + 10, y + 7, "[How to Play]");
+        graphics.putString(x + 10, y + 8, "[Exit]");
+
+        graphics.setForegroundColor(TextColor.ANSI.GREEN);
+        switch (selectedOption) {
+            case 0:
+                graphics.putString(x + 10, y + 6, "[Start]");
+                break;
+            case 1:
+                graphics.putString(x + 10, y + 7, "[How to Play]");
+                break;
+            case 2:
+                graphics.putString(x + 10, y + 8, "[Exit]");
+                break;
+        }
+    }
+
+    private static void howToPlay(TextGraphics graphics, int x, int y, TerminalScreen screen) throws IOException {
+        graphics.setForegroundColor(TextColor.ANSI.WHITE);
+        graphics.putString(x - 10, y, "Saviors of the Solar System - How to Play", SGR.BOLD);
+        graphics.putString(x - 10, y + 2, "Every brave hero needs to know how things work.");
+        graphics.putString(x - 14, y + 4, "Instructions:", SGR.ITALIC);
+        graphics.putString(x - 14, y + 5, "Your job is to save our Solar System.");
+        graphics.putString(x - 14, y + 6, "Your spaceship will need to avoid the asteroids that");
+        graphics.putString(x - 14, y + 7, "will come in your way!");
+        graphics.putString(x - 14, y + 8, "Use the Arrow keys in order to move the spaceship!");
+
+
+        screen.refresh();
+
+        KeyStroke keyStroke;
+        do {
+            keyStroke = screen.pollInput();
+        } while (keyStroke == null || keyStroke.getKeyType() != KeyType.Escape);
     }
 }

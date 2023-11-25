@@ -6,7 +6,8 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 public class Asteroid extends Element{
 
     Asteroid(int x) {
-        super(new Position(x,0), TextColor.ANSI.RED);
+        super( TextColor.ANSI.RED);
+        setPosition(new Position(x,0));
         image = new BasicTextImage(1,1);
         TextGraphics graphics = image.newTextGraphics();
         graphics.setCharacter(1,1, new TextCharacter('^', TextColor.ANSI.YELLOW_BRIGHT, TextColor.ANSI.BLACK));
