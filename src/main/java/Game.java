@@ -113,12 +113,14 @@ public class Game {
     private static void howToPlay(TextGraphics graphics, int x, int y, TerminalScreen screen) throws IOException {
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         graphics.putString(x - 10, y, "Saviors of the Solar System - How to Play", SGR.BOLD);
-        graphics.putString(x - 10, y + 2, "Every brave hero needs to know how things work.");
-        graphics.putString(x - 14, y + 4, "Instructions:", SGR.ITALIC);
+        graphics.putString(x - 10, y + 2, "Every brave hero needs to know how things work.", SGR.ITALIC);
+        graphics.putString(x - 14, y + 4, "Instructions:", SGR.BOLD);
         graphics.putString(x - 14, y + 5, "Your job is to save our Solar System.");
         graphics.putString(x - 14, y + 6, "Your spaceship will need to avoid the asteroids that");
         graphics.putString(x - 14, y + 7, "will come in your way!");
         graphics.putString(x - 14, y + 8, "Use the Arrow keys in order to move the spaceship!");
+        graphics.putString(x - 14, y + 9, "Collect all the tokens in order to pass.");
+        graphics.putString(x - 14, y + 10, "Good luck on your journey!");
 
 
         screen.refresh();
