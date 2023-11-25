@@ -19,6 +19,12 @@ public abstract class Element {
         this.color = color;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+    public void setPosition(Position position) {
+        this.position  = position;
+    }
     public int getX() {return position.getX();}
 
     public int getY() {return position.getY();}

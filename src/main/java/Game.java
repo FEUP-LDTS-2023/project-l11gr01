@@ -78,6 +78,6 @@ public class Game {
         graphics.putString(x + 1, y, "Saviors of the Solar System", SGR.BOLD);
         graphics.putString(x + 4, y + 2, "Welcome, our Savior!", SGR.ITALIC);
         graphics.putString(x, y + 4, "Press Enter to start playing!");
-        graphics.putString(x + 10, y + 5, "[Start]");
+        graphics.putString(x + 10, y + 6, "[Start]");
     }
 }
