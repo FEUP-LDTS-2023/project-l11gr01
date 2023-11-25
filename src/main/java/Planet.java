@@ -187,7 +187,14 @@ public abstract class Planet{
         }
     }
 
-    protected abstract void verifyAsteroidCollision();
+    protected void verifyAsteroidCollision() {
+        for (Asteroid asteroid : asteroids){
+            if (spaceship.getPosition().equals(asteroid.position)){
+                System.out.println("You weren't able to save the solar system!");
+                System.exit(0);
+            }
+        }
+    }
 
 }
 
