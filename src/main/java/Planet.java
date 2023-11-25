@@ -3,7 +3,6 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +16,6 @@ public abstract class Planet{
     protected List<Wall> walls;
     protected List<Asteroid> asteroids;
     protected int tokenCount;
-
-
 
     protected Token token;
     protected int asteroidCount;
@@ -103,6 +100,17 @@ public abstract class Planet{
         verifyAsteroidCollision();
     }
 
+    public void updateToken() {
+        Random random = new Random();
+        for (Position spaceshipPosition : spaceship.getPositions()) {
+            if (spaceshipPosition.equals(token.getPositions().get(0))) {
+                token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)), backgroundColor);
+                tokenCount--;
+            }
+            verifyTokenCollection();
+        }
+    }
+
     private void createWalls() {
         //Create walls for the left and right boundaries
         for (int y = 0; y <= 44; y++) {
@@ -151,7 +159,7 @@ public abstract class Planet{
         for (Wall wall : walls) {
             for (Position wallPosition : wall.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
-                    if (wallPosition.getX() == spaceshipPosition.getX() && wallPosition.getY() == spaceshipPosition.getY()-1) {
+                    if (wallPosition.getX() == spaceshipPosition.getX() && wallPosition.getY() == spaceshipPosition.getY() - 1) {
                         return false;
                     }
                 }
@@ -164,7 +172,7 @@ public abstract class Planet{
         for (Wall wall : walls) {
             for (Position wallPosition : wall.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
-                    if (wallPosition.getX() == spaceshipPosition.getX() && wallPosition.getY() == spaceshipPosition.getY()+1) {
+                    if (wallPosition.getX() == spaceshipPosition.getX() && wallPosition.getY() == spaceshipPosition.getY() + 1) {
                         return false;
                     }
                 }
@@ -177,7 +185,7 @@ public abstract class Planet{
         for (Wall wall : walls) {
             for (Position wallPosition : wall.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
-                    if (wallPosition.getX() == spaceshipPosition.getX()-1 && wallPosition.getY() == spaceshipPosition.getY()) {
+                    if (wallPosition.getX() == spaceshipPosition.getX() - 1 && wallPosition.getY() == spaceshipPosition.getY()) {
                         return false;
                     }
                 }
@@ -190,7 +198,7 @@ public abstract class Planet{
         for (Wall wall : walls) {
             for (Position wallPosition : wall.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
-                    if (wallPosition.getX() == spaceshipPosition.getX()+1 && wallPosition.getY() == spaceshipPosition.getY()) {
+                    if (wallPosition.getX() == spaceshipPosition.getX() + 1 && wallPosition.getY() == spaceshipPosition.getY()) {
                         return false;
                     }
                 }
@@ -199,18 +207,7 @@ public abstract class Planet{
         return true;
     }
 
-    public void updateToken(){
-        Random random = new Random();
-
-        for (Position spaceshipPosition : spaceship.getPositions()) {
-            if (spaceshipPosition.equals(token.getPositions().get(0))) {
-                token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)),backgroundColor);
-                tokenCount--;
-            }
-        }
-    }
-
-    protected void verifyAsteroidCollision() {
+    public void verifyAsteroidCollision() {
         for (Asteroid asteroid : asteroids){
             for (Position asteroidPosition : asteroid.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
@@ -221,6 +218,14 @@ public abstract class Planet{
                 }
             }
         }
-    };
+    }
+
+    public void verifyTokenCollection() {
+        if (tokenCount == 0){
+            System.out.println("YOU WON!");
+            System.exit(0);
+        }
+    }
+
 }
 

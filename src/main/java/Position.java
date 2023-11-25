@@ -25,7 +25,7 @@ public class Position {
     }
 
     public Position getPosition(){
-        return new Position(this.x,this.y);
+        return new Position(this.x, this.y);
     }
 
     @Override

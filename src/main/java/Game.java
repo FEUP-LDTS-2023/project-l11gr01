@@ -3,7 +3,6 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
@@ -32,8 +31,6 @@ public class Game {
             //Graphics object for outputting to the screen
             TextGraphics graphics = screen.newTextGraphics();
 
-
-
             boolean running = true;
 
             while (running) {
@@ -53,7 +50,6 @@ public class Game {
                             break;
                         }
                     }
-                    //Escrever aqui oque deve acontecer quando coletar as 5 moedas.
                 }
             }
             screen.close();

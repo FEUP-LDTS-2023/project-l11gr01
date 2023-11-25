@@ -7,7 +7,7 @@ public class Token extends Element{
         super(TextColor.Factory.fromString("#999933"));
         image = new BasicTextImage(1,1);
         TextGraphics graphics = image.newTextGraphics();
-        graphics.setCharacter(0,0, new TextCharacter('T',TextColor.ANSI.YELLOW_BRIGHT,backgroundColor));
+        graphics.setCharacter(0,0, new TextCharacter('0',TextColor.ANSI.YELLOW_BRIGHT,backgroundColor));
         setPosition(position);
     }
 

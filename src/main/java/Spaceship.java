@@ -1,5 +1,3 @@
-import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.BasicTextImage;
@@ -10,9 +8,9 @@ public class Spaceship extends Element {
     public Spaceship(TextColor backgroundColor){
         super(TextColor.ANSI.YELLOW_BRIGHT);
 
-        for (int x =44; x <= 46; x++) {
+        for (int x = 44; x <= 46; x++) {
             for (int y = 39; y <= 41; y++) {
-                setPosition(new Position(x,y));
+                setPosition(new Position(x, y));
             }
         }
         image = new BasicTextImage(3,2);
