@@ -78,9 +78,21 @@ public abstract class Planet{
                 asteroids.remove(i);
             }
         }
+        verifyAsteroidCollision();
     }
 
-
+    private void createWalls() {
+        //Create walls for the left and right boundaries
+        for (int y = 0; y <= 44; y++) {
+            walls.add(new Wall(0, y));
+            walls.add(new Wall(89, y));
+        }
+        // Create walls for the top and bottom boundaries
+        for (int x = 0; x <= 89; x++) {
+            walls.add(new Wall(x, 0));
+            walls.add(new Wall(x, 44));
+        }
+    }
 
     void processKey(KeyStroke keyStroke) throws IOException {
         if(keyStroke != null){
@@ -110,20 +122,6 @@ public abstract class Planet{
                     break;
                 }
             }
-        }
-    }
-
-    private void createWalls() {
-
-         //Create walls for the left and right boundaries
-        for (int y = 0; y <= 44; y++) {
-            walls.add(new Wall(0, y));
-            walls.add(new Wall(89, y));
-        }
-        // Create walls for the top and bottom boundaries
-        for (int x = 0; x <= 89; x++) {
-            walls.add(new Wall(x, 0));
-            walls.add(new Wall(x, 44));
         }
     }
 
@@ -189,4 +187,7 @@ public abstract class Planet{
         }
     }
 
+    protected abstract void verifyAsteroidCollision();
+
 }
+

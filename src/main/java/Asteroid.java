@@ -9,6 +9,6 @@ public class Asteroid extends Element{
         super(new Position(x,0), TextColor.ANSI.RED);
         image = new BasicTextImage(1,1);
         TextGraphics graphics = image.newTextGraphics();
-        graphics.setCharacter(1,1, new TextCharacter('▲', TextColor.ANSI.YELLOW_BRIGHT, TextColor.ANSI.BLACK));
+        graphics.setCharacter(1,1, new TextCharacter('^', TextColor.ANSI.YELLOW_BRIGHT, TextColor.ANSI.BLACK));
     }
 }

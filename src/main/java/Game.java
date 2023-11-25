@@ -1,3 +1,4 @@
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -75,11 +76,10 @@ public class Game {
     }
 
     private static void drawMenu(TextGraphics graphics, int x, int y) {
-
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(x, y, "Savior of the Solar System");
-        graphics.putString(x, y + 2, "Welcome, our Savior");
-        graphics.putString(x, y + 3, "Press Enter to start playing!");
-        graphics.putString(x + 10, y + 5, "[Start]");
+        graphics.putString(x + 1, y, "Saviors of the Solar System", SGR.BOLD);
+        graphics.putString(x + 4, y + 2, "Welcome, our Savior!", SGR.ITALIC);
+        graphics.putString(x, y + 4, "Press Enter to start playing!");
+        graphics.putString(x + 10, y + 6, "[Start]");
     }
 }
