@@ -23,6 +23,10 @@ public abstract class Element {
 
     public int getY() {return position.getY();}
 
+    public Position getPosition(){
+        return position;
+    }
+
     public void moveUp(){
         position.setY(position.getY() - 1);
     }

@@ -15,4 +15,11 @@ public class Token extends Element{
         graphics.putString(new TerminalPosition(getX(), getY()), "€");
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(o == null || this.getClass() != o.getClass()) return false;
+
+        return(this == o ||
+                this.getPosition().equals(((Token) o).getPosition()));
+    }
 }

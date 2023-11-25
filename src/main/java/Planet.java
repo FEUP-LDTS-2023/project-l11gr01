@@ -2,7 +2,9 @@ import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import java.io.IOException;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -15,10 +17,17 @@ public abstract class Planet{
     protected List<Asteroid> asteroids;
     protected List<Token> tokens;
 
+    private long lastAsteroidCreationTime = System.currentTimeMillis();
+
+    private long lastAsteroidMoveTime = System.currentTimeMillis();
+    private long asteroidCreationDelay = 1000; // Milliseconds between each asteroid creation
+    private long asteroidMoveDelay = 100;
+
+
     public Planet(TextColor backgroundColor,String name){
         this.backgroundColor = backgroundColor;
         this.spaceship = new Spaceship();
-        this.walls = new ArrayList<>(210);
+        this.walls = new ArrayList<>();
         this.asteroids = new ArrayList<>();
         this.tokens = new ArrayList<>();
         this.name = name;
@@ -37,7 +46,7 @@ public abstract class Planet{
         spaceship.draw(graphics);
         //Draw level name
         graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-        graphics.putString(new TerminalPosition(0,0),name,SGR.BOLD);
+        graphics.putString(new TerminalPosition(1,1),name,SGR.BOLD);
         //Draw asteroids
         for (Asteroid asteroid : asteroids) {
             asteroid.draw(graphics);
@@ -49,14 +58,23 @@ public abstract class Planet{
     }
 
     public void updateAsteroids() {
-        if (asteroids.size() < 3) {
-            Random random = new Random();
-            int x = random.nextInt(1,90);
-            asteroids.add(new Asteroid(x));
+        Random random = new Random();
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
+            if (asteroids.size() < 3) {
+                int x = random.nextInt(1, 90);
+                asteroids.add(new Asteroid(x));
+            }
+            lastAsteroidCreationTime = currentTime;
+        }
+        if (currentTime - lastAsteroidMoveTime > asteroidMoveDelay) {
+            for (Asteroid asteroid : asteroids) {
+                asteroid.moveDown();
+            }
+            lastAsteroidMoveTime = currentTime;
         }
         for (int i = 0; i < asteroids.size(); i++) {
-            asteroids.get(i).moveDown();
-            if (asteroids.get(i).getY() == 45) {
+            if (asteroids.get(i).getY() == 44) {
                 asteroids.remove(i);
             }
         }
@@ -96,14 +114,15 @@ public abstract class Planet{
     }
 
     private void createWalls() {
-        //Create walls for the left and right boundaries
-        for (int y = 30; y <= 44; y++) {
+
+         //Create walls for the left and right boundaries
+        for (int y = 0; y <= 44; y++) {
             walls.add(new Wall(0, y));
             walls.add(new Wall(89, y));
         }
         // Create walls for the top and bottom boundaries
         for (int x = 0; x <= 89; x++) {
-            walls.add(new Wall(x, 30));
+            walls.add(new Wall(x, 0));
             walls.add(new Wall(x, 44));
         }
     }
@@ -144,12 +163,30 @@ public abstract class Planet{
         return true;
     }
 
-    public void spawnTokens(int count){
+    public List<Token> spawnTokens(int count){
         Random random = new Random();
+        ArrayList<Token> tokens = new ArrayList<>();
         for(int i = 0; i < count; i++){
-            int x = random.nextInt(10,75);
-            int y = random.nextInt(10,35);
-            tokens.add(new Token(new Position(x,y),TextColor.Factory.fromString("#999933")));
+            Token newToken;
+            do{
+                newToken = new Token(new Position(random.nextInt(75), random.nextInt(35)), TextColor.Factory.fromString("#999933"));
+
+            } while(tokens.contains(newToken) || newToken.getPosition().equals(spaceship.getPosition()));
+            tokens.add(newToken);
+        }
+
+        return tokens;
+    }
+
+    public void removeTokens() {
+        Iterator<Token> iterator = tokens.iterator();
+        while (iterator.hasNext()) {
+            Token token = iterator.next();
+            if (spaceship.getPosition().equals(token.getPosition())) {
+                iterator.remove(); // Use iterator to safely remove the token
+                break;
+            }
         }
     }
+
 }

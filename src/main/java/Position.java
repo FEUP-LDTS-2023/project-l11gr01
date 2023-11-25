@@ -24,12 +24,15 @@ public class Position {
         this.y = y;
     }
 
-    public Boolean equals(Position position) {
-        if (this.getX() == position.getX() && this.getY() == position.getY()) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    public Position getPosition(){
+        return new Position(this.x,this.y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || o.getClass() != this.getClass()) return false;
+
+        return (this == o) ||
+                (this.x == ((Position) o).x && this.y == ((Position) o).y);
     }
 }

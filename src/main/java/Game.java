@@ -43,6 +43,7 @@ public class Game {
                         case Enter: {
                             //Start level 1
                             level = new Mercury();
+                            level.tokens = level.spawnTokens(5);
                             do {
                                 level.updateAsteroids();
                                 level.draw(graphics);
@@ -70,6 +71,7 @@ public class Game {
 
     private static void processKey(KeyStroke keyStroke) throws IOException {
         level.processKey(keyStroke);
+        level.removeTokens();
     }
 
     private static void drawMenu(TextGraphics graphics, int x, int y) {
