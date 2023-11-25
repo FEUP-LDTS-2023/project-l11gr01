@@ -155,7 +155,7 @@ public abstract class Planet{
         }
     }
 
-    private boolean canSpaceShipMoveUp() {
+    public boolean canSpaceShipMoveUp() {
         for (Wall wall : walls) {
             for (Position wallPosition : wall.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
@@ -168,7 +168,7 @@ public abstract class Planet{
         return true;
     }
 
-    private boolean canSpaceShipMoveDown() {
+    public boolean canSpaceShipMoveDown() {
         for (Wall wall : walls) {
             for (Position wallPosition : wall.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
@@ -181,7 +181,7 @@ public abstract class Planet{
         return true;
     }
 
-    private boolean canSpaceShipMoveLeft() {
+    public boolean canSpaceShipMoveLeft() {
         for (Wall wall : walls) {
             for (Position wallPosition : wall.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
@@ -194,7 +194,7 @@ public abstract class Planet{
         return true;
     }
 
-    private boolean canSpaceShipMoveRight() {
+    public boolean canSpaceShipMoveRight() {
         for (Wall wall : walls) {
             for (Position wallPosition : wall.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
