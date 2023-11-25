@@ -167,7 +167,7 @@ public abstract class Planet{
         for(int i = 0; i < count; i++){
             Token newToken;
             do{
-                newToken = new Token(new Position(random.nextInt(75), random.nextInt(35)), TextColor.Factory.fromString("#999933"));
+                newToken = new Token(new Position(random.nextInt(76) + 5, random.nextInt(31) + 5), TextColor.Factory.fromString("#999933"));
 
             } while(tokens.contains(newToken) || newToken.getPosition().equals(spaceship.getPosition()));
             tokens.add(newToken);
