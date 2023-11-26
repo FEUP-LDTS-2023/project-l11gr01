@@ -116,11 +116,12 @@ public class Game {
         graphics.putString(x - 10, y + 2, "Every brave hero needs to know how things work.", SGR.ITALIC);
         graphics.putString(x - 14, y + 4, "Instructions:", SGR.BOLD);
         graphics.putString(x - 14, y + 5, "Your job is to save our Solar System.");
-        graphics.putString(x - 14, y + 6, "Your spaceship will need to avoid the asteroids that");
-        graphics.putString(x - 14, y + 7, "will come in your way!");
+        graphics.putString(x - 14, y + 6, "You're on command of a spaceship, try to avoid");
+        graphics.putString(x - 14, y + 7, "the asteroids that will come in your way!");
         graphics.putString(x - 14, y + 8, "Use the Arrow keys in order to move the spaceship!");
         graphics.putString(x - 14, y + 9, "Collect all the tokens in order to pass.");
         graphics.putString(x - 14, y + 10, "Good luck on your journey!");
+        graphics.putString(x - 14, y + 11, "Press Escape to go back to the menu!", SGR.BOLD);
 
 
         screen.refresh();
