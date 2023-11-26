@@ -68,7 +68,7 @@ public abstract class Planet{
         }
         //Draw level name
         graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-        graphics.putString(new TerminalPosition(1,1),name,SGR.BOLD);
+        graphics.putString(new TerminalPosition(1,1), name, SGR.BOLD);
         //Draw spaceship
         spaceship.draw(graphics);
         //Draw asteroids

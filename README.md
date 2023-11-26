@@ -6,4 +6,6 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 Screenshots of the game:
 
-
+![img](docs/images/MainMenu.png)
+![img](docs/images/InstructionsMenu.png)
+![img](docs/images/ingame.png)

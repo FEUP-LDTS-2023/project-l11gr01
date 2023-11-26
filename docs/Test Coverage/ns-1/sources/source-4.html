@@ -1,0 +1,263 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Game</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: Game (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Game</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/66)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Game$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/67)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import com.googlecode.lanterna.SGR;
+&nbsp;import com.googlecode.lanterna.TerminalSize;
+&nbsp;import com.googlecode.lanterna.TextColor;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;import com.googlecode.lanterna.input.KeyStroke;
+&nbsp;import com.googlecode.lanterna.input.KeyType;
+&nbsp;import com.googlecode.lanterna.screen.TerminalScreen;
+&nbsp;import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+&nbsp;import com.googlecode.lanterna.terminal.Terminal;
+&nbsp;import java.io.IOException;
+&nbsp;
+<b class="nc">&nbsp;public class Game {</b>
+&nbsp;
+&nbsp;    private static Planet level;
+<b class="nc">&nbsp;    private static boolean isLevelRunning = false;</b>
+&nbsp;
+<b class="nc">&nbsp;    private static int selectedOption = 0;</b>
+&nbsp;
+&nbsp;    public static void main(String[] args) {
+&nbsp;        try {
+&nbsp;            //Create Terminal
+<b class="nc">&nbsp;            TerminalSize terminalSize = new TerminalSize(90, 45);</b>
+<b class="nc">&nbsp;            DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setTerminalEmulatorTitle(&quot;Saviors of the Solar System&quot;);</b>
+<b class="nc">&nbsp;            terminalFactory.setInitialTerminalSize(terminalSize);</b>
+<b class="nc">&nbsp;            Terminal terminal = terminalFactory.createTerminal();</b>
+&nbsp;
+&nbsp;            //Create screen
+<b class="nc">&nbsp;            TerminalScreen screen = new TerminalScreen(terminal);</b>
+<b class="nc">&nbsp;            screen.setCursorPosition(null);</b>
+<b class="nc">&nbsp;            screen.startScreen();</b>
+&nbsp;
+<b class="nc">&nbsp;            int terminalWindowX = (terminalSize.getColumns() - 30) / 2;</b>
+<b class="nc">&nbsp;            int terminalWindowY = (terminalSize.getRows() - 5) / 2;</b>
+&nbsp;
+&nbsp;            //Graphics object for outputting to the screen
+<b class="nc">&nbsp;            TextGraphics graphics = screen.newTextGraphics();</b>
+&nbsp;
+<b class="nc">&nbsp;            boolean running = true;</b>
+&nbsp;
+<b class="nc">&nbsp;            while (running) {</b>
+<b class="nc">&nbsp;                drawMenu(graphics, terminalWindowX, terminalWindowY);</b>
+<b class="nc">&nbsp;                screen.refresh();</b>
+<b class="nc">&nbsp;                KeyStroke keyStroke = screen.pollInput();</b>
+<b class="nc">&nbsp;                if (keyStroke != null) {</b>
+<b class="nc">&nbsp;                    switch (keyStroke.getKeyType()) {</b>
+&nbsp;                        case ArrowUp: {
+<b class="nc">&nbsp;                            selectedOption = (selectedOption - 1 + 3) % 3;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case ArrowDown: {
+<b class="nc">&nbsp;                            selectedOption = (selectedOption + 1) % 3;</b>
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case Enter: {
+<b class="nc">&nbsp;                            switch (selectedOption) {</b>
+&nbsp;                                case 0: {
+<b class="nc">&nbsp;                                    level = new Mercury();</b>
+<b class="nc">&nbsp;                                    level.run(screen);</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+&nbsp;                                case 1: {
+<b class="nc">&nbsp;                                    howToPlay(screen.newTextGraphics(), 35,1,screen);</b>
+<b class="nc">&nbsp;                                    break;</b>
+&nbsp;                                }
+&nbsp;                                case 2: {
+<b class="nc">&nbsp;                                    running = false;</b>
+&nbsp;                                    break;
+&nbsp;                                }
+&nbsp;                            }
+<b class="nc">&nbsp;                            break;</b>
+&nbsp;                        }
+&nbsp;                        case Escape, EOF: {
+<b class="nc">&nbsp;                            running = false;</b>
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            screen.close();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private static void processKey(KeyStroke keyStroke) throws IOException {
+<b class="nc">&nbsp;        level.processKey(keyStroke);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void drawMenu(TextGraphics graphics, int x, int y) {
+<b class="nc">&nbsp;        graphics.setForegroundColor(TextColor.ANSI.WHITE);</b>
+<b class="nc">&nbsp;        graphics.putString(x + 1, y, &quot;Saviors of the Solar System&quot;, SGR.BOLD);</b>
+<b class="nc">&nbsp;        graphics.putString(x + 4, y + 2, &quot;Welcome, our Savior!&quot;, SGR.ITALIC);</b>
+<b class="nc">&nbsp;        graphics.putString(x, y + 4, &quot;Press Enter to start playing!&quot;);</b>
+<b class="nc">&nbsp;        graphics.putString(x + 10, y + 6, &quot;[Start]&quot;);</b>
+<b class="nc">&nbsp;        graphics.putString(x + 10, y + 7, &quot;[How to Play]&quot;);</b>
+<b class="nc">&nbsp;        graphics.putString(x + 10, y + 8, &quot;[Exit]&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        graphics.setForegroundColor(TextColor.ANSI.GREEN);</b>
+<b class="nc">&nbsp;        switch (selectedOption) {</b>
+&nbsp;            case 0:
+<b class="nc">&nbsp;                graphics.putString(x + 10, y + 6, &quot;[Start]&quot;);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 1:
+<b class="nc">&nbsp;                graphics.putString(x + 10, y + 7, &quot;[How to Play]&quot;);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 2:
+<b class="nc">&nbsp;                graphics.putString(x + 10, y + 8, &quot;[Exit]&quot;);</b>
+&nbsp;                break;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void howToPlay(TextGraphics graphics, int x, int y, TerminalScreen screen) throws IOException {
+<b class="nc">&nbsp;        graphics.setForegroundColor(TextColor.ANSI.WHITE);</b>
+<b class="nc">&nbsp;        graphics.putString(x - 10, y, &quot;Saviors of the Solar System - How to Play&quot;, SGR.BOLD);</b>
+<b class="nc">&nbsp;        graphics.putString(x - 10, y + 2, &quot;Every brave hero needs to know how things work.&quot;, SGR.ITALIC);</b>
+<b class="nc">&nbsp;        graphics.putString(x - 14, y + 4, &quot;Instructions:&quot;, SGR.BOLD);</b>
+<b class="nc">&nbsp;        graphics.putString(x - 14, y + 5, &quot;Your job is to save our Solar System.&quot;);</b>
+<b class="nc">&nbsp;        graphics.putString(x - 14, y + 6, &quot;Your spaceship will need to avoid the asteroids that&quot;);</b>
+<b class="nc">&nbsp;        graphics.putString(x - 14, y + 7, &quot;will come in your way!&quot;);</b>
+<b class="nc">&nbsp;        graphics.putString(x - 14, y + 8, &quot;Use the arrow keys in order to move the spaceship!&quot;);</b>
+<b class="nc">&nbsp;        graphics.putString(x - 14, y + 9, &quot;Collect all the tokens in order to save the planet.&quot;);</b>
+<b class="nc">&nbsp;        graphics.putString(x - 14, y + 10, &quot;Good luck on your journey!&quot;);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        screen.refresh();</b>
+&nbsp;
+&nbsp;        KeyStroke keyStroke;
+&nbsp;        do {
+<b class="nc">&nbsp;            keyStroke = screen.pollInput();</b>
+<b class="nc">&nbsp;        } while (keyStroke == null || keyStroke.getKeyType() != KeyType.Escape);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-11-26 22:08</div>
+</div>
+</body>
+</html>

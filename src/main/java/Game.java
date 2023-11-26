@@ -118,8 +118,8 @@ public class Game {
         graphics.putString(x - 14, y + 5, "Your job is to save our Solar System.");
         graphics.putString(x - 14, y + 6, "Your spaceship will need to avoid the asteroids that");
         graphics.putString(x - 14, y + 7, "will come in your way!");
-        graphics.putString(x - 14, y + 8, "Use the Arrow keys in order to move the spaceship!");
-        graphics.putString(x - 14, y + 9, "Collect all the tokens in order to pass.");
+        graphics.putString(x - 14, y + 8, "Use the arrow keys in order to move the spaceship!");
+        graphics.putString(x - 14, y + 9, "Collect all the tokens in order to save the planet.");
         graphics.putString(x - 14, y + 10, "Good luck on your journey!");
 
 
