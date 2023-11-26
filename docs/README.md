@@ -90,9 +90,9 @@ The following diagrams shows how the creator (Game class), the product (Planet c
 
 These classes can be found in the following files:
 
-- [Game](src/main/java/Game.java)
-- [Planet](src/main/java/Planet.java)
-- [Mercury](src/main/java/Mercury.java)
+- [Game](Files/Game.java)
+- [Planet](Files/Planet.java)
+- [Mercury](Files/Mercury.java)
 
 **Consequences**
 
