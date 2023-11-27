@@ -80,11 +80,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import com.googlecode.lanterna.graphics.BasicTextImage;
 &nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
 &nbsp;
-&nbsp;public class Asteroid extends Element{
+&nbsp;public class Asteroid extends com.ldts1101.sotss.Element{
 &nbsp;
 &nbsp;    Asteroid(int x) {
 <b class="nc">&nbsp;        super( TextColor.ANSI.RED);</b>
-<b class="nc">&nbsp;        setPosition(new Position(x,0));</b>
+<b class="nc">&nbsp;        setPosition(new com.ldts1101.sotss.Position(x,0));</b>
 <b class="nc">&nbsp;        image = new BasicTextImage(1,1);</b>
 <b class="nc">&nbsp;        TextGraphics graphics = image.newTextGraphics();</b>
 <b class="nc">&nbsp;        graphics.setCharacter(1,1, new TextCharacter(&#39;^&#39;, TextColor.ANSI.YELLOW_BRIGHT, TextColor.ANSI.BLACK));</b>

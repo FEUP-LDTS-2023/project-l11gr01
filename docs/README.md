@@ -1,11 +1,17 @@
-## LDTS_<11><01> - SAVIORS OF THE SOLAR SYSTEM
+## LDTS_1101 - SAVIORS OF THE SOLAR SYSTEM
 
 
 In this exciting adventure game you shall help the Saviors of the Universe save the solar system from a species of invaders that have the ability to control asteroids, by escaping the asteroids thrown by them and collecting all the tokens throughout the eight different levels (representing the eight planets of the solar system).
-In each level, until reaching the final level "Planet Earth" (which is the most difficult one), the difficulty level will increase. You will have more asteroids to doge that will travel faster. You'll also have to collect more tokens to save the given planet. At the start you have 3 lives and for each planet you are able to save you'll receive an extra one. 
+In each level, until reaching the final level "com.ldts1101.sotss.Planet Earth" (which is the most difficult one), the difficulty level will increase. You will have more asteroids to dodge that will travel faster. You'll also have to collect more tokens to save the given planet. At the start you have 3 lives and for each planet you are able to save you'll receive an extra one. 
 For every asteroid hit you lose one life.
 You can also catch special tokens that give you an extra life.
 Are you ready to save the solar system from the invaders?
+
+How to play:
+- #1 Run the program
+- #2 Either start the game (press enter in "Start" button), visit the "How to Play" section (Instructions) (play afterward) or exit ("Exit" button).
+- #3 Use the arrow keys (up, down, left, right) to dodge the asteroids and collect all the tokens to pass the level.
+- #4 Have fun helping the Savior of the Galaxy save the Solar System.
 
 This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira (up202009302@up.pt) and Álvaro Torres (up202208954@up.pt) for LDTS 2023⁄24.
 
@@ -73,11 +79,11 @@ Every planet that represents a level of the game (there are eight different ones
 
 **The Pattern**
 
-We have applied the **Factory-Method** pattern. This pattern allows you to define an interface for creating the Planet object (Planet class), but let the subclasses (concrete planets) decide which class to instantiate. We decided to use this design pattern so that we could generalize the Planet class once we had eight different concrete planets tha shall be created, thus when running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process. The responsibility knowing what implementation of planet to create is delegated to the several subclasses, so to change the concrete planet that is created we only need to change one class.
+We have applied the **Factory-Method** pattern. This pattern allows you to define an interface for creating the com.ldts1101.sotss.Planet object (com.ldts1101.sotss.Planet class), but let the subclasses (concrete planets) decide which class to instantiate. We decided to use this design pattern so that we could generalize the com.ldts1101.sotss.Planet class once we had eight different concrete planets tha shall be created, thus when running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process. The responsibility knowing what implementation of planet to create is delegated to the several subclasses, so to change the concrete planet that is created we only need to change one class.
 
 **Implementation**
 
-The following diagrams shows how the creator (Game class), the product (Planet class), the concrete creators (subclasses of Planet) and the concrete products (concrete planets) interact with each other. 
+The following diagrams shows how the creator (Game class), the product (com.ldts1101.sotss.Planet class), the concrete creators (subclasses of com.ldts1101.sotss.Planet) and the concrete products (concrete planets) interact with each other. 
 
 - UML dependencies diagram:
 ![img](Diagrams/UMLdependencies.png)
@@ -91,7 +97,7 @@ The following diagrams shows how the creator (Game class), the product (Planet c
 These classes can be found in the following files:
 
 - [Game](Files/Game.java)
-- [Planet](Files/Planet.java)
+- [com.ldts1101.sotss.Planet](Files/com.ldts1101.sotss.Planet.java)
 - [Mercury](Files/Mercury.java)
 
 **Consequences**
@@ -99,7 +105,7 @@ These classes can be found in the following files:
 The use of the Factory-Method Pattern in the current design allows the following benefits:
 
 - It eliminates the need to bind application-specific classes into our code.
-- The code only needs to deal with the Planet class that is the product interface.
+- The code only needs to deal with the com.ldts1101.sotss.Planet class that is the product interface.
 - Hence it can work with any concrete planet that is created (concrete product).
 - When running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process
 

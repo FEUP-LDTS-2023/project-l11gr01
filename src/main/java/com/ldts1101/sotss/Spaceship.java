@@ -1,7 +1,11 @@
+package com.ldts1101.sotss;
+
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.BasicTextImage;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.ldts1101.sotss.Element;
+import com.ldts1101.sotss.Position;
 
 public class Spaceship extends Element {
 

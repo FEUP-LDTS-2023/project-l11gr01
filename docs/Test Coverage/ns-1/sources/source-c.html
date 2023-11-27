@@ -80,14 +80,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import com.googlecode.lanterna.graphics.BasicTextImage;
 &nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
 &nbsp;
-&nbsp;public class Spaceship extends Element {
+&nbsp;public class Spaceship extends com.ldts1101.sotss.Element {
 &nbsp;
 &nbsp;    public Spaceship(TextColor backgroundColor){
 <b class="nc">&nbsp;        super(TextColor.ANSI.BLUE);</b>
 &nbsp;
 <b class="nc">&nbsp;        for (int x = 44; x &lt;= 46; x++) {</b>
 <b class="nc">&nbsp;            for (int y = 39; y &lt;= 41; y++) {</b>
-<b class="nc">&nbsp;                setPosition(new Position(x, y));</b>
+<b class="nc">&nbsp;                setPosition(new com.ldts1101.sotss.Position(x, y));</b>
 &nbsp;            }
 &nbsp;        }
 <b class="nc">&nbsp;        image = new BasicTextImage(3,2);</b>

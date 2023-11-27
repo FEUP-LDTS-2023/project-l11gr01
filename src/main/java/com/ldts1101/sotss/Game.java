@@ -1,3 +1,5 @@
+package com.ldts1101.sotss;
+
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -7,6 +9,8 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.ldts1101.sotss.Planet;
+
 import java.io.IOException;
 
 public class Game {

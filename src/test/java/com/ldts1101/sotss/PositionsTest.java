@@ -1,3 +1,6 @@
+package com.ldts1101.sotss;
+
+import com.ldts1101.sotss.Position;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

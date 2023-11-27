@@ -1,8 +1,12 @@
+package com.ldts1101.sotss;
+
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
+import com.ldts1101.sotss.Position;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +63,7 @@ public abstract class Planet{
     }
 
     public void draw(TextGraphics graphics) {
-        //Set Planet's background color
+        //Set com.ldts1101.sotss.Planet's background color
         graphics.setBackgroundColor(backgroundColor);
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(90,45), ' ');
         //Draw walls

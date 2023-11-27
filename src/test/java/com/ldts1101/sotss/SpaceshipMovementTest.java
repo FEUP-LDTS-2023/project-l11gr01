@@ -1,4 +1,7 @@
+package com.ldts1101.sotss;
+
 import com.googlecode.lanterna.TextColor;
+import com.ldts1101.sotss.Planet;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -78,11 +81,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class SpaceshipMovementTest {
+public class com.ldts1101.sotss.SpaceshipMovementTest {
 
     @Test
     public void testSpaceshipMoveUp() throws IOException {
-        Planet planetMock = mock(Planet.class);
+        com.ldts1101.sotss.Planet planetMock = mock(com.ldts1101.sotss.Planet.class);
         TerminalScreen screenMock = mock(TerminalScreen.class);
 
         Spaceship spaceship = new Spaceship(TextColor.ANSI.YELLOW_BRIGHT);
@@ -101,7 +104,7 @@ public class SpaceshipMovementTest {
 
     @Test
     public void testSpaceshipMoveUp2() throws IOException {
-        Planet planetMock = mock(Planet.class);
+        com.ldts1101.sotss.Planet planetMock = mock(com.ldts1101.sotss.Planet.class);
         TerminalScreen screenMock = mock(TerminalScreen.class);
 
         Spaceship spaceship = new Spaceship(TextColor.ANSI.DEFAULT);

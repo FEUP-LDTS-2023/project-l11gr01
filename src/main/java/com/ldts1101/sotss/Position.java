@@ -1,3 +1,5 @@
+package com.ldts1101.sotss;
+
 public class Position {
 
     private int x;
