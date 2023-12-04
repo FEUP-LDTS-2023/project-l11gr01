@@ -30,6 +30,7 @@ public abstract class Planet{
 
 
     //Constructor, after calling it need to set asteroidCount.
+
     public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount,long asteroidDelay){
         this.backgroundColor = backgroundColor;
         this.tokenCount = tokenCount;
@@ -85,6 +86,7 @@ public abstract class Planet{
     }
 
     public void updateAsteroidsX(){}
+
     public void updateAsteroidsY() {
         Random random = new Random();
         long currentTime = System.currentTimeMillis();
@@ -238,8 +240,6 @@ public abstract class Planet{
             System.exit(0);
         }
     }
-
-
 
 }
 
