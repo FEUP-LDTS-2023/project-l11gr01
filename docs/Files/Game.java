@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+package com.ldts1101.sotss;
+
+>>>>>>> aa83ae0d9b9924a10aefd970ae1ff641dd3a3b48
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -7,6 +12,11 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+<<<<<<< HEAD
+=======
+import com.ldts1101.sotss.Planet;
+
+>>>>>>> aa83ae0d9b9924a10aefd970ae1ff641dd3a3b48
 import java.io.IOException;
 
 public class Game {
@@ -121,6 +131,10 @@ public class Game {
         graphics.putString(x - 14, y + 8, "Use the arrow keys in order to move the spaceship!");
         graphics.putString(x - 14, y + 9, "Collect all the tokens in order to save the planet.");
         graphics.putString(x - 14, y + 10, "Good luck on your journey!");
+<<<<<<< HEAD
+        graphics.putString(x - 14, y + 11, "Press Escape to go back to the menu!", SGR.BOLD);
+=======
+>>>>>>> aa83ae0d9b9924a10aefd970ae1ff641dd3a3b48
 
 
         screen.refresh();

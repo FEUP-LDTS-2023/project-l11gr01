@@ -1,6 +1,14 @@
 plugins {
     id 'java'
+<<<<<<< HEAD
     id 'info.solidsoft.pitest' version '1.7.0'
+=======
+<<<<<<< HEAD
+    id 'info.solidsoft.pitest' version '1.7.0'
+=======
+    id 'info.solidsoft.pitest' version '1.6.0'
+>>>>>>> aa83ae0d9b9924a10aefd970ae1ff641dd3a3b48
+>>>>>>> master
     id 'application'
 }
 
