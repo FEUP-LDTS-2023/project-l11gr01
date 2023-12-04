@@ -1,22 +1,46 @@
-## LDTS_<11><01> - SAVIORS OF THE SOLAR SYSTEM
+# LDTS_1101 - Saviors of the Solar System
 
+## GAME DESCRIPTION
 
 In this exciting adventure game you shall help the Saviors of the Universe save the solar system from a species of invaders that have the ability to control asteroids, by escaping the asteroids thrown by them and collecting all the tokens throughout the eight different levels (representing the eight planets of the solar system).
-In each level, until reaching the final level "Planet Earth" (which is the most difficult one), the difficulty level will increase. You will have more asteroids to doge that will travel faster. You'll also have to catch more tokens to save the given planet. At the start you have 3 lives and for each planet you are able to save you'll receive an extra one.
+In each level, until reaching the final level "Earth" (which is the most difficult one), the difficulty level will increase. You will have more asteroids to dodge that will travel faster. You'll also have to collect more tokens to save the given planet. At the start you have 3 lives and for each planet you are able to save you'll receive an extra one. 
+For every asteroid hit you lose one life.
 You can also catch special tokens that give you an extra life.
 Are you ready to save the solar system from the invaders?
 
+How to play:
+- #1 Run the program
+- #2 Either start the game (press enter in "Start" button), visit the "How to Play" section (Instructions) (play afterward) or exit ("Exit" button).
+- #3 Use the arrow keys (up, down, left, right) to dodge the asteroids and collect all the tokens to pass the level.
+- #4 Have fun helping the Savior of the Galaxy save the Solar System.
+
 This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira (up202009302@up.pt) and Álvaro Torres (up202208954@up.pt) for LDTS 2023⁄24.
 
-### IMPLEMENTED FEATURES
+## IMPLEMENTED FEATURES
 
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
+- **Total of features:** 8
+- **Total implemented features:** 4
+
+
+- **Main Menu with** - "Start", "How to Play" (Instructions Menu) and "Exit" buttons (Esc key used to exit game when not in the Main Menu).
+
+![img](images/MainMenu.png)
+![img](images/InstructionsMenu.png)
 
 - **Spaceship movement** - The spaceship can move using the arrow keys (up, down, left, right).
-- **Asteroids movement** - Asteroids will move from left to right and from top to bottom.
-- **Tokens in each level** - Randomly generated tokens for each level that the user will be able to catch.
 
-### PLANNED FEATURES
+![img](images/spaceshipmovement.png)
+
+- **Asteroids movement** - Asteroids will move from top to bottom (vertically) randomly, one being created each second (for now). If there is a collision between the spaceship and one asteroid the user loses the game (for now).
+
+![img](images/asteroidsmovement.png)
+
+- **Tokens in each level** - Randomly generated tokens for each level that the user will be able to collect (next token appears when previous is collected).
+
+![img](images/tokenscollection.png)
+
+## PLANNED FEATURES
 
 > This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
 
@@ -38,7 +62,7 @@ We are going to implement the following features in the given order.
 
 ![img](images/extralives.png)
 
-### DESIGN
+## DESIGN
 
 > This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts:
 
@@ -47,53 +71,61 @@ We are going to implement the following features in the given order.
 - **Implementation.** Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
 - **Consequences.** Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with those of alternative solutions.
 
-**Example of one of such subsections**:
 
-------
-
-#### THE JUMP ACTION OF THE KANGAROOBOY SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
+### EACH PLANET IS DIFFERENT BUT HAS THE SAME BASIS
 
 **Problem in Context**
 
-There was a lot of scattered conditional logic when deciding how the KangarooBoy should behave when jumping, as the jumps should be different depending on the items that came to his possession during the game (an helix will alow him to fly, driking a potion will allow him to jump double the height, etc.). This is a violation of the **Single Responsability Principle**. We could concentrate all the conditional logic in the same method to circumscribe the issue to that one method but the **Single Responsability Principle** would still be violated.
+Every planet that represents a level of the game (there are eight different ones) has the same basis as all planets. The constructor for a planet has a backgroundColor, name, tokenCount and an asteroidCount. Every concrete planet is different in all these fields.
 
 **The Pattern**
 
-We have applied the **State** pattern. This pattern allows you to represent different states with different subclasses. We can switch to a different state of the application by switching to another implementation (i.e., another subclass). This pattern allowed to address the identified problems because […].
+We have applied the **Factory-Method** pattern. This pattern allows you to define an interface for creating the planet object (planet class), but let the subclasses (concrete planets) decide which class to instantiate. We decided to use this design pattern so that we could generalize the planet class once we had eight different concrete planets tha shall be created, thus when running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process. The responsibility knowing what implementation of planet to create is delegated to the several subclasses, so to change the concrete planet that is created we only need to change one class.
 
 **Implementation**
 
-The following figure shows how the pattern’s roles were mapped to the application classes.
+The following diagrams shows how the creator (Game class), the product (planet class), the concrete creators (subclasses of planet) and the concrete products (concrete planets) interact with each other. 
 
-![img](https://www.fe.up.pt/~arestivo/page/img/examples/lpoo/state.svg)
+- UML dependencies diagram:
+![img](Diagrams/UMLdependencies.png)
+
+- UML classes diagram:
+![img](Diagrams/UMLclasses.png)
+
+- Full UML classes diagram of game implementation:
+![img](Diagrams/UMLclassesfull.png)
 
 These classes can be found in the following files:
 
-- [Character](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/Character.java)
-- [JumpAbilityState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/JumpAbilityState.java)
-- [DoubleJumpState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/DoubleJumpState.java)
-- [HelicopterState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/HelicopterState.java)
-- [IncreasedGravityState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/IncreasedGravityState.java)
+- [Game](Files/Game.java)
+- [Planet](Files/Planet.java)
+- [Mercury](Files/Mercury.java)
 
 **Consequences**
 
-The use of the State Pattern in the current design allows the following benefits:
+The use of the Factory-Method Pattern in the current design allows the following benefits:
 
-- The several states that represent the character’s hability to jump become explicit in the code, instead of relying on a series of flags.
-- We don’t need to have a long set of conditional if or switch statements associated with the various states; instead, polimorphism is used to activate the right behavior.
-- There are now more classes and instances to manage, but still in a reasonable number.
+- It eliminates the need to bind application-specific classes into our code.
+- The code only needs to deal with the planet class that is the product interface.
+- Hence it can work with any concrete planet that is created (concrete product).
+- When running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process
 
-#### KNOWN CODE SMELLS
+## KNOWN CODE SMELLS
 
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation.
 
-### TESTING
+When the user opens the instructions in the main menu it cannot play the game without exiting it first and then re-running it.
+
+## TESTING
 
 - Screenshot of coverage report.
+
+![img](images/coveragereport.png)
+
 - Link to mutation testing report.
 
-### SELF-EVALUATION
+## SELF-EVALUATION
 
-- Tiago Martins: 33%
-- Tiago Oliveira: 33%
-- Álvaro Torres: 33%
+- Tiago Martins: 33,33333333%
+- Tiago Oliveira: 33,33333333%
+- Álvaro Torres: 33,33333333%
