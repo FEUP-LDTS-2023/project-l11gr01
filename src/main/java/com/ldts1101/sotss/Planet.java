@@ -46,7 +46,7 @@ public abstract class Planet{
     public void run(TerminalScreen screen) throws IOException {
         KeyStroke keyStroke;
         Random random = new Random();
-        token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)),backgroundColor);
+        token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)), backgroundColor);
         do {
             updateToken();
             updateAsteroidsY();
