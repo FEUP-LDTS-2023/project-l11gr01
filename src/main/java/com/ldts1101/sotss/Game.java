@@ -58,7 +58,7 @@ public class Game {
                         case Enter: {
                             switch (selectedOption) {
                                 case 0: {
-                                    level = new Mars();
+                                    level = new Uranus();
                                     level.run(screen);
                                     break;
                                 }
