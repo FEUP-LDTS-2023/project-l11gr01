@@ -25,12 +25,13 @@ public abstract class Planet{
     protected int asteroidCount;
     private long lastAsteroidCreationTime = System.currentTimeMillis();
     private long lastAsteroidMoveTime = System.currentTimeMillis();
-    private long asteroidCreationDelay = 1000; // Milliseconds between each asteroid creation
+    private long asteroidCreationDelay; // Milliseconds between each asteroid creation
     private long asteroidMoveDelay = 100;
 
 
     //Constructor, after calling it need to set asteroidCount.
-    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount){
+
+    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount,long asteroidDelay){
         this.backgroundColor = backgroundColor;
         this.tokenCount = tokenCount;
         this.asteroidCount = asteroidCount;
@@ -38,6 +39,7 @@ public abstract class Planet{
         this.walls = new ArrayList<>();
         this.asteroids = new ArrayList<>();
         this.name = name;
+        this.asteroidCreationDelay = asteroidDelay;
         createWalls();
     }
 
@@ -47,7 +49,7 @@ public abstract class Planet{
         token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)),backgroundColor);
         do {
             updateToken();
-            updateAsteroids();
+            updateAsteroidsY();
             draw(screen.newTextGraphics());
             screen.refresh();
             keyStroke = screen.pollInput();
@@ -83,7 +85,9 @@ public abstract class Planet{
         token.draw(graphics);
     }
 
-    public void updateAsteroids() {
+    public void updateAsteroidsX(){}
+
+    public void updateAsteroidsY() {
         Random random = new Random();
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
