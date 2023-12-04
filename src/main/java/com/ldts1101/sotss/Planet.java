@@ -129,6 +129,8 @@ public abstract class Planet{
         // Create walls for the top and bottom boundaries
         for (int x = 0; x <= 89; x++) {
             walls.add(new Wall(x, 0));
+            walls.add(new Wall(x, 1));
+            walls.add(new Wall(x, 2));
             walls.add(new Wall(x, 44));
         }
     }
