@@ -2,6 +2,7 @@
 
 In this exciting adventure game you shall help the Saviors of the Universe save the solar system from a species of invaders that have the ability to control asteroids, by escaping the asteroids thrown by them and collecting all the tokens throughout the eight different levels (representing the eight planets of the solar system). In each level, until reaching the final level "Earth" (which is the most difficult one), the difficulty level will increase. You will have more asteroids to dodge that will travel faster. You'll also have to collect more tokens to save the given planet. At the start you have 3 lives and for each planet you are able to save you'll receive an extra one. For every asteroid hit you lose one life. You can also catch special tokens that give you an extra life. Are you ready to save the solar system from the invaders?
 
+
 How to play:
 - #1 Run the program
 - #2 Either start the game (press enter in "Start" button), visit the "How to Play" section (Instructions) (play afterward) or exit ("Exit" button).

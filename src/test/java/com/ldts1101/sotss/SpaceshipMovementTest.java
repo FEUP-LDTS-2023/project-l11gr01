@@ -1,7 +1,9 @@
 package com.ldts1101.sotss;
 
 import com.googlecode.lanterna.TextColor;
-import com.ldts1101.sotss.Planet;
+import com.ldts1101.sotss.model.game.elements.Spaceship;
+import com.ldts1101.sotss.model.game.elements.Wall;
+import com.ldts1101.sotss.model.game.level.Level;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,11 +17,11 @@ import static org.mockito.Mockito.when;
 
 public class SpaceshipMovementTest {
 
-    private Planet planet;
+    private Level planet;
 
     @Before
     public void setUp() {
-        planet = mock(Planet.class);
+        planet = mock(Level.class);
     }
 
     @Test

@@ -1,10 +1,10 @@
-package com.ldts1101.sotss;
+package com.ldts1101.sotss.model.game.elements;
 
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.BasicTextImage;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.ldts1101.sotss.Element;
-import com.ldts1101.sotss.Position;
+import com.ldts1101.sotss.model.Position;
+import com.ldts1101.sotss.model.game.elements.Element;
 
 public class Token extends Element {
     public Token(Position position, TextColor backgroundColor) {

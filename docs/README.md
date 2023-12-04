@@ -3,7 +3,7 @@
 ## GAME DESCRIPTION
 
 In this exciting adventure game you shall help the Saviors of the Universe save the solar system from a species of invaders that have the ability to control asteroids, by escaping the asteroids thrown by them and collecting all the tokens throughout the eight different levels (representing the eight planets of the solar system).
-In each level, until reaching the final level "Earth" (which is the most difficult one), the difficulty level will increase. You will have more asteroids to dodge that will travel faster. You'll also have to collect more tokens to save the given planet. At the start you have 3 lives and for each planet you are able to save you'll receive an extra one. 
+In each level, until reaching the final level "Earth" (which is the most difficult one), the difficulty level will increase. You will have more asteroids to dodge that will travel faster. You'll also have to collect more tokens to save the given planet. At the start you have 3 lives and for each planet you are able to save you'll receive an extra one.
 For every asteroid hit you lose one life.
 You can also catch special tokens that give you an extra life.
 Are you ready to save the solar system from the invaders?
@@ -80,11 +80,19 @@ Every planet that represents a level of the game (there are eight different ones
 
 **The Pattern**
 
+<<<<<<< HEAD
 We have applied the **Factory-Method** pattern. This pattern allows you to define an interface for creating the planet object (planet class), but let the subclasses (concrete planets) decide which class to instantiate. We decided to use this design pattern so that we could generalize the planet class once we had eight different concrete planets tha shall be created, thus when running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process. The responsibility knowing what implementation of planet to create is delegated to the several subclasses, so to change the concrete planet that is created we only need to change one class.
 
 **Implementation**
 
 The following diagrams shows how the creator (Game class), the product (planet class), the concrete creators (subclasses of planet) and the concrete products (concrete planets) interact with each other. 
+=======
+We have applied the **Factory-Method** pattern. This pattern allows you to define an interface for creating the com.ldts1101.sotss.model.game.level.Level object (com.ldts1101.sotss.model.game.level.Level class), but let the subclasses (concrete planets) decide which class to instantiate. We decided to use this design pattern so that we could generalize the com.ldts1101.sotss.model.game.level.Level class once we had eight different concrete planets tha shall be created, thus when running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process. The responsibility knowing what implementation of planet to create is delegated to the several subclasses, so to change the concrete planet that is created we only need to change one class.
+
+**Implementation**
+
+The following diagrams shows how the creator (Game class), the product (com.ldts1101.sotss.model.game.level.Level class), the concrete creators (subclasses of com.ldts1101.sotss.model.game.level.Level) and the concrete products (concrete planets) interact with each other. 
+>>>>>>> 6f131b0 (Changed sturcture of the code.)
 
 - UML dependencies diagram:
 ![img](Diagrams/UMLdependencies.png)
@@ -98,7 +106,11 @@ The following diagrams shows how the creator (Game class), the product (planet c
 These classes can be found in the following files:
 
 - [Game](Files/Game.java)
+<<<<<<< HEAD
 - [Planet](Files/Planet.java)
+=======
+- [com.ldts1101.sotss.model.game.level.Level](Files/com.ldts1101.sotss.model.game.level.Level.java)
+>>>>>>> 6f131b0 (Changed sturcture of the code.)
 - [Mercury](Files/Mercury.java)
 
 **Consequences**
@@ -106,7 +118,11 @@ These classes can be found in the following files:
 The use of the Factory-Method Pattern in the current design allows the following benefits:
 
 - It eliminates the need to bind application-specific classes into our code.
+<<<<<<< HEAD
 - The code only needs to deal with the planet class that is the product interface.
+=======
+- The code only needs to deal with the com.ldts1101.sotss.model.game.level.Level class that is the product interface.
+>>>>>>> 6f131b0 (Changed sturcture of the code.)
 - Hence it can work with any concrete planet that is created (concrete product).
 - When running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process
 

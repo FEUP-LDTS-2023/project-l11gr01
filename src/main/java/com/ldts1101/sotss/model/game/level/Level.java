@@ -1,18 +1,22 @@
-package com.ldts1101.sotss;
+package com.ldts1101.sotss.model.game.level;
 
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
-import com.ldts1101.sotss.Position;
+import com.ldts1101.sotss.model.Position;
+import com.ldts1101.sotss.model.game.elements.Asteroid;
+import com.ldts1101.sotss.model.game.elements.Spaceship;
+import com.ldts1101.sotss.model.game.elements.Token;
+import com.ldts1101.sotss.model.game.elements.Wall;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Planet{
+public abstract class Level {
 
     protected String name;
     protected TextColor backgroundColor;
@@ -30,7 +34,7 @@ public abstract class Planet{
 
 
     //Constructor, after calling it need to set asteroidCount.
-    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount){
+    public Level(TextColor backgroundColor, String name, int tokenCount, int asteroidCount){
         this.backgroundColor = backgroundColor;
         this.tokenCount = tokenCount;
         this.asteroidCount = asteroidCount;

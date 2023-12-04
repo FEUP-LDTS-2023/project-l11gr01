@@ -1,4 +1,4 @@
-package com.ldts1101.sotss;
+package com.ldts1101.sotss.model;
 
 public class Position {
 

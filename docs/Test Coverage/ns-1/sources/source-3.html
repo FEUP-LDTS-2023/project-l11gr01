@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
-  <title>Coverage Report > com.ldts1101.sotss.Element</title>
+  <title>Coverage Report > com.ldts1101.sotss.model.game.elements.Element</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">&lt;empty package name&gt;</a>
 </div>
 
-<h1>Coverage Summary for Class: com.ldts1101.sotss.Element (&lt;empty package name&gt;)</h1>
+<h1>Coverage Summary for Class: com.ldts1101.sotss.model.game.elements.Element (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -41,7 +41,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">com.ldts1101.sotss.Element</td>
+  <td class="name">com.ldts1101.sotss.model.game.elements.Element</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -86,46 +86,46 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.List;
 &nbsp;
 &nbsp;
-&nbsp;public abstract class com.ldts1101.sotss.Element {
+&nbsp;public abstract class com.ldts1101.sotss.model.game.elements.Element {
 &nbsp;
 &nbsp;    //Member fields
-&nbsp;    protected List&lt;com.ldts1101.sotss.Position&gt; positions;
+&nbsp;    protected List&lt;com.ldts1101.sotss.model.Position&gt; positions;
 &nbsp;    protected TextColor color;
 &nbsp;    protected TextImage image;
 &nbsp;
-&nbsp;    //Constructor, after calling it need to set image and com.ldts1101.sotss.Position(s).
-<b class="nc">&nbsp;    com.ldts1101.sotss.Element(TextColor color) {</b>
+&nbsp;    //Constructor, after calling it need to set image and com.ldts1101.sotss.model.Position(s).
+<b class="nc">&nbsp;    com.ldts1101.sotss.model.game.elements.Element(TextColor color) {</b>
 <b class="nc">&nbsp;        this.positions = new ArrayList&lt;&gt;();</b>
 <b class="nc">&nbsp;        this.color = color;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public List&lt;com.ldts1101.sotss.Position&gt; getPositions() {
+&nbsp;    public List&lt;com.ldts1101.sotss.model.Position&gt; getPositions() {
 <b class="nc">&nbsp;        return positions;</b>
 &nbsp;    }
-&nbsp;    public void setPosition(com.ldts1101.sotss.Position position) {
+&nbsp;    public void setPosition(com.ldts1101.sotss.model.Position position) {
 <b class="nc">&nbsp;        positions.add(position);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;
 &nbsp;    public void moveUp(){
-<b class="nc">&nbsp;        for (com.ldts1101.sotss.Position position : positions) {</b>
+<b class="nc">&nbsp;        for (com.ldts1101.sotss.model.Position position : positions) {</b>
 <b class="nc">&nbsp;            position.setY(position.getY() - 1);</b>
 <b class="nc">&nbsp;        }</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public void moveDown(){
-<b class="nc">&nbsp;        for (com.ldts1101.sotss.Position position : positions) {</b>
+<b class="nc">&nbsp;        for (com.ldts1101.sotss.model.Position position : positions) {</b>
 <b class="nc">&nbsp;            position.setY(position.getY() + 1);</b>
 <b class="nc">&nbsp;        }</b>
 &nbsp;    }
 &nbsp;    public void moveLeft(){
-<b class="nc">&nbsp;        for (com.ldts1101.sotss.Position position : positions) {</b>
+<b class="nc">&nbsp;        for (com.ldts1101.sotss.model.Position position : positions) {</b>
 <b class="nc">&nbsp;            position.setX(position.getX() - 1);</b>
 <b class="nc">&nbsp;        }</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public void moveRight(){
-<b class="nc">&nbsp;        for (com.ldts1101.sotss.Position position : positions) {</b>
+<b class="nc">&nbsp;        for (com.ldts1101.sotss.model.Position position : positions) {</b>
 <b class="nc">&nbsp;            position.setX(position.getX() + 1);</b>
 <b class="nc">&nbsp;        }</b>
 &nbsp;    }

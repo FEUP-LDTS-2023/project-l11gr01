@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
-  <title>Coverage Report > com.ldts1101.sotss.Position</title>
+  <title>Coverage Report > com.ldts1101.sotss.model.Position</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">&lt;empty package name&gt;</a>
 </div>
 
-<h1>Coverage Summary for Class: com.ldts1101.sotss.Position (&lt;empty package name&gt;)</h1>
+<h1>Coverage Summary for Class: com.ldts1101.sotss.model.Position (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -41,7 +41,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">com.ldts1101.sotss.Position</td>
+  <td class="name">com.ldts1101.sotss.model.Position</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -75,12 +75,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;public class com.ldts1101.sotss.Position {
+<code class="sourceCode" id="sourceCode">&nbsp;public class com.ldts1101.sotss.model.Position {
 &nbsp;
 &nbsp;    private int x;
 &nbsp;    private int y;
 &nbsp;
-<b class="fc">&nbsp;    public com.ldts1101.sotss.Position(int x, int y){</b>
+<b class="fc">&nbsp;    public com.ldts1101.sotss.model.Position(int x, int y){</b>
 <b class="fc">&nbsp;        this.x = x;</b>
 <b class="fc">&nbsp;        this.y = y;</b>
 &nbsp;    }
@@ -101,8 +101,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        this.y = y;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public com.ldts1101.sotss.Position getPosition(){
-<b class="nc">&nbsp;        return new com.ldts1101.sotss.Position(this.x, this.y);</b>
+&nbsp;    public com.ldts1101.sotss.model.Position getPosition(){
+<b class="nc">&nbsp;        return new com.ldts1101.sotss.model.Position(this.x, this.y);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Override
@@ -110,7 +110,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        if(o == null || o.getClass() != this.getClass()) return false;</b>
 &nbsp;
 <b class="nc">&nbsp;        return (this == o) ||</b>
-&nbsp;                (this.x == ((com.ldts1101.sotss.Position) o).x &amp;&amp; this.y == ((com.ldts1101.sotss.Position) o).y);
+&nbsp;                (this.x == ((com.ldts1101.sotss.model.Position) o).x &amp;&amp; this.y == ((com.ldts1101.sotss.model.Position) o).y);
 &nbsp;    }
 &nbsp;}
 </code>

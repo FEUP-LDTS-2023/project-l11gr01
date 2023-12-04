@@ -80,10 +80,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import com.googlecode.lanterna.graphics.BasicTextImage;
 &nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
 &nbsp;
-&nbsp;public class Wall extends com.ldts1101.sotss.Element {
+&nbsp;public class Wall extends com.ldts1101.sotss.model.game.elements.Element {
 &nbsp;    Wall(int x, int y) {
 <b class="nc">&nbsp;        super( TextColor.ANSI.BLACK_BRIGHT);</b>
-<b class="nc">&nbsp;        setPosition(new com.ldts1101.sotss.Position(x,y));</b>
+<b class="nc">&nbsp;        setPosition(new com.ldts1101.sotss.model.Position(x,y));</b>
 <b class="nc">&nbsp;        image = new BasicTextImage(1,1);</b>
 <b class="nc">&nbsp;        TextGraphics graphics = image.newTextGraphics();</b>
 <b class="nc">&nbsp;        graphics.setCharacter(0,0,Symbols.BLOCK_SOLID);</b>

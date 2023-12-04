@@ -1,11 +1,10 @@
-package com.ldts1101.sotss;
+package com.ldts1101.sotss.model.game.elements;
 
-import com.googlecode.lanterna.graphics.BasicTextImage;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextImage;
+import com.ldts1101.sotss.model.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public abstract class Element {
     protected TextColor color;
     protected TextImage image;
 
-    //Constructor, after calling it need to set image and com.ldts1101.sotss.Position(s).
+    //Constructor, after calling it need to set image and com.ldts1101.sotss.model.Position(s).
     Element(TextColor color) {
         this.positions = new ArrayList<>();
         this.color = color;
