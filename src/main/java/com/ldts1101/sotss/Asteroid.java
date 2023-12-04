@@ -9,9 +9,9 @@ import com.ldts1101.sotss.Position;
 
 public class Asteroid extends Element {
 
-    Asteroid(int x) {
+    Asteroid(int x, int y) {
         super( TextColor.ANSI.RED);
-        setPosition(new Position(x,0));
+        setPosition(new Position(x,y));
         image = new BasicTextImage(1,1);
         TextGraphics graphics = image.newTextGraphics();
         graphics.setCharacter(1,1, new TextCharacter('^', TextColor.ANSI.YELLOW_BRIGHT, TextColor.ANSI.BLACK));

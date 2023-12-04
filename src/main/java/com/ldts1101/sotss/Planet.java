@@ -26,7 +26,7 @@ public abstract class Planet{
     private long lastAsteroidCreationTime = System.currentTimeMillis();
     private long lastAsteroidMoveTime = System.currentTimeMillis();
     private long asteroidCreationDelay; // Milliseconds between each asteroid creation
-    private long asteroidMoveDelay = 100;
+    protected long asteroidMoveDelay = 100;
 
 
     //Constructor, after calling it need to set asteroidCount.
@@ -85,7 +85,31 @@ public abstract class Planet{
         token.draw(graphics);
     }
 
-    public void updateAsteroidsX(){}
+    public void updateAsteroidsX(){
+        Random random = new Random();
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
+            if (asteroids.size() < asteroidCount) {
+                int y = random.nextInt(1, 90);
+                asteroids.add(new Asteroid(1,y));
+            }
+            lastAsteroidCreationTime = currentTime;
+        }
+        if (currentTime - lastAsteroidMoveTime > asteroidMoveDelay) {
+            for (Asteroid asteroid : asteroids) {
+                asteroid.moveDown();
+            }
+            lastAsteroidMoveTime = currentTime;
+        }
+        for (int i = 0; i < asteroids.size(); i++) {
+            for (Position position : asteroids.get(i).getPositions()) {
+                if (position.getY() == 44) {
+                    asteroids.remove(i);
+                }
+            }
+        }
+        verifyAsteroidCollision();
+    }
 
     public void updateAsteroidsY() {
         Random random = new Random();
@@ -93,7 +117,7 @@ public abstract class Planet{
         if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
             if (asteroids.size() < asteroidCount) {
                 int x = random.nextInt(1, 90);
-                asteroids.add(new Asteroid(x));
+                asteroids.add(new Asteroid(x,3));
             }
             lastAsteroidCreationTime = currentTime;
         }

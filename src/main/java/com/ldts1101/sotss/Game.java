@@ -58,7 +58,7 @@ public class Game {
                         case Enter: {
                             switch (selectedOption) {
                                 case 0: {
-                                    level = new Mars();
+                                    level = new Mercury();
                                     level.run(screen);
                                     break;
                                 }
@@ -125,6 +125,7 @@ public class Game {
         graphics.putString(x - 14, y + 8, "Use the arrow keys in order to move the spaceship!");
         graphics.putString(x - 14, y + 9, "Collect all the tokens in order to save the planet.");
         graphics.putString(x - 14, y + 10, "Good luck on your journey!");
+        graphics.putString(x - 14, y + 11, "Press Escape to go back to the menu!",SGR.BOLD);
 
 
         screen.refresh();
