@@ -5,6 +5,6 @@ import com.ldts1101.sotss.Planet;
 
 public class Venus extends Planet {
     public Venus(){
-        super(TextColor.Factory.fromString("#FFFDAF"),"Venus",5,3);
+        super(TextColor.Factory.fromString("#FFFDAF"),"Venus",6,4);
     }
 }

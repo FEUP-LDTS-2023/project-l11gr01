@@ -113,7 +113,7 @@ public abstract class Planet{
         Random random = new Random();
         for (Position spaceshipPosition : spaceship.getPositions()) {
             if (spaceshipPosition.equals(token.getPositions().get(0))) {
-                token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)), backgroundColor);
+                token = new Token(new Position(random.nextInt(1,89), random.nextInt(3,44)), backgroundColor);
                 tokenCount--;
             }
             verifyTokenCollection();
