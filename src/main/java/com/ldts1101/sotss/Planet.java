@@ -20,7 +20,9 @@ public abstract class Planet{
     protected List<Wall> walls;
     protected List<Asteroid> asteroids;
     protected int tokenCount;
-
+    protected int livesCount;
+    protected Life lives;
+    protected String life;
     protected Token token;
     protected int asteroidCount;
     private long lastAsteroidCreationTime = System.currentTimeMillis();
@@ -30,10 +32,12 @@ public abstract class Planet{
 
 
     //Constructor, after calling it need to set asteroidCount.
-    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount){
+    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount, String life, int livesCount){
         this.backgroundColor = backgroundColor;
         this.tokenCount = tokenCount;
         this.asteroidCount = asteroidCount;
+        this.life = life;
+        this.livesCount = livesCount;
         this.spaceship = new Spaceship(backgroundColor);
         this.walls = new ArrayList<>();
         this.asteroids = new ArrayList<>();
@@ -44,7 +48,7 @@ public abstract class Planet{
     public void run(TerminalScreen screen) throws IOException {
         KeyStroke keyStroke;
         Random random = new Random();
-        token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)),backgroundColor);
+        token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)), backgroundColor);
         do {
             updateToken();
             updateAsteroids();
@@ -81,6 +85,11 @@ public abstract class Planet{
         }
         //Draw Token
         token.draw(graphics);
+        //Draw lives -->like level name for each independent level taking into consideration livesCount
+        //lives.draw(graphics);
+        //Draw level lives
+        graphics.setForegroundColor(TextColor.ANSI.RED);
+        graphics.putString(new TerminalPosition(81,1), life, SGR.BOLD);
     }
 
     public void updateAsteroids() {
@@ -107,6 +116,7 @@ public abstract class Planet{
             }
         }
         verifyAsteroidCollision();
+        verifyDeath();
     }
 
     public void updateToken() {
@@ -131,6 +141,11 @@ public abstract class Planet{
             walls.add(new Wall(x, 0));
             walls.add(new Wall(x, 44));
         }
+    }
+
+    private void createLives(){
+        //int currentLives = planet.livesCount - livesCount --> para calcular as lives após passar nível
+        //lives = new Life(new TerminalPosition(88, 1), backgroundColor);
     }
 
     void processKey(KeyStroke keyStroke) throws IOException {
@@ -218,15 +233,21 @@ public abstract class Planet{
 
 
     public void verifyAsteroidCollision() {
-        for (Asteroid asteroid : asteroids){
+        for (Asteroid asteroid : asteroids) {
             for (Position asteroidPosition : asteroid.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
                     if (spaceshipPosition.equals(asteroidPosition)) {
-                        System.out.println("You weren't able to save the solar system!");
-                        System.exit(0);
+                        livesCount--;
                     }
                 }
             }
+        }
+    }
+
+    public void verifyDeath(){
+        if (livesCount == 0) {
+            System.out.println("You weren't able to save the solar system!");
+            System.exit(0);
         }
     }
 
