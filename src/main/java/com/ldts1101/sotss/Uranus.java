@@ -5,6 +5,6 @@ import com.ldts1101.sotss.Planet;
 
 public class Uranus extends Planet {
     public Uranus(){
-        super(TextColor.Factory.fromString("#ADD8E6"),"Uranus",5,3);
+        super(TextColor.Factory.fromString("#ADD8E6"),"Uranus",5,3, livesCount + 1);
     }
 }
