@@ -1,7 +1,6 @@
 package com.ldts1101.sotss;
 
 import com.googlecode.lanterna.TextColor;
-import com.ldts1101.sotss.Planet;
 import org.junit.Before;
 import org.junit.Test;
 

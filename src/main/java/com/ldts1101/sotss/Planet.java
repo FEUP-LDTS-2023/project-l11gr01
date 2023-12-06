@@ -5,12 +5,9 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
-import com.ldts1101.sotss.Position;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public abstract class Planet{
 
@@ -20,28 +17,29 @@ public abstract class Planet{
     protected List<Wall> walls;
     protected List<Asteroid> asteroids;
     protected int tokenCount;
-    protected int livesCount;
-    protected Life lives;
-    protected String life;
+    public int livesCount;
     protected Token token;
     protected int asteroidCount;
     private long lastAsteroidCreationTime = System.currentTimeMillis();
     private long lastAsteroidMoveTime = System.currentTimeMillis();
     private long asteroidCreationDelay = 1000; // Milliseconds between each asteroid creation
     private long asteroidMoveDelay = 100;
+    //protected int initialLives;
+    protected int asteroidHits;
+    private boolean collisionProcessed = false;
 
 
     //Constructor, after calling it need to set asteroidCount.
-    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount, String life, int livesCount){
+    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount, int livesCount){
         this.backgroundColor = backgroundColor;
         this.tokenCount = tokenCount;
         this.asteroidCount = asteroidCount;
-        this.life = life;
-        this.livesCount = livesCount;
         this.spaceship = new Spaceship(backgroundColor);
         this.walls = new ArrayList<>();
         this.asteroids = new ArrayList<>();
         this.name = name;
+        this.livesCount = livesCount;
+        this.asteroidHits = 0;
         createWalls();
     }
 
@@ -85,11 +83,11 @@ public abstract class Planet{
         }
         //Draw Token
         token.draw(graphics);
-        //Draw lives -->like level name for each independent level taking into consideration livesCount
-        //lives.draw(graphics);
         //Draw level lives
         graphics.setForegroundColor(TextColor.ANSI.RED);
-        graphics.putString(new TerminalPosition(81,1), life, SGR.BOLD);
+        for (int i = 0; i < livesCount; i++) {
+            graphics.putString(new TerminalPosition(81 + i * 2, 1), "<3", SGR.BOLD);
+        }
     }
 
     public void updateAsteroids() {
@@ -115,8 +113,12 @@ public abstract class Planet{
                 }
             }
         }
-        verifyAsteroidCollision();
-        verifyDeath();
+        // Process collisions only once per iteration
+        if (!collisionProcessed) {
+            verifyAsteroidCollision();
+            collisionProcessed = true;
+        }
+        System.out.println("livesCount: " + livesCount);
     }
 
     public void updateToken() {
@@ -141,11 +143,6 @@ public abstract class Planet{
             walls.add(new Wall(x, 0));
             walls.add(new Wall(x, 44));
         }
-    }
-
-    private void createLives(){
-        //int currentLives = planet.livesCount - livesCount --> para calcular as lives após passar nível
-        //lives = new Life(new TerminalPosition(88, 1), backgroundColor);
     }
 
     void processKey(KeyStroke keyStroke) throws IOException {
@@ -233,22 +230,104 @@ public abstract class Planet{
 
 
     public void verifyAsteroidCollision() {
-        for (Asteroid asteroid : asteroids) {
+        /*
+        Set<Position> spaceshipPositions = new HashSet<>(spaceship.getPositions());
+        for (Asteroid asteroid : asteroids){
             for (Position asteroidPosition : asteroid.getPositions()) {
-                for (Position spaceshipPosition : spaceship.getPositions()) {
+                if (spaceshipPositions.contains(asteroidPosition)) {
+                    livesCount--;
+                    if (livesCount <= 0) {
+                        verifyDeath();
+                    }
+                    return;
+                }
+            }
+        }
+
+        boolean collisionDetected = false;
+        for (Position spaceshipPosition : spaceship.getPositions()) {
+            for (Asteroid asteroid : asteroids) {
+                for (Position asteroidPosition : asteroid.getPositions()) {
                     if (spaceshipPosition.equals(asteroidPosition)) {
-                        livesCount--;
+                        collisionDetected = true;
                     }
                 }
             }
         }
+        if (collisionDetected){
+            livesCount--;
+            if (livesCount <= 0) {
+                verifyDeath();
+            }
+        }
+
+
+        boolean collisionDetected = false;
+
+        if (!collisionProcessed) {
+            for (Position spaceshipPosition : spaceship.getPositions()) {
+                for (Asteroid asteroid : asteroids) {
+                    for (Position asteroidPosition : asteroid.getPositions()) {
+                        if (spaceshipPosition.equals(asteroidPosition)) {
+                            collisionDetected = true;
+                            break;  // Exit the innermost loop once a collision is detected
+                        }
+                    }
+                    if (collisionDetected) {
+                        break;  // Exit the middle loop once a collision is detected
+                    }
+                }
+                if (collisionDetected) {
+                    break;  // Exit the outer loop once a collision is detected
+                }
+            }
+
+            if (collisionDetected) {
+                System.out.println("Collision detected. Lives before decrement: " + livesCount);
+                livesCount--;
+                System.out.println("Lives after decrement: " + livesCount);
+
+                if (livesCount <= 0) {
+                    System.out.println("Calling verifyDeath()");
+                    verifyDeath();
+                }
+
+                collisionProcessed = true;  // Set the flag to true to indicate that the collision has been processed
+            }
+        } else {
+            collisionProcessed = false;  // Reset the flag for the next frame
+        }
+
+         */
+        for (Asteroid asteroid : asteroids) {
+            for (Position spaceshipPosition : spaceship.getPositions()) {
+                if (asteroid.getPositions().contains(spaceshipPosition)) {
+                    System.out.println("Collision detected. Lives before decrement: " + livesCount);
+                    livesCount--;
+                    System.out.println("Lives after decrement: " + livesCount);
+
+                    if (livesCount <= 0) {
+                        System.out.println("Calling verifyDeath()");
+                        verifyDeath();
+                    }
+
+                    // Additional logic for lives visual representation (update Life objects, print <3, etc.)
+                    break; // Break out of the loop after one collision is processed
+                }
+            }
+        }
+    }
+    public void processCollisions() {
+        // Reset the collisionProcessed flag for the next iteration
+        collisionProcessed = false;
     }
 
-    public void verifyDeath(){
+    public void verifyDeath() {
         if (livesCount == 0) {
             System.out.println("You weren't able to save the solar system!");
             System.exit(0);
         }
+        // Additional logic for handling the end of a life (e.g., reset the level or show a game over screen)
     }
 
     public void verifyTokenCollection() {
