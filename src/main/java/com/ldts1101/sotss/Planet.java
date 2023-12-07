@@ -114,7 +114,6 @@ public abstract class Planet{
                 }
             }
         }
-        verifyAsteroidCollision();
     }
 
     public void updateToken() {
@@ -225,26 +224,25 @@ public abstract class Planet{
     }
 
 
-    public void verifyAsteroidCollision() {
+    public boolean verifyAsteroidCollision() {
         for (Asteroid asteroid : asteroids){
             for (Position asteroidPosition : asteroid.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
                     if (spaceshipPosition.equals(asteroidPosition)) {
-                        System.out.println("You weren't able to save the solar system!");
-                        System.exit(0);
+                        return true;
                     }
                 }
             }
         }
+        return false;
     }
 
     public boolean verifyTokenCollection() {
         if (tokenCount == 0){
-            System.out.println("Level Completed!");
+
             return true;
         }
         return false;
     }
-
 }
 
