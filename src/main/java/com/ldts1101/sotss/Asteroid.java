@@ -9,6 +9,8 @@ import com.ldts1101.sotss.Position;
 
 public class Asteroid extends Element {
 
+    boolean colided = false;
+
     Asteroid(int x) {
         super( TextColor.ANSI.RED);
         setPosition(new Position(x,0));
@@ -16,4 +18,8 @@ public class Asteroid extends Element {
         TextGraphics graphics = image.newTextGraphics();
         graphics.setCharacter(1,1, new TextCharacter('^', TextColor.ANSI.YELLOW_BRIGHT, TextColor.ANSI.BLACK));
     }
+
+    public boolean colided() {return colided;}
+
+    public void colides() {colided = true;}
 }
