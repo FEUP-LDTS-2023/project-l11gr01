@@ -7,13 +7,13 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Spaceship extends Element {
 
-    protected int lives;
+    protected static int lives;
 
     public Spaceship(TextColor backgroundColor){
         super(TextColor.ANSI.BLUE);
 
         for (int x = 44; x <= 46; x++) {
-            for (int y = 39; y <= 41; y++) {
+            for (int y = 39; y <= 40; y++) {
                 setPosition(new Position(x, y));
             }
         }
@@ -35,5 +35,11 @@ public class Spaceship extends Element {
 
     public void loseLife() {
         lives--;
+    }
+
+    public void addLife() {lives++;}
+
+    public boolean died() {
+        return lives == 0;
     }
 }

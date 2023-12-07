@@ -160,7 +160,7 @@ public class Game {
             try {
                 level = levels.get(currentLevelIndex).getDeclaredConstructor().newInstance();
                 level.run(screen);
-                if (level.verifyAsteroidCollision()) {
+                if (level.spaceshipDead()) {
                     isGameRunning = false;
                 }
                 currentLevelIndex++;
