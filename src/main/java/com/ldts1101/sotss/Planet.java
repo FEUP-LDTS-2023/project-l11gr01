@@ -61,6 +61,10 @@ public abstract class Planet{
                 System.exit(0);
                 break;
             }
+
+            if(verifyTokenCollection()){
+                return;
+            }
         } while ((tokenCount != 0) && (keyStroke == null) || (keyStroke.getKeyType() != KeyType.EOF && keyStroke.getKeyType() != KeyType.Escape));
     }
 
@@ -234,11 +238,12 @@ public abstract class Planet{
         }
     }
 
-    public void verifyTokenCollection() {
+    public boolean verifyTokenCollection() {
         if (tokenCount == 0){
-            System.out.println("YOU WON!");
-            System.exit(0);
+            System.out.println("Level Completed!");
+            return true;
         }
+        return false;
     }
 
 }

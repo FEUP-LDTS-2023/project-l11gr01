@@ -58,8 +58,11 @@ public class Game {
                         case Enter: {
                             switch (selectedOption) {
                                 case 0: {
-                                    level = new Mercury();
-                                    level.run(screen);
+                                    startLevel(new Mercury(),screen);
+                                    if(level.verifyTokenCollection()){
+                                        displayMessageBetweenLevels(screen,"You saved Mercury!");
+                                        startLevel(new Venus(),screen);
+                                    }
                                     break;
                                 }
                                 case 1: {
@@ -133,5 +136,28 @@ public class Game {
         do {
             keyStroke = screen.pollInput();
         } while (keyStroke == null || keyStroke.getKeyType() != KeyType.Escape);
+    }
+
+    private static void startLevel(Planet newLevel, TerminalScreen screen) throws IOException{
+        level = newLevel;
+        level.run(screen);
+    }
+
+    private static void displayMessageBetweenLevels(TerminalScreen screen,String message) throws IOException{
+        screen.clear();
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setForegroundColor(TextColor.ANSI.WHITE);
+        graphics.setBackgroundColor(TextColor.ANSI.BLACK);
+
+        graphics.putString(27, 20, message, SGR.BOLD);
+        graphics.putString(27, 21, "Traveling to the next adventure.", SGR.BOLD);
+        graphics.putString(27, 22, "Press Escape when you're ready!", SGR.BOLD);
+
+        screen.refresh();
+        KeyStroke keyStroke;
+        do {
+            keyStroke = screen.pollInput();
+        } while (keyStroke == null || keyStroke.getKeyType() != KeyType.Enter);
+
     }
 }
