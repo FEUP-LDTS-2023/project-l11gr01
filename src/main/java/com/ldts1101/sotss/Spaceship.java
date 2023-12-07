@@ -4,10 +4,10 @@ import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.BasicTextImage;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.ldts1101.sotss.Element;
-import com.ldts1101.sotss.Position;
 
 public class Spaceship extends Element {
+
+    protected int lives;
 
     public Spaceship(TextColor backgroundColor){
         super(TextColor.ANSI.BLUE);
@@ -25,5 +25,15 @@ public class Spaceship extends Element {
         graphics.setCharacter(0, 1, new TextCharacter('<', TextColor.ANSI.BLUE, backgroundColor));
         graphics.setCharacter(1, 1, new TextCharacter('^', TextColor.ANSI.BLUE, backgroundColor));
         graphics.setCharacter(2, 1, new TextCharacter('>', TextColor.ANSI.BLUE, backgroundColor));
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    public int getLives() {return lives;}
+
+    public void loseLife() {
+        lives--;
     }
 }

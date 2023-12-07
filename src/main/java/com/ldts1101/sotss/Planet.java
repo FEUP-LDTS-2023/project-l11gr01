@@ -20,7 +20,6 @@ public abstract class Planet{
     protected List<Wall> walls;
     protected List<Asteroid> asteroids;
     protected int tokenCount;
-
     protected Token token;
     protected int asteroidCount;
     private long lastAsteroidCreationTime = System.currentTimeMillis();
@@ -30,8 +29,7 @@ public abstract class Planet{
 
 
     //Constructor, after calling it need to set asteroidCount.
-
-    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount,long asteroidDelay){
+    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount,long asteroidDelay, int livesCount){
         this.backgroundColor = backgroundColor;
         this.tokenCount = tokenCount;
         this.asteroidCount = asteroidCount;
@@ -40,6 +38,7 @@ public abstract class Planet{
         this.asteroids = new ArrayList<>();
         this.name = name;
         this.asteroidCreationDelay = asteroidDelay;
+        this.spaceship.setLives(livesCount);
         createWalls();
     }
 
@@ -83,6 +82,8 @@ public abstract class Planet{
         }
         //Draw Token
         token.draw(graphics);
+        //Draw level lives
+        drawLives(graphics);
     }
 
     public void updateAsteroidsX(){
@@ -90,8 +91,8 @@ public abstract class Planet{
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
             if (asteroids.size() < asteroidCount) {
-                int y = random.nextInt(1, 90);
-                asteroids.add(new Asteroid(1,y));
+                int x = random.nextInt(1, 90);
+                asteroids.add(new Asteroid(x));
             }
             lastAsteroidCreationTime = currentTime;
         }
@@ -117,7 +118,7 @@ public abstract class Planet{
         if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
             if (asteroids.size() < asteroidCount) {
                 int x = random.nextInt(1, 90);
-                asteroids.add(new Asteroid(x,3));
+                asteroids.add(new Asteroid(x));
             }
             lastAsteroidCreationTime = currentTime;
         }
@@ -135,6 +136,7 @@ public abstract class Planet{
             }
         }
         verifyAsteroidCollision();
+        verifyDeath();
     }
 
     public void updateToken() {
@@ -248,22 +250,40 @@ public abstract class Planet{
 
 
     public void verifyAsteroidCollision() {
-        for (Asteroid asteroid : asteroids){
+        for (Asteroid asteroid : asteroids) {
             for (Position asteroidPosition : asteroid.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
                     if (spaceshipPosition.equals(asteroidPosition)) {
-                        System.out.println("You weren't able to save the solar system!");
-                        System.exit(0);
+                        if (!asteroid.colided()) {
+                            spaceship.loseLife();
+                        }
+                        asteroid.colides();
+
                     }
                 }
             }
         }
     }
 
+    public void verifyDeath(){
+        if (spaceship.getLives() == 0) {
+            System.out.println("You weren't able to save the solar system!");
+            System.exit(0);
+        }
+        // Additional logic for handling the end of a life (e.g., reset the level or show a game over screen)
+    }
+
     public void verifyTokenCollection() {
         if (tokenCount == 0){
             System.out.println("YOU WON!");
             System.exit(0);
+        }
+    }
+
+    public void drawLives(TextGraphics graphics) {
+        graphics.setForegroundColor(TextColor.ANSI.RED);
+        for (int i = 0;i < spaceship.getLives(); i++) {
+            graphics.putString(new TerminalPosition(87 - i * 2, 1), "<3", SGR.BOLD);
         }
     }
 
