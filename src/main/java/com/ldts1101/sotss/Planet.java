@@ -21,6 +21,8 @@ public abstract class Planet{
     protected List<Asteroid> asteroids;
     protected int tokenCount;
     protected Token token;
+    protected Life life;
+    private int lifeTokencount = 3;
     protected int asteroidCount;
     private long lastAsteroidCreationTime = System.currentTimeMillis();
     private long lastAsteroidMoveTime = System.currentTimeMillis();
@@ -49,6 +51,8 @@ public abstract class Planet{
         do {
             updateToken();
             updateAsteroidsY();
+            createLifetoken();
+            updateLifetoken();
             draw(screen.newTextGraphics());
             screen.refresh();
             keyStroke = screen.pollInput();
@@ -84,6 +88,9 @@ public abstract class Planet{
         token.draw(graphics);
         //Draw level lives
         drawLives(graphics);
+        //Draw Life
+        if (life != null)
+            life.draw(graphics);
     }
 
     public void updateAsteroidsX(){
@@ -147,6 +154,25 @@ public abstract class Planet{
                 tokenCount--;
             }
             verifyTokenCollection();
+        }
+    }
+
+    public void createLifetoken() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(3);
+        if (lifeTokencount > 0) {
+            if (randomNumber <= 1) {
+                life = new Life(new Position(random.nextInt(1, 89), random.nextInt(1, 44)), backgroundColor);
+                lifeTokencount--;
+            }
+        }
+    }
+
+    public void updateLifetoken(){
+        for (Position spaceshipPosition : spaceship.getPositions()) {
+            if (spaceshipPosition.equals(life.getPositions())) {
+                createLifetoken();
+            }
         }
     }
 
