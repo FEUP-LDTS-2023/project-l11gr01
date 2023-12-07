@@ -5,6 +5,6 @@ import com.ldts1101.sotss.Planet;
 
 public class Mars extends Planet {
     public Mars(){
-        super(TextColor.Factory.fromString("#F06100"),"Mars",11,9,1000, 3);
+        super(TextColor.Factory.fromString("#F06100"),"Mars",11,9,1000, livesCount + 1);
     }
 }

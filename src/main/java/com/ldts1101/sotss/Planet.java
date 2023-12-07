@@ -20,6 +20,7 @@ public abstract class Planet{
     protected List<Wall> walls;
     protected List<Asteroid> asteroids;
     protected int tokenCount;
+    public static int livesCount;
     protected Token token;
     protected Life life;
     private int lifeTokencount = 3;
@@ -31,10 +32,11 @@ public abstract class Planet{
 
 
     //Constructor, after calling it need to set asteroidCount.
-    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount,long asteroidDelay, int livesCount){
+    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount, long asteroidDelay, int livesCount){
         this.backgroundColor = backgroundColor;
         this.tokenCount = tokenCount;
         this.asteroidCount = asteroidCount;
+        this.livesCount = livesCount;
         this.spaceship = new Spaceship(backgroundColor);
         this.walls = new ArrayList<>();
         this.asteroids = new ArrayList<>();
