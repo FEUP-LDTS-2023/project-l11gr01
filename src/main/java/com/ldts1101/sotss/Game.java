@@ -12,15 +12,29 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.ldts1101.sotss.Planet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
     private static Planet level;
-    private static boolean isLevelRunning = false;
-
+    private static boolean isGameRunning = false;
     private static int selectedOption = 0;
+    private static List<Class<? extends Planet>> levels;
+    private static int currentLevelIndex = 0;
+    private static boolean running = true;
 
     public static void main(String[] args) {
+        levels = new ArrayList<>();
+        levels.add(Mercury.class);
+        levels.add(Venus.class);
+        levels.add(Jupiter.class);
+        levels.add(Saturn.class);
+        levels.add(Neptune.class);
+        levels.add(Uranus.class);
+        levels.add(Mars.class);
+        levels.add(Earth.class);
+
         try {
             //Create Terminal
             TerminalSize terminalSize = new TerminalSize(90, 45);
@@ -39,10 +53,11 @@ public class Game {
             //Graphics object for outputting to the screen
             TextGraphics graphics = screen.newTextGraphics();
 
-            boolean running = true;
 
             while (running) {
-                drawMenu(graphics, terminalWindowX, terminalWindowY);
+                if (!isGameRunning) {
+                    drawMenu(graphics, terminalWindowX, terminalWindowY);
+                }
                 screen.refresh();
                 KeyStroke keyStroke = screen.pollInput();
                 if (keyStroke != null) {
@@ -58,12 +73,14 @@ public class Game {
                         case Enter: {
                             switch (selectedOption) {
                                 case 0: {
-                                    level = new Earth();
-                                    level.run(screen);
+                                    isGameRunning = true;
+                                    while (isGameRunning) {
+                                        startNextLevel(screen);
+                                    }
                                     break;
                                 }
                                 case 1: {
-                                    howToPlay(screen.newTextGraphics(), 35,1,screen);
+                                    howToPlay(screen.newTextGraphics(), 35, 1, screen);
                                     break;
                                 }
                                 case 2: {
@@ -73,10 +90,12 @@ public class Game {
                             }
                             break;
                         }
+
                         case Escape, EOF: {
                             running = false;
                             break;
                         }
+
                     }
                 }
             }
@@ -134,5 +153,44 @@ public class Game {
         do {
             keyStroke = screen.pollInput();
         } while (keyStroke == null || keyStroke.getKeyType() != KeyType.Escape);
+    }
+
+    private static void startNextLevel(TerminalScreen screen) throws IOException {
+        if (currentLevelIndex < levels.size()) {
+            try {
+                level = levels.get(currentLevelIndex).getDeclaredConstructor().newInstance();
+                level.run(screen);
+                if (level.verifyAsteroidCollision()) {
+                    isGameRunning = false;
+                }
+                currentLevelIndex++;
+                displayMessageBetweenLevels(screen);
+            } catch (ReflectiveOperationException e) {
+                throw new RuntimeException("Error creating the next level.", e);
+            }
+        } else {
+            System.out.println("Congratulations! You completed all levels!");
+            running = false;
+        }
+    }
+
+    private static void displayMessageBetweenLevels(TerminalScreen screen) throws IOException {
+        screen.clear();
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setForegroundColor(TextColor.ANSI.WHITE);
+        graphics.setBackgroundColor(TextColor.ANSI.BLACK);
+
+        graphics.putString(27, 20, "You saved the planet!", SGR.BOLD);
+        graphics.putString(27, 21, "Traveling to the next planet...", SGR.BOLD);
+        graphics.putString(27, 22, "Press Enter when you're ready!", SGR.BOLD);
+
+        screen.refresh();
+        KeyStroke keyStroke;
+        do {
+            keyStroke = screen.pollInput();
+        } while (keyStroke == null || keyStroke.getKeyType() != KeyType.Enter);
+        if (keyStroke.getKeyType() == KeyType.Enter) {
+            isGameRunning = true;
+        }
     }
 }

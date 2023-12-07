@@ -66,6 +66,10 @@ public abstract class Planet{
                 System.exit(0);
                 break;
             }
+
+            if(verifyTokenCollection()){
+                return;
+            }
         } while ((tokenCount != 0) && (keyStroke == null) || (keyStroke.getKeyType() != KeyType.EOF && keyStroke.getKeyType() != KeyType.Escape));
     }
 
@@ -118,7 +122,6 @@ public abstract class Planet{
                 }
             }
         }
-        verifyAsteroidCollision();
     }
 
     public void updateAsteroidsY() {
@@ -161,7 +164,7 @@ public abstract class Planet{
 
     public void createLifetoken() {
         Random random = new Random();
-        int randomNumber = random.nextInt(3);
+        int randomNumber = random.nextInt(1);
         if (lifeTokencount > 0) {
             if (randomNumber <= 1) {
                 life = new Life(new Position(random.nextInt(1, 89), random.nextInt(1, 44)), backgroundColor);
@@ -276,8 +279,8 @@ public abstract class Planet{
         return true;
     }
 
-
-    public void verifyAsteroidCollision() {
+    public boolean verifyAsteroidCollision() {
+        /*
         for (Asteroid asteroid : asteroids) {
             for (Position asteroidPosition : asteroid.getPositions()) {
                 for (Position spaceshipPosition : spaceship.getPositions()) {
@@ -286,11 +289,23 @@ public abstract class Planet{
                             spaceship.loseLife();
                         }
                         asteroid.colides();
-
                     }
                 }
             }
         }
+
+         */
+        for (Asteroid asteroid : asteroids){
+            for (Position asteroidPosition : asteroid.getPositions()) {
+                for (Position spaceshipPosition : spaceship.getPositions()) {
+                    if (spaceshipPosition.equals(asteroidPosition)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+
     }
 
     public void verifyDeath(){
@@ -301,16 +316,16 @@ public abstract class Planet{
         // Additional logic for handling the end of a life (e.g., reset the level or show a game over screen)
     }
 
-    public void verifyTokenCollection() {
-        if (tokenCount == 0){
-            System.out.println("YOU WON!");
-            System.exit(0);
+    public boolean verifyTokenCollection() {
+        if (tokenCount == 0) {
+            return true;
         }
+        return false;
     }
 
     public void drawLives(TextGraphics graphics) {
         graphics.setForegroundColor(TextColor.ANSI.RED);
-        for (int i = 0;i < spaceship.getLives(); i++) {
+        for (int i = 0; i < spaceship.getLives(); i++) {
             graphics.putString(new TerminalPosition(87 - i * 2, 1), "<3", SGR.BOLD);
         }
     }
