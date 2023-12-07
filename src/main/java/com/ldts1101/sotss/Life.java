@@ -10,8 +10,8 @@ public class Life extends Element{
         super(TextColor.Factory.fromString("#999933"));
         image = new BasicTextImage(2,1);
         TextGraphics graphics = image.newTextGraphics();
-        graphics.setCharacter(0,0, new TextCharacter('<', TextColor.ANSI.RED, backgroundColor));
-        graphics.setCharacter(1,0, new TextCharacter('3', TextColor.ANSI.RED, backgroundColor));
+        graphics.setCharacter(0,0, new TextCharacter('<', TextColor.Factory.fromString("#7C0000"), backgroundColor));
+        graphics.setCharacter(1,0, new TextCharacter('3', TextColor.Factory.fromString("#7C0000"), backgroundColor));
         setPosition(position);
     }
 }

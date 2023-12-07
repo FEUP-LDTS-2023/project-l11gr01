@@ -82,7 +82,7 @@ public abstract class Planet{
             wall.draw(graphics);
         }
         //Draw level name
-        graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+        graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
         graphics.putString(new TerminalPosition(1,1), name, SGR.BOLD);
         //Draw spaceship
         spaceship.draw(graphics);
@@ -324,7 +324,7 @@ public abstract class Planet{
     }
 
     public void drawLives(TextGraphics graphics) {
-        graphics.setForegroundColor(TextColor.ANSI.RED);
+        graphics.setForegroundColor(TextColor.Factory.fromString("#7C0000"));
         for (int i = 0; i < spaceship.getLives(); i++) {
             graphics.putString(new TerminalPosition(87 - i * 2, 1), "<3", SGR.BOLD);
         }
