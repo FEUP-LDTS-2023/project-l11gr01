@@ -11,7 +11,7 @@ public class LifeToken extends Element{
         super();
         image = new BasicTextImage(1,1);
         TextGraphics graphics = image.newTextGraphics();
-        graphics.setCharacter(0,0, new TextCharacter(Symbols.HEART,TextColor.ANSI.RED,backgroundColor));
+        graphics.setCharacter(0,0, new TextCharacter(Symbols.HEART,TextColor.ANSI.RED, backgroundColor));
         setPosition(position);
     }
 }

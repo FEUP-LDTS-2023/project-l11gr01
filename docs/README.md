@@ -18,49 +18,38 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 ## IMPLEMENTED FEATURES
 
-> This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 - **Total of features:** 8
-- **Total implemented features:** 4
+- **Total implemented features:** 8
 
+## Features
 
-- **Main Menu with** - "Start", "How to Play" (Instructions Menu) and "Exit" buttons (Esc key used to exit game when not in the Main Menu).
-
-![img](images/MainMenu.png)
-![img](images/InstructionsMenu.png)
+- **Main Menu** - "Start", "How to Play" (Instructions Menu) and "Exit" buttons (Esc key used to exit game when not in the Main Menu).
 
 - **Spaceship movement** - The spaceship can move using the arrow keys (up, down, left, right).
 
-![img](images/spaceshipmovement.png)
-
-- **Asteroids movement** - Asteroids will move from top to bottom (vertically) randomly, one being created each second (for now). If there is a collision between the spaceship and one asteroid the user loses the game (for now).
-
-![img](images/asteroidsmovement.png)
+- **Asteroids movement** - Asteroids will move from top to bottom (vertically) randomly. Depending on the level, the creation delay and move delay for the asteroids are different.
 
 - **Tokens in each level** - Randomly generated tokens for each level that the user will be able to collect (next token appears when previous is collected).
 
-![img](images/tokenscollection.png)
+- **Increase difficulty by level** - For each level the user passes the difficulty will increase: more asteroids to dodge that will travel faster (asteroid creation and move delay decreased) + more tokens to collect to save the given planet and pass to the level.
 
-## PLANNED FEATURES
-
-> This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
-
-We are going to implement the following features in the given order.
-
-- **Increase difficulty by level** - For each level the user passes the difficulty will increase: more asteroids to doge that will travel faster + more tokens to collect to save the given planet (pass the level).
-
-![img](images/increasedifficulty.png)
-
-- **Lose lives** - Whenever the spaceship is hit by an asteroid it loses one life.
-
-![img](images/loselife.png)
+- **Lose lives** - Whenever the spaceship is hit by an asteroid it loses one life. At first the player (spaceship) has 3 lives. The player can check the lives he has in the top-right corner of the screen.
 
 - **Win lives for passing level** - For each level the user passes it will receive one extra life.
 
-![img](images/levellives.png)
-
 - **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life.
 
-![img](images/extralives.png)
+- **Level transition** - The game is composed of eight levels (each one represents one planet of the Solar System). There are intermediary "tabs" between the various levels. If the player presses Escape while in one of those tabs the next level starts.
+
+**In-game screenshots that illustrate the major features of the game:**
+
+????
+
+
+
+## PLANNED FEATURES
+
+All planned features where implemented for final delivery.
 
 ## DESIGN
 
@@ -107,22 +96,24 @@ The use of the Factory-Method Pattern in the current design allows the following
 
 - It eliminates the need to bind application-specific classes into our code.
 - The code only needs to deal with the planet class that is the product interface.
-- Hence it can work with any concrete planet that is created (concrete product).
+- Hence, it can work with any concrete planet that is created (concrete product).
 - When running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process
 
 ## KNOWN CODE SMELLS
 
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation.
 
-When the user opens the instructions in the main menu it cannot play the game without exiting it first and then re-running it.
+After the spaceship is hit by an asteroid (for example from above), if the spaceship is moved down against the same asteroid there is no hit registered. 
 
 ## TESTING
 
 - Screenshot of coverage report.
 
-![img](images/coveragereport.png)
+![img]() !substituir
 
 - Link to mutation testing report.
+
+!por 
 
 ## SELF-EVALUATION
 

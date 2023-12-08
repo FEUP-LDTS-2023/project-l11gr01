@@ -54,6 +54,6 @@ public abstract class Element {
     }
 
     public void draw(TextGraphics graphics) {
-        graphics.drawImage(new TerminalPosition(positions.get(0).getX(),positions.get(0).getY()), image);
+        graphics.drawImage(new TerminalPosition(positions.get(0).getX(), positions.get(0).getY()), image);
     };
 }

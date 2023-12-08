@@ -70,7 +70,7 @@ public abstract class Planet{
     }
 
     public void draw(TextGraphics graphics) {
-        //Set com.ldts1101.sotss.Planet's background color
+        //Set planet's background color
         graphics.setBackgroundColor(backgroundColor);
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(90,45), ' ');
         //Draw walls
