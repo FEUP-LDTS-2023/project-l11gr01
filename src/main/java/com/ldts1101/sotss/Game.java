@@ -9,7 +9,6 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.ldts1101.sotss.Planet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -80,7 +79,7 @@ public class Game {
                                     break;
                                 }
                                 case 1: {
-                                    howToPlay(screen.newTextGraphics(), 35, 1, screen);
+                                    howToPlay(screen.newTextGraphics(), screen);
                                     break;
                                 }
                                 case 2: {
@@ -103,11 +102,6 @@ public class Game {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-    private static void processKey(KeyStroke keyStroke) throws IOException {
-        level.processKey(keyStroke);
     }
 
     private static void drawMenu(TextGraphics graphics, int x, int y) {
@@ -133,18 +127,18 @@ public class Game {
         }
     }
 
-    private static void howToPlay(TextGraphics graphics, int x, int y, TerminalScreen screen) throws IOException {
+    private static void howToPlay(TextGraphics graphics, TerminalScreen screen) throws IOException {
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(x - 10, y, "Saviors of the Solar System - How to Play", SGR.BOLD);
-        graphics.putString(x - 10, y + 2, "Every brave hero needs to know how things work.", SGR.ITALIC);
-        graphics.putString(x - 14, y + 4, "Instructions:", SGR.BOLD);
-        graphics.putString(x - 14, y + 5, "Your task is to save our Solar System.");
-        graphics.putString(x - 14, y + 6, "Your spaceship will need to avoid the asteroids that");
-        graphics.putString(x - 14, y + 7, "will come in your way!");
-        graphics.putString(x - 14, y + 8, "Use the arrow keys in order to move the spaceship!");
-        graphics.putString(x - 14, y + 9, "Collect all the tokens in order to save the planet.");
-        graphics.putString(x - 14, y + 10, "Good luck on your journey!");
-        graphics.putString(x - 14, y + 11, "Press Escape to go back to the menu!",SGR.BOLD);
+        graphics.putString(35 - 10, 1, "Saviors of the Solar System - How to Play", SGR.BOLD);
+        graphics.putString(35 - 10, 1 + 2, "Every brave hero needs to know how things work.", SGR.ITALIC);
+        graphics.putString(35 - 14, 1 + 4, "Instructions:", SGR.BOLD);
+        graphics.putString(35 - 14, 1 + 5, "Your task is to save our Solar System.");
+        graphics.putString(35 - 14, 1 + 6, "Your spaceship will need to avoid the asteroids that");
+        graphics.putString(35 - 14, 1 + 7, "will come in your way!");
+        graphics.putString(35 - 14, 1 + 8, "Use the arrow keys in order to move the spaceship!");
+        graphics.putString(35 - 14, 1 + 9, "Collect all the tokens in order to save the planet.");
+        graphics.putString(35 - 14, 1 + 10, "Good luck on your journey!");
+        graphics.putString(35 - 14, 1 + 11, "Press Escape to go back to the menu!",SGR.BOLD);
 
 
         screen.refresh();

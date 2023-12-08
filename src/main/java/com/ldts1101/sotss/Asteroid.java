@@ -12,7 +12,7 @@ public class Asteroid extends Element {
     boolean colided = false;
 
     Asteroid(int x) {
-        super( TextColor.ANSI.RED);
+        super();
         setPosition(new Position(x,0));
         image = new BasicTextImage(1,1);
         TextGraphics graphics = image.newTextGraphics();

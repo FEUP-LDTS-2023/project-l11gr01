@@ -10,7 +10,7 @@ public class Spaceship extends Element {
     protected static int lives;
 
     public Spaceship(TextColor backgroundColor){
-        super(TextColor.ANSI.BLUE);
+        super();
 
         for (int x = 44; x <= 46; x++) {
             for (int y = 39; y <= 40; y++) {

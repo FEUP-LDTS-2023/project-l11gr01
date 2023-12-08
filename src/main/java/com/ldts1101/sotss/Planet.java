@@ -21,8 +21,7 @@ public abstract class Planet{
     protected List<Asteroid> asteroids;
     protected int tokenCount;
     public static int livesCount;
-    protected Token token;
-    private int lifeTokencount = 3;
+    protected Element token;
     protected int asteroidCount;
     private long lastAsteroidCreationTime = System.currentTimeMillis();
     private long lastAsteroidMoveTime = System.currentTimeMillis();
@@ -47,8 +46,7 @@ public abstract class Planet{
 
     public void run(TerminalScreen screen) throws IOException {
         KeyStroke keyStroke;
-        Random random = new Random();
-        token = new Token(new Position(random.nextInt(1,89), random.nextInt(1,44)), backgroundColor);
+        createToken();
         do {
             updateToken();
             updateAsteroidsY();
@@ -146,11 +144,13 @@ public abstract class Planet{
     }
 
     public void updateToken() {
-        Random random = new Random();
         for (Position spaceshipPosition : spaceship.getPositions()) {
             if (spaceshipPosition.equals(token.getPositions().get(0))) {
-                token = new Token(new Position(random.nextInt(1,89), random.nextInt(4,44)), backgroundColor);
-                tokenCount--;
+               createToken();
+               tokenCount--;
+               if (token instanceof LifeToken) {
+                   spaceship.addLife();
+               }
             }
         }
     }
@@ -282,6 +282,17 @@ public abstract class Planet{
 
     public boolean spaceshipDead() {
         return spaceship.died();
+    }
+
+    private void createToken() {
+        Random random = new Random();
+        int i = random.nextInt(0,2);
+        if (i == 1) {
+            token = new LifeToken(new Position(random.nextInt(1,89), random.nextInt(4,44)), backgroundColor);
+        }
+        else {
+            token = new Token(new Position(random.nextInt(1,89), random.nextInt(4,44)), backgroundColor);
+        }
     }
 
 }

@@ -15,13 +15,11 @@ public abstract class Element {
 
     //Member fields
     protected List<Position> positions;
-    protected TextColor color;
     protected TextImage image;
 
     //Constructor, after calling it need to set image and com.ldts1101.sotss.Position(s).
-    Element(TextColor color) {
+    Element() {
         this.positions = new ArrayList<>();
-        this.color = color;
     }
 
     public List<Position> getPositions() {

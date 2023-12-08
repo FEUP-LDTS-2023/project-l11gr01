@@ -8,10 +8,10 @@ import com.ldts1101.sotss.Position;
 
 public class Token extends Element {
     public Token(Position position, TextColor backgroundColor) {
-        super(TextColor.Factory.fromString("#999933"));
+        super();
         image = new BasicTextImage(1,1);
         TextGraphics graphics = image.newTextGraphics();
-        graphics.setCharacter(0,0, new TextCharacter('0',TextColor.ANSI.YELLOW_BRIGHT,backgroundColor));
+        graphics.setCharacter(0,0, new TextCharacter(Symbols.DIAMOND ,TextColor.ANSI.YELLOW_BRIGHT, backgroundColor));
         setPosition(position);
     }
 
