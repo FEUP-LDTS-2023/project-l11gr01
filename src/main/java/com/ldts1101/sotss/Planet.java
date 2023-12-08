@@ -122,7 +122,7 @@ public abstract class Planet{
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
             if (asteroids.size() < asteroidCount) {
-                int x = random.nextInt(1, 90);
+                int x = random.nextInt(1, 89);
                 asteroids.add(new Asteroid(x));
             }
             lastAsteroidCreationTime = currentTime;
@@ -259,10 +259,10 @@ public abstract class Planet{
             Position asteroidPosition = asteroid.getPositions().get(0);
             for (Position spaceshipPosition : spaceship.getPositions()) {
                 if (spaceshipPosition.equals(asteroidPosition)) {
-                    if (!asteroid.colided()) {
+                    if (!asteroid.collided()) {
                         spaceship.loseLife();
                     }
-                    asteroid.colides();
+                    asteroid.collides();
                 }
             }
         }

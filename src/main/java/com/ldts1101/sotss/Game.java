@@ -109,20 +109,20 @@ public class Game {
         graphics.putString(x + 1, y, "Saviors of the Solar System", SGR.BOLD);
         graphics.putString(x + 4, y + 2, "Welcome, our Savior!", SGR.ITALIC);
         graphics.putString(x, y + 4, "Press Enter to start playing!");
-        graphics.putString(x + 10, y + 6, "[Start]");
-        graphics.putString(x + 10, y + 7, "[How to Play]");
-        graphics.putString(x + 10, y + 8, "[Exit]");
+        graphics.putString(x + 11, y + 6, "[Start]");
+        graphics.putString(x + 8, y + 7, "[How to Play]");
+        graphics.putString(x + 11, y + 8, "[Exit]");
 
         graphics.setForegroundColor(TextColor.ANSI.GREEN);
         switch (selectedOption) {
             case 0:
-                graphics.putString(x + 10, y + 6, "[Start]");
+                graphics.putString(x + 11, y + 6, "[Start]");
                 break;
             case 1:
-                graphics.putString(x + 10, y + 7, "[How to Play]");
+                graphics.putString(x + 8, y + 7, "[How to Play]");
                 break;
             case 2:
-                graphics.putString(x + 10, y + 8, "[Exit]");
+                graphics.putString(x + 11, y + 8, "[Exit]");
                 break;
         }
     }
@@ -132,13 +132,14 @@ public class Game {
         graphics.putString(35 - 10, 1, "Saviors of the Solar System - How to Play", SGR.BOLD);
         graphics.putString(35 - 10, 1 + 2, "Every brave hero needs to know how things work.", SGR.ITALIC);
         graphics.putString(35 - 14, 1 + 4, "Instructions:", SGR.BOLD);
-        graphics.putString(35 - 14, 1 + 5, "Your task is to save our Solar System.");
-        graphics.putString(35 - 14, 1 + 6, "Your spaceship will need to avoid the asteroids that");
-        graphics.putString(35 - 14, 1 + 7, "will come in your way!");
-        graphics.putString(35 - 14, 1 + 8, "Use the arrow keys in order to move the spaceship!");
-        graphics.putString(35 - 14, 1 + 9, "Collect all the tokens in order to save the planet.");
-        graphics.putString(35 - 14, 1 + 10, "Good luck on your journey!");
-        graphics.putString(35 - 14, 1 + 11, "Press Escape to go back to the menu!",SGR.BOLD);
+        graphics.putString(35 - 14, 1 + 5, "Your task is to help the Saviors of the Universe");
+        graphics.putString(35 - 14, 1 + 6, "save the Solar System from a species of invaders.");
+        graphics.putString(35 - 14, 1 + 7, "Your spaceship will have to dodge the asteroids");
+        graphics.putString(35 - 14, 1 + 8, "thrown by the invaders!");
+        graphics.putString(35 - 14, 1 + 9, "Use the arrow keys in order to move the spaceship!");
+        graphics.putString(35 - 14, 1 + 10, "Collect all the tokens in order to save the planet.");
+        graphics.putString(35 - 14, 1 + 11, "Good luck on your journey!");
+        graphics.putString(35 - 14, 1 + 13, "Press Escape to go back to the menu!",SGR.BOLD);
 
 
         screen.refresh();
@@ -163,7 +164,7 @@ public class Game {
                 throw new RuntimeException("Error creating the next level.", e);
             }
         } else {
-            System.out.println("Congratulations! You completed all levels!");
+            System.out.println("Congratulations! You saved the Solar System from the invaders!");
             running = false;
         }
     }
@@ -174,9 +175,13 @@ public class Game {
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         graphics.setBackgroundColor(TextColor.ANSI.BLACK);
 
-        graphics.putString(27, 20, "You saved the planet!", SGR.BOLD);
-        graphics.putString(27, 21, "Traveling to the next planet...", SGR.BOLD);
-        graphics.putString(27, 22, "Press Enter when you're ready!", SGR.BOLD);
+        if (level.equals(Earth.class)){
+            graphics.putString(27, 20, "Congrats! You helped saving the Solar System!", SGR.BOLD);
+        }
+
+        graphics.putString(30, 20, "You saved the planet!", SGR.BOLD);
+        graphics.putString(27, 22, "Traveling to the next planet...", SGR.BOLD);
+        graphics.putString(27, 24, "Press Enter when you're ready!", SGR.BOLD);
 
         screen.refresh();
         KeyStroke keyStroke;

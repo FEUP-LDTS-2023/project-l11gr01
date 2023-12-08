@@ -27,6 +27,7 @@ public class Spaceship extends Element {
         graphics.setCharacter(2, 1, new TextCharacter('>', TextColor.ANSI.BLUE, backgroundColor));
     }
 
+
     public void setLives(int lives) {
         this.lives = lives;
     }
