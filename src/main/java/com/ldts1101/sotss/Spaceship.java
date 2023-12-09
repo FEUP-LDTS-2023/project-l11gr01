@@ -6,8 +6,6 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.BasicTextImage;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-import static com.ldts1101.sotss.Planet.livesCount;
-
 public class Spaceship extends Element {
     protected static int livesCount;
 

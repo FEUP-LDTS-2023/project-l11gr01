@@ -37,9 +37,9 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 - **Win lives for passing level** - For each level the user passes it will receive one extra life.
 
-- **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life. The Life tokens appear after one normal token is collected and have a 10% chance of appearing.
+- **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life. The Life tokens appear after one normal token is collected and have a 5% chance of appearing. If you don't catch one of those tokens right away after it appears and instead you go collect a normal token, there's a chance that the LifeToken disappears and is created in another position, thus increasing the difficulty.
 
-- **Level transition** - The game is composed of eight levels (each one represents one planet of the Solar System). There are intermediary "tabs" between the various levels. If the player presses Escape while in one of those tabs the next level starts.
+- **Level transition** - The game is composed of eight levels (each one represents one planet of the Solar System). There are intermediary "tabs" between the various levels. If the player presses Enter while in one of those tabs the next level starts.
 
 **In-game screenshots that illustrate the major features of the game:**
 
@@ -87,7 +87,7 @@ The following diagrams shows how the creator (Game class), the product (planet c
 These classes can be found in the following files:
 
 - [Game](Files/Game.java)
-- [Planet](Files/Planet.java)
+- [Planet](Files/Planet.java)    !!!!!atualizar!!!!
 - [Mercury](Files/Mercury.java)
 
 **Consequences**
@@ -103,7 +103,7 @@ The use of the Factory-Method Pattern in the current design allows the following
 
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation.
 
-After the spaceship is hit by an asteroid (for example from above), if the spaceship is moved down against the same asteroid there is no hit registered. 
+After the spaceship is hit by an asteroid (for example from above), if the spaceship is moved down against the same asteroid there is no hit registered.
 
 ## TESTING
 

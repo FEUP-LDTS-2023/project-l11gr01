@@ -5,7 +5,6 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
-import com.ldts1101.sotss.Position;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,13 +19,13 @@ public abstract class Planet{
     protected List<Wall> walls;
     protected List<Asteroid> asteroids;
     protected int tokenCount;
-    public static int livesCount;
+    protected static int livesCount = 3;
     protected Element token;
     protected Element lifeToken;
     protected int asteroidCount;
     private long lastAsteroidCreationTime = System.currentTimeMillis();
     private long lastAsteroidMoveTime = System.currentTimeMillis();
-    private long asteroidCreationDelay; // Milliseconds between each asteroid creation
+    private long asteroidCreationDelay;
     protected long asteroidMoveDelay = 100;
 
 
@@ -308,7 +307,7 @@ public abstract class Planet{
     private void createLifeToken() {
         Random random = new Random();
         int i = random.nextInt(0,100);
-        if (i <= 10) {
+        if (i <= 5) {
             lifeToken = new LifeToken(new Position(random.nextInt(1,89), random.nextInt(3,44)), backgroundColor);
         }
     }
