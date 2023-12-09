@@ -6,9 +6,10 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.BasicTextImage;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-public class Spaceship extends Element {
+import static com.ldts1101.sotss.Planet.livesCount;
 
-    protected static int lives;
+public class Spaceship extends Element {
+    protected static int livesCount;
 
     public Spaceship(TextColor backgroundColor){
         super();
@@ -33,19 +34,19 @@ public class Spaceship extends Element {
 
 
 
-    public void setLives(int lives) {
-        this.lives = lives;
+    public void setLives(int livesCount) {
+        this.livesCount = livesCount;
     }
 
-    public int getLives() {return lives;}
+    public int getLives() {return livesCount;}
 
     public void loseLife() {
-        lives--;
+        livesCount--;
     }
 
-    public void addLife() {lives++;}
+    public void addLife() {livesCount++;}
 
     public boolean died() {
-        return lives == 0;
+        return livesCount == 0;
     }
 }

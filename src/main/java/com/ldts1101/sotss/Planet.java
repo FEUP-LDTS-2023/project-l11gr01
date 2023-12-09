@@ -22,6 +22,7 @@ public abstract class Planet{
     protected int tokenCount;
     public static int livesCount;
     protected Element token;
+    protected Element lifeToken;
     protected int asteroidCount;
     private long lastAsteroidCreationTime = System.currentTimeMillis();
     private long lastAsteroidMoveTime = System.currentTimeMillis();
@@ -46,9 +47,12 @@ public abstract class Planet{
 
     public void run(TerminalScreen screen) throws IOException {
         KeyStroke keyStroke;
-        createToken();
+        //updateToken(); //createToken();
+        Random random = new Random();
+        token = new Token(new Position(random.nextInt(1,89), random.nextInt(3,44)), backgroundColor);
         do {
             updateToken();
+            updateLifeToken();
             updateAsteroidsY();
             draw(screen.newTextGraphics());
             screen.refresh();
@@ -88,6 +92,10 @@ public abstract class Planet{
         }
         //Draw Token
         token.draw(graphics);
+        //Draw LifeToken
+        if (lifeToken != null){
+            lifeToken.draw(graphics);
+        }
         //Draw level lives
         drawLives(graphics);
     }
@@ -141,16 +149,29 @@ public abstract class Planet{
             }
         }
         verifyAsteroidCollision();
+        if (spaceshipDead()){
+            System.exit(0);
+        }
     }
 
     public void updateToken() {
+        Random random = new Random();
         for (Position spaceshipPosition : spaceship.getPositions()) {
             if (spaceshipPosition.equals(token.getPositions().get(0))) {
-               createToken();
-               tokenCount--;
-               if (token instanceof LifeToken) {
-                   spaceship.addLife();
-               }
+                token = new Token(new Position(random.nextInt(1,89), random.nextInt(3,44)), backgroundColor); //createToken();
+                tokenCount--;
+                createLifeToken();
+            }
+        }
+    }
+
+    public void updateLifeToken() {
+        for (Position spaceshipPosition : spaceship.getPositions()) {
+            if (lifeToken != null) {
+                if (spaceshipPosition.equals(lifeToken.getPositions().get(0))) {
+                    spaceship.addLife();
+                    lifeToken = null;
+                }
             }
         }
     }
@@ -284,14 +305,11 @@ public abstract class Planet{
         return spaceship.died();
     }
 
-    private void createToken() {
+    private void createLifeToken() {
         Random random = new Random();
-        int i = random.nextInt(0,2);
-        if (i == 1) {
-            token = new LifeToken(new Position(random.nextInt(1,89), random.nextInt(4,44)), backgroundColor);
-        }
-        else {
-            token = new Token(new Position(random.nextInt(1,89), random.nextInt(4,44)), backgroundColor);
+        int i = random.nextInt(0,100);
+        if (i <= 10) {
+            lifeToken = new LifeToken(new Position(random.nextInt(1,89), random.nextInt(3,44)), backgroundColor);
         }
     }
 

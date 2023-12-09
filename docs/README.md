@@ -37,7 +37,7 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 - **Win lives for passing level** - For each level the user passes it will receive one extra life.
 
-- **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life.
+- **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life. The Life tokens appear after one normal token is collected and have a 10% chance of appearing.
 
 - **Level transition** - The game is composed of eight levels (each one represents one planet of the Solar System). There are intermediary "tabs" between the various levels. If the player presses Escape while in one of those tabs the next level starts.
 
