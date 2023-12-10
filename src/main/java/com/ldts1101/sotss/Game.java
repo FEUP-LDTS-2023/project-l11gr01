@@ -79,7 +79,7 @@ public class Game {
                                     break;
                                 }
                                 case 1: {
-                                    howToPlay(screen.newTextGraphics(), screen);
+                                    howToPlay(screen.newTextGraphics(), screen, terminalWindowX, terminalWindowY);
                                     break;
                                 }
                                 case 2: {
@@ -127,19 +127,21 @@ public class Game {
         }
     }
 
-    private static void howToPlay(TextGraphics graphics, TerminalScreen screen) throws IOException {
-        graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(35 - 10, 1, "Saviors of the Solar System - How to Play", SGR.BOLD);
-        graphics.putString(35 - 10, 1 + 2, "Every brave hero needs to know how things work.", SGR.ITALIC);
-        graphics.putString(35 - 14, 1 + 4, "Instructions:", SGR.BOLD);
-        graphics.putString(35 - 14, 1 + 5, "Your task is to help the Saviors of the Universe");
-        graphics.putString(35 - 14, 1 + 6, "save the Solar System from a species of invaders.");
-        graphics.putString(35 - 14, 1 + 7, "Your spaceship will have to dodge the asteroids");
-        graphics.putString(35 - 14, 1 + 8, "thrown by the invaders!");
-        graphics.putString(35 - 14, 1 + 9, "Use the arrow keys in order to move the spaceship!");
-        graphics.putString(35 - 14, 1 + 10, "Collect all the tokens in order to save the planet.");
-        graphics.putString(35 - 14, 1 + 11, "Good luck on your journey!");
-        graphics.putString(35 - 14, 1 + 13, "Press Escape to go back to the menu!",SGR.BOLD);
+    private static void howToPlay(TextGraphics graphics, TerminalScreen screen, int x, int y) throws IOException {
+        screen.clear();
+        graphics.setBackgroundColor(TextColor.ANSI.BLACK);
+
+        graphics.putString(5, 5, "Saviors of the Solar System - How to Play", SGR.BOLD);
+        graphics.putString(5, 7, "Every brave hero needs to know how things work.", SGR.ITALIC);
+        graphics.putString(5, 9, "Instructions:", SGR.BOLD);
+        graphics.putString(5, 11, "Your task is to help the Saviors of the Universe");
+        graphics.putString(5, 12, "save the Solar System from a species of invaders.");
+        graphics.putString(5, 13, "Your spaceship will have to dodge the asteroids");
+        graphics.putString(5, 14, "thrown by the invaders!");
+        graphics.putString(5, 15, "Use the arrow keys in order to move the spaceship!");
+        graphics.putString(5, 16, "Collect all the tokens in order to save the planet.");
+        graphics.putString(5, 17, "Good luck on your journey!");
+        graphics.putString(5, 19, "Press ESCAPE to go back to the menu!", SGR.BOLD);
 
 
         screen.refresh();
@@ -148,6 +150,10 @@ public class Game {
         do {
             keyStroke = screen.pollInput();
         } while (keyStroke == null || keyStroke.getKeyType() != KeyType.Escape);
+
+        screen.clear();
+        drawMenu(screen.newTextGraphics(), x,y);
+        screen.refresh();
     }
 
     private static void startNextLevel(TerminalScreen screen) throws IOException {
