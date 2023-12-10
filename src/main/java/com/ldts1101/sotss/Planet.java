@@ -29,7 +29,6 @@ public abstract class Planet{
     protected long asteroidMoveDelay = 100;
 
 
-    //Constructor, after calling it need to set asteroidCount.
     public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount, long asteroidDelay, int livesCount){
         this.backgroundColor = backgroundColor;
         this.tokenCount = tokenCount;

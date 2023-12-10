@@ -7,7 +7,7 @@ import com.googlecode.lanterna.graphics.BasicTextImage;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Spaceship extends Element {
-    protected static int livesCount;
+    protected static int livesCount = Planet.livesCount;
 
     public Spaceship(TextColor backgroundColor){
         super();
@@ -29,8 +29,6 @@ public class Spaceship extends Element {
         graphics.setCharacter(1, 2, new TextCharacter(Symbols.TRIANGLE_UP_POINTING_MEDIUM_BLACK, TextColor.ANSI.RED, backgroundColor));
         graphics.setCharacter(2, 2, new TextCharacter(' ', TextColor.ANSI.BLUE, backgroundColor));
     }
-
-
 
     public void setLives(int livesCount) {
         this.livesCount = livesCount;

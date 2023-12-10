@@ -3,23 +3,23 @@
 ## GAME DESCRIPTION
 
 In this exciting adventure game you shall help the Saviors of the Universe save the Solar System from a species of invaders that have the ability to control asteroids, by avoiding the asteroids thrown by them and collecting all the tokens throughout the eight different levels (representing the eight planets of the solar system).
-In each level, until reaching the final level "Earth" (which is the most difficult one), the difficulty level will increase. You will have more asteroids to dodge that will travel faster. You'll also have to collect more tokens to save the given planet. At the start you have 3 lives and for each planet you are able to save you'll receive an extra one. 
+In each level, until reaching the final level "Earth" (which is the most difficult one), the difficulty level will increase. You will have more asteroids to dodge that will travel faster. You'll also have to collect more tokens to save the given planet. At the start of each level you have 3 lives (even if you lose lives during a level they are reset to 3 at the start of a new level). 
 For every asteroid hit you lose one life.
 You can also collect special tokens that give you an extra life.
-Are you ready to save the solar system from the invaders?
+Are you ready to save the Solar System from the invaders?
 
 How to play:
 - #1 Run the program
 - #2 Either start the game (press enter in "Start" button), visit the "How to Play" section (Instructions) (play afterward) or exit ("Exit" button).
 - #3 Use the arrow keys (up, down, left, right) to dodge the asteroids and collect all the tokens to pass the level.
-- #4 Have fun helping the Savior of the Galaxy save the Solar System.
+- #4 Have fun helping the Saviors of the Universe save the Solar System.
 
 This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira (up202009302@up.pt) and Álvaro Torres (up202208954@up.pt) for LDTS 2023⁄24.
 
 ## IMPLEMENTED FEATURES
 
-- **Total of features:** 8
-- **Total implemented features:** 8
+- **Total of features:** 10
+- **Total implemented features:** 10
 
 ## Features
 
@@ -31,15 +31,17 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 - **Tokens in each level** - Randomly generated tokens for each level that the user will be able to collect (next token appears when previous is collected).
 
-- **Increase difficulty by level** - For each level the user passes the difficulty will increase: more asteroids to dodge that will travel faster (asteroid creation and move delay decreased) + more tokens to collect to save the given planet and pass to the level.
+- **Increase difficulty by level** - For each level the user passes the difficulty will increase: more asteroids to dodge that will travel faster (asteroid creation and move delay decreased) + more tokens to collect to save the given planet and pass to the next level.
 
 - **Lose lives** - Whenever the spaceship is hit by an asteroid it loses one life. At first the player (spaceship) has 3 lives. The player can check the lives he has in the top-right corner of the screen.
 
-- **Win lives for passing level** - For each level the user passes it will receive one extra life.
+- **Win lives for passing level** - For each level the user passes it will receive one extra life. We decided to de-implement this feature as it would make the game too easy. Instead, we opted for setting the number of lives (livesCount) to 3 for each level, even if lives are lost or won (via LifeToken) during a level, in the next level the livesCount is reset to 3, hence increasing the difficulty of the game.
 
-- **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life. The Life tokens appear after one normal token is collected and have a 5% chance of appearing. If you don't catch one of those tokens right away after it appears and instead you go collect a normal token, there's a chance that the LifeToken disappears and is created in another position, thus increasing the difficulty.
+- **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life, that is "usable" during the level in which it was collected. The Life tokens appear after one normal token is collected and have a 5% chance of appearing. If you don't catch one of those tokens right away after it appears, and instead you go collect a normal token, there's a chance that the given LifeToken disappears and a new one is created in another position, thus increasing the difficulty of collecting it.
 
 - **Level transition** - The game is composed of eight levels (each one represents one planet of the Solar System). There are intermediary "tabs" between the various levels. If the player presses Enter while in one of those tabs the next level starts.
+
+- **Game Over and Win Screens** - If the player loses, then a Game Over screen appears. If Enter is pressed the Main Menu appears so that the game may be played again, if Escape is pressed the program ends. When the player wins the game (passes level "Earth"), then a Win screen appears that has the same functionality as the Game Over tab.
 
 **In-game screenshots that illustrate the major features of the game:**
 
@@ -103,7 +105,7 @@ The use of the Factory-Method Pattern in the current design allows the following
 
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation.
 
-After the spaceship is hit by an asteroid (for example from above), if the spaceship is moved down against the same asteroid there is no hit registered.
+After the spaceship is hit by an asteroid (for example from above), if the spaceship is moved down against the same asteroid there is no hit registered (again). Each asteroid can only hit the spaceship once.
 
 ## TESTING
 

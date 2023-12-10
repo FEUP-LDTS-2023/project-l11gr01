@@ -4,8 +4,7 @@ import com.googlecode.lanterna.TextColor;
 
 public class Mars extends Planet {
     public Mars(){
-        super(TextColor.Factory.fromString("#E77D11"),"Mars",11,9,400, livesCount);
+        super(TextColor.Factory.fromString("#E77D11"),"Mars",12,10,400, livesCount);
         super.asteroidMoveDelay = 55;
-        super.livesCount = livesCount + 1;
     }
 }

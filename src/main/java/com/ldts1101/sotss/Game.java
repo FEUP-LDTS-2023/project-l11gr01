@@ -179,7 +179,7 @@ public class Game {
             graphics.putString(27, 20, "Congrats! You helped saving the Solar System!", SGR.BOLD);
         }
 
-        graphics.putString(30, 20, "You saved the planet!", SGR.BOLD);
+        graphics.putString(31, 20, "You saved the planet!", SGR.BOLD);
         graphics.putString(27, 22, "Traveling to the next planet...", SGR.BOLD);
         graphics.putString(27, 24, "Press Enter when you're ready!", SGR.BOLD);
 
