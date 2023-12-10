@@ -210,8 +210,8 @@ public class Game {
             graphics.putString(40, 20, "GAME OVER!", SGR.BOLD);
             graphics.putString(28, 22, "You couldn't save the Solar System.", SGR.ITALIC);
             graphics.putString(29, 24, "You can always try again though!", SGR.ITALIC);
-            graphics.putString(23, 26, "Press ESCAPE if you want to take a break, Savior!");
-            graphics.putString(24, 28, "Or ENTER if you want to take your revenge!");
+            graphics.putString(23, 26, "Press ESCAPE if you want to take a break, Savior!",SGR.BOLD);
+            graphics.putString(24, 28, "Or ENTER if you want to take your revenge!",SGR.BOLD);
 
             screen.refresh();
 
@@ -241,8 +241,8 @@ public class Game {
         graphics.putString(40, 20, "YOU WON!", SGR.BOLD);
         graphics.putString(30, 22, "You saved the Solar System!", SGR.ITALIC);
         graphics.putString(26, 24, "You are the hero the Solar System needed!", SGR.ITALIC);
-        graphics.putString(20, 26, "Press ENTER if you want to redo your impressive journey!");
-        graphics.putString(23,28,"Or ESCAPE so you can enjoy your deserved rest!");
+        graphics.putString(20, 26, "Press ENTER if you want to redo your impressive journey!",SGR.BOLD);
+        graphics.putString(23,28,"Or ESCAPE so you can enjoy your deserved rest!",SGR.BOLD);
 
         screen.refresh();
         KeyStroke keyStroke;
