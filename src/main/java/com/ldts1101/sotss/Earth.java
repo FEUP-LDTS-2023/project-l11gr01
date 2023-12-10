@@ -5,7 +5,7 @@ import com.ldts1101.sotss.Planet;
 
 public class Earth extends Planet {
     public Earth(){
-        super(TextColor.Factory.fromString("#088F8F"),"Earth",12,10, 300, livesCount + 1);
-        super.asteroidMoveDelay = 50;
+        super(TextColor.Factory.fromString("#088F8F"),"Earth",15,11, 300, livesCount + 1);
+        super.asteroidMoveDelay = 45;
     }
 }

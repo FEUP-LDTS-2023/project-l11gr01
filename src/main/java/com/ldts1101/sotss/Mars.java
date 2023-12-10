@@ -5,7 +5,7 @@ import com.ldts1101.sotss.Planet;
 
 public class Mars extends Planet {
     public Mars(){
-        super(TextColor.Factory.fromString("#E77D11"),"Mars",11,9,400, livesCount + 1);
-        super.asteroidMoveDelay = 55;
+        super(TextColor.Factory.fromString("#E77D11"),"Mars",13,10,400, livesCount + 1);
+        super.asteroidMoveDelay = 50;
     }
 }
