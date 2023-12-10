@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-
+    private static TerminalScreen screen;
     private static Planet level;
     private static boolean isGameRunning = false;
     private static int selectedOption = 0;
@@ -42,7 +42,7 @@ public class Game {
             Terminal terminal = terminalFactory.createTerminal();
 
             //Create screen
-            TerminalScreen screen = new TerminalScreen(terminal);
+            screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);
             screen.startScreen();
 
@@ -108,7 +108,7 @@ public class Game {
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         graphics.putString(x + 1, y, "Saviors of the Solar System", SGR.BOLD);
         graphics.putString(x + 4, y + 2, "Welcome, our Savior!", SGR.ITALIC);
-        graphics.putString(x, y + 4, "Press Enter to start playing!");
+        graphics.putString(x, y + 4, "Press ENTER to start playing!");
         graphics.putString(x + 11, y + 6, "[Start]");
         graphics.putString(x + 8, y + 7, "[How to Play]");
         graphics.putString(x + 11, y + 8, "[Exit]");
@@ -187,7 +187,7 @@ public class Game {
 
         graphics.putString(31, 20, "You saved the planet!", SGR.BOLD);
         graphics.putString(27, 22, "Traveling to the next planet...", SGR.BOLD);
-        graphics.putString(27, 24, "Press Enter when you're ready!", SGR.BOLD);
+        graphics.putString(27, 24, "Press ENTER when you're ready!", SGR.BOLD);
 
         screen.refresh();
         KeyStroke keyStroke;
@@ -196,6 +196,47 @@ public class Game {
         } while (keyStroke == null || keyStroke.getKeyType() != KeyType.Enter);
         if (keyStroke.getKeyType() == KeyType.Enter) {
             isGameRunning = true;
+        }
+    }
+
+    public static void displayGameOverScreen() throws IOException {
+        try{
+            screen.clear();
+
+            TextGraphics graphics = screen.newTextGraphics();
+            graphics.setForegroundColor(TextColor.ANSI.WHITE);
+            graphics.setBackgroundColor(TextColor.ANSI.BLACK);
+
+            graphics.putString(25, 20, "Game Over!", SGR.BOLD);
+            graphics.putString(25, 21, "You couldn't save the Solar System.", SGR.BOLD);
+            graphics.putString(25, 22, "You can always try again though!", SGR.BOLD);
+            graphics.putString(25, 23, "Press ESCAPE if you want to take a break, Savior!", SGR.BOLD);
+            graphics.putString(25, 24, "Or press ENTER if you want to take your revenge!", SGR.BOLD);
+
+            screen.refresh();
+
+            KeyStroke keyStroke;
+            do {
+                keyStroke = screen.pollInput();
+                if (keyStroke != null && keyStroke.getKeyType() == KeyType.Escape) {
+                    screen.close();
+                    System.exit(0);
+                }
+                if (keyStroke != null && keyStroke.getKeyType() == KeyType.Enter) {
+                    isGameRunning = false;
+                    restartGame();
+                }
+            } while (keyStroke == null || (keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.Enter));
+        } catch (IOException e) {
+            throw new RuntimeException("Issues displaying the Game Over Screen", e);
+        }
+    }
+
+    private static void restartGame() throws IOException{
+        currentLevelIndex = 0; //Goes back to Mercury
+        isGameRunning = true;
+        while (isGameRunning) {
+            startNextLevel(screen);
         }
     }
 }

@@ -123,7 +123,7 @@ public abstract class Planet{
         }
     }
 
-    public void updateAsteroidsY() {
+    public void updateAsteroidsY() throws IOException{
         Random random = new Random();
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
@@ -147,8 +147,10 @@ public abstract class Planet{
             }
         }
         verifyAsteroidCollision();
+
         if (spaceshipDead()){
-            System.exit(0);
+            Game.displayGameOverScreen();
+            return;
         }
     }
 
@@ -286,7 +288,6 @@ public abstract class Planet{
             }
         }
     }
-
 
     public boolean levelPassed() {
         return tokenCount == 0;
