@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-
+private static TerminalScreen screen;
     private static Planet level;
     private static boolean isGameRunning = false;
     private static int selectedOption = 0;
@@ -42,7 +42,7 @@ public class Game {
             Terminal terminal = terminalFactory.createTerminal();
 
             //Create screen
-            TerminalScreen screen = new TerminalScreen(terminal);
+            screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);
             screen.startScreen();
 
@@ -196,6 +196,36 @@ public class Game {
         } while (keyStroke == null || keyStroke.getKeyType() != KeyType.Enter);
         if (keyStroke.getKeyType() == KeyType.Enter) {
             isGameRunning = true;
+        }
+    }
+
+    public static void displayGameOverScreen() throws IOException{
+        try{
+            screen.clear();
+
+            TextGraphics graphics = screen.newTextGraphics();
+            graphics.setForegroundColor(TextColor.ANSI.WHITE);
+            graphics.setBackgroundColor(TextColor.ANSI.BLACK);
+
+            graphics.putString(25, 20, "Game Over!", SGR.BOLD);
+            graphics.putString(25, 21, "You couldn't save the Solar System.");
+            graphics.putString(25, 22, "You can always try again though!");
+            graphics.putString(25, 23, "Press ESCAPE to go back to the Start Menu", SGR.BOLD);
+
+            screen.refresh();
+
+            KeyStroke keyStroke;
+            do{
+                keyStroke = screen.pollInput();
+            } while(keyStroke == null || keyStroke.getKeyType() != KeyType.Escape);
+
+            if(keyStroke.getKeyType() == KeyType.Escape) {
+                screen.close();
+                running = false;
+                System.exit(0);
+            }
+        } catch (IOException e){
+            throw new RuntimeException("Issues displaying the Game Over Screen",e);
         }
     }
 }
