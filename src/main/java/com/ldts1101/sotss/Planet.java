@@ -308,8 +308,8 @@ public abstract class Planet{
 
     private void createLifeToken() {
         Random random = new Random();
-        int i = random.nextInt(0,100);
-        if (i <= 5) {
+        int i = random.nextInt(0,200);
+        if (i <= 2) {
             lifeToken = new LifeToken(new Position(random.nextInt(1,89), random.nextInt(3,44)), backgroundColor);
         }
     }

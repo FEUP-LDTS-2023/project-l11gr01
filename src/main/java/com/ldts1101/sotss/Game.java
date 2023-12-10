@@ -200,9 +200,8 @@ private static TerminalScreen screen;
         }
     }
 
-    public static void displayGameOverScreen() throws IOException{
-
-        try{
+    public static void displayGameOverScreen() throws IOException {
+        try {
             screen.clear();
 
             TextGraphics graphics = screen.newTextGraphics();
@@ -213,31 +212,34 @@ private static TerminalScreen screen;
             graphics.putString(25, 21, "You couldn't save the Solar System.", SGR.BOLD);
             graphics.putString(25, 22, "You can always try again though!", SGR.BOLD);
             graphics.putString(25, 23, "Press ESCAPE if you want to take a break Savior!", SGR.BOLD);
-            graphics.putString(25,24,"Or press ENTER if you want to take your revenge!", SGR.BOLD);
+            graphics.putString(25, 24, "Or press ENTER if you want to take your revenge!", SGR.BOLD);
 
             screen.refresh();
 
             KeyStroke keyStroke;
-            do{
+            do {
                 keyStroke = screen.pollInput();
-            } while(keyStroke == null || keyStroke.getKeyType() != KeyType.Escape);
-
-            if(keyStroke.getKeyType() == KeyType.Escape) {
-                screen.close();
-                System.exit(0);
-            }
-
-            if(keyStroke.getKeyType() == KeyType.Enter){
-                restartGame();
-            }
-        } catch (IOException e){
-            throw new RuntimeException("Issues displaying the Game Over Screen",e);
+                if (keyStroke != null && keyStroke.getKeyType() == KeyType.Escape) {
+                    screen.close();
+                    System.exit(0);
+                }
+                if (keyStroke != null && keyStroke.getKeyType() == KeyType.Enter) {
+                    isGameRunning = false;
+                    restartGame();
+                }
+            } while (keyStroke == null || (keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.Enter));
+        } catch (IOException e) {
+            throw new RuntimeException("Issues displaying the Game Over Screen", e);
         }
     }
 
-    private static void restartGame(){
+
+    private static void restartGame() throws IOException{
+
         currentLevelIndex = 0; //Goes back to Mercury
-        running = true;
-        screen.clear();
+        isGameRunning = true;
+        while (isGameRunning) {
+            startNextLevel(screen);
+        }
     }
 }
