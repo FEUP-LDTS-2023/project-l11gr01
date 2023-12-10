@@ -22,6 +22,7 @@ private static TerminalScreen screen;
     private static List<Class<? extends Planet>> levels;
     private static int currentLevelIndex = 0;
     private static boolean running = true;
+    private static boolean gameWon = false;
 
     public static void main(String[] args) {
         levels = new ArrayList<>();
@@ -166,7 +167,13 @@ private static TerminalScreen screen;
                     isGameRunning = false;
                 }
                 currentLevelIndex++;
-                displayMessageBetweenLevels(screen);
+                if (currentLevelIndex == levels.size()) {
+                    gameWon = true;
+                    displayGameWinScreen(screen);
+                } else {
+                    displayMessageBetweenLevels(screen);
+                }
+
             } catch (ReflectiveOperationException e) {
                 throw new RuntimeException("Error creating the next level.", e);
             }
@@ -200,7 +207,7 @@ private static TerminalScreen screen;
         }
     }
 
-    public static void displayGameOverScreen() throws IOException {
+    public static void displayGameOverScreen() {
         try {
             screen.clear();
 
@@ -233,6 +240,33 @@ private static TerminalScreen screen;
         }
     }
 
+    private static void displayGameWinScreen(TerminalScreen screen) throws IOException {
+        screen.clear();
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setForegroundColor(TextColor.ANSI.WHITE);
+        graphics.setBackgroundColor(TextColor.ANSI.BLACK);
+
+        graphics.putString(25, 20, "Congratulations!", SGR.BOLD);
+        graphics.putString(25, 21, "You saved the Solar System!", SGR.BOLD);
+        graphics.putString(25, 22, "You are the hero the universe needed!", SGR.BOLD);
+        graphics.putString(25, 24, "Press ENTER if you want to redo your impressive journey!", SGR.BOLD);
+        graphics.putString(25,25,"Or ESCAPE so you can enjoy your deserved rest!", SGR.BOLD);
+
+        screen.refresh();
+        KeyStroke keyStroke;
+        do {
+            keyStroke = screen.pollInput();
+            if (keyStroke != null && keyStroke.getKeyType() == KeyType.Escape) {
+                screen.close();
+                System.exit(0);
+            }
+            if (keyStroke != null && keyStroke.getKeyType() == KeyType.Enter) {
+                isGameRunning = false;
+                restartGame();
+            }
+        } while (keyStroke == null || (keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.Enter));
+
+    }
 
     private static void restartGame() throws IOException{
 
