@@ -22,7 +22,7 @@ public class Game {
     private static List<Class<? extends Planet>> levels;
     private static int currentLevelIndex = 0;
     private static boolean running = true;
-
+    private static boolean gameWon = false;
     public static void main(String[] args) {
         levels = new ArrayList<>();
         levels.add(Mercury.class);
@@ -165,13 +165,17 @@ public class Game {
                     isGameRunning = false;
                 }
                 currentLevelIndex++;
-                displayMessageBetweenLevels(screen);
+
+                if (currentLevelIndex == levels.size()) {
+                    gameWon = true;
+                    displayGameWinScreen(screen);
+                } else {
+                    displayMessageBetweenLevels(screen);
+                }
+
             } catch (ReflectiveOperationException e) {
                 throw new RuntimeException("Error creating the next level.", e);
             }
-        } else {
-            System.out.println("Congratulations! You saved the Solar System from the invaders!");
-            running = false;
         }
     }
 
@@ -180,10 +184,6 @@ public class Game {
         TextGraphics graphics = screen.newTextGraphics();
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         graphics.setBackgroundColor(TextColor.ANSI.BLACK);
-
-        if (level.equals(Earth.class)){
-            graphics.putString(27, 20, "Congrats! You helped saving the Solar System!", SGR.BOLD);
-        }
 
         graphics.putString(31, 20, "You saved the planet!", SGR.BOLD);
         graphics.putString(27, 22, "Traveling to the next planet...", SGR.BOLD);
@@ -199,7 +199,7 @@ public class Game {
         }
     }
 
-    public static void displayGameOverScreen() throws IOException {
+    public static void displayGameOverScreen() {
         try{
             screen.clear();
 
@@ -207,11 +207,11 @@ public class Game {
             graphics.setForegroundColor(TextColor.ANSI.WHITE);
             graphics.setBackgroundColor(TextColor.ANSI.BLACK);
 
-            graphics.putString(25, 20, "Game Over!", SGR.BOLD);
-            graphics.putString(25, 21, "You couldn't save the Solar System.", SGR.BOLD);
-            graphics.putString(25, 22, "You can always try again though!", SGR.BOLD);
-            graphics.putString(25, 23, "Press ESCAPE if you want to take a break, Savior!", SGR.BOLD);
-            graphics.putString(25, 24, "Or press ENTER if you want to take your revenge!", SGR.BOLD);
+            graphics.putString(40, 20, "GAME OVER!", SGR.BOLD);
+            graphics.putString(28, 22, "You couldn't save the Solar System.", SGR.ITALIC);
+            graphics.putString(29, 24, "You can always try again though!", SGR.ITALIC);
+            graphics.putString(23, 26, "Press ESCAPE if you want to take a break, Savior!");
+            graphics.putString(24, 28, "Or ENTER if you want to take your revenge!");
 
             screen.refresh();
 
@@ -232,8 +232,36 @@ public class Game {
         }
     }
 
+    private static void displayGameWinScreen(TerminalScreen screen) throws IOException {
+        screen.clear();
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setForegroundColor(TextColor.ANSI.WHITE);
+        graphics.setBackgroundColor(TextColor.ANSI.BLACK);
+
+        graphics.putString(40, 20, "YOU WON!", SGR.BOLD);
+        graphics.putString(29, 22, "You saved the Solar System!", SGR.ITALIC);
+        graphics.putString(28, 24, "You are the hero the Solar System needed!", SGR.ITALIC);
+        graphics.putString(22, 26, "Press ENTER if you want to redo your impressive journey!");
+        graphics.putString(24,28,"Or ESCAPE so you can enjoy your deserved rest!");
+
+        screen.refresh();
+        KeyStroke keyStroke;
+        do {
+            keyStroke = screen.pollInput();
+            if (keyStroke != null && keyStroke.getKeyType() == KeyType.Escape) {
+                screen.close();
+                System.exit(0);
+            }
+            if (keyStroke != null && keyStroke.getKeyType() == KeyType.Enter) {
+                isGameRunning = false;
+                restartGame();
+            }
+        } while (keyStroke == null || (keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.Enter));
+
+    }
+
     private static void restartGame() throws IOException{
-        currentLevelIndex = 0; //Goes back to Mercury
+        currentLevelIndex = 0; //Goes back to Mercury (first level)
         isGameRunning = true;
         while (isGameRunning) {
             startNextLevel(screen);

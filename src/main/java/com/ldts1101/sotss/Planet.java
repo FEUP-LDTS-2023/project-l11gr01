@@ -45,13 +45,12 @@ public abstract class Planet{
 
     public void run(TerminalScreen screen) throws IOException {
         KeyStroke keyStroke;
-        //updateToken(); //createToken();
         Random random = new Random();
         token = new Token(new Position(random.nextInt(1,89), random.nextInt(3,44)), backgroundColor);
         do {
             updateToken();
             updateLifeToken();
-            updateAsteroidsY();
+            updateAsteroids();
             draw(screen.newTextGraphics());
             screen.refresh();
             keyStroke = screen.pollInput();
@@ -98,32 +97,7 @@ public abstract class Planet{
         drawLives(graphics);
     }
 
-    public void updateAsteroidsX(){
-        Random random = new Random();
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
-            if (asteroids.size() < asteroidCount) {
-                int x = random.nextInt(1, 90);
-                asteroids.add(new Asteroid(x));
-            }
-            lastAsteroidCreationTime = currentTime;
-        }
-        if (currentTime - lastAsteroidMoveTime > asteroidMoveDelay) {
-            for (Asteroid asteroid : asteroids) {
-                asteroid.moveDown();
-            }
-            lastAsteroidMoveTime = currentTime;
-        }
-        for (int i = 0; i < asteroids.size(); i++) {
-            for (Position position : asteroids.get(i).getPositions()) {
-                if (position.getY() == 44) {
-                    asteroids.remove(i);
-                }
-            }
-        }
-    }
-
-    public void updateAsteroidsY() throws IOException{
+    public void updateAsteroids() {
         Random random = new Random();
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastAsteroidCreationTime > asteroidCreationDelay) {
@@ -150,7 +124,6 @@ public abstract class Planet{
 
         if (spaceshipDead()){
             Game.displayGameOverScreen();
-            return;
         }
     }
 
@@ -192,7 +165,7 @@ public abstract class Planet{
         }
     }
 
-    void processKey(KeyStroke keyStroke) throws IOException {
+    void processKey(KeyStroke keyStroke) {
         if(keyStroke != null){
             switch(keyStroke.getKeyType()){
                 case ArrowUp: {

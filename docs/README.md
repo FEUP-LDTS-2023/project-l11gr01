@@ -23,7 +23,7 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 ## Features
 
-- **Main Menu** - "Start", "How to Play" (Instructions Menu) and "Exit" buttons (Esc key used to exit game when not in the Main Menu).
+- **Main Menu** - "Start", "How to Play" (Instructions Menu) and "Exit" buttons (ESCAPE key used to exit game when not in the Main Menu).
 
 - **Spaceship movement** - The spaceship can move using the arrow keys (up, down, left, right).
 
@@ -41,7 +41,7 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 - **Level transition** - The game is composed of eight levels (each one represents one planet of the Solar System). There are intermediary "tabs" between the various levels. If the player presses Enter while in one of those tabs the next level starts.
 
-- **Game Over and Win Screens** - If the player loses, then a Game Over screen appears. If Enter is pressed the Main Menu appears so that the game may be played again, if Escape is pressed the program ends. When the player wins the game (passes level "Earth"), then a Win screen appears that has the same functionality as the Game Over tab.
+- **Game Over and Win Screens** - If the player loses, then a Game Over screen appears. If ENTER is pressed the game restarts (at the first level), if ESCAPE is pressed the program ends. When the player wins the game (passes level "Earth"), then a Win screen appears that has the same functionality as the Game Over tab.
 
 **In-game screenshots that illustrate the major features of the game:**
 

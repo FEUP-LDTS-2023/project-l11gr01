@@ -10,11 +10,9 @@ import java.util.List;
 
 public abstract class Element {
 
-    //Member fields
     protected List<Position> positions;
     protected TextImage image;
 
-    //Constructor, after calling it need to set image and com.ldts1101.sotss.Position(s).
     Element() {
         this.positions = new ArrayList<>();
     }
@@ -52,5 +50,5 @@ public abstract class Element {
 
     public void draw(TextGraphics graphics) {
         graphics.drawImage(new TerminalPosition(positions.get(0).getX(), positions.get(0).getY()), image);
-    };
+    }
 }
