@@ -105,6 +105,7 @@ private static TerminalScreen screen;
     }
 
     private static void drawMenu(TextGraphics graphics, int x, int y) {
+
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         graphics.putString(x + 1, y, "Saviors of the Solar System", SGR.BOLD);
         graphics.putString(x + 4, y + 2, "Welcome, our Savior!", SGR.ITALIC);
@@ -200,6 +201,7 @@ private static TerminalScreen screen;
     }
 
     public static void displayGameOverScreen() throws IOException{
+
         try{
             screen.clear();
 
@@ -208,9 +210,10 @@ private static TerminalScreen screen;
             graphics.setBackgroundColor(TextColor.ANSI.BLACK);
 
             graphics.putString(25, 20, "Game Over!", SGR.BOLD);
-            graphics.putString(25, 21, "You couldn't save the Solar System.");
-            graphics.putString(25, 22, "You can always try again though!");
-            graphics.putString(25, 23, "Press ESCAPE to go back to the Start Menu", SGR.BOLD);
+            graphics.putString(25, 21, "You couldn't save the Solar System.", SGR.BOLD);
+            graphics.putString(25, 22, "You can always try again though!", SGR.BOLD);
+            graphics.putString(25, 23, "Press ESCAPE if you want to take a break Savior!", SGR.BOLD);
+            graphics.putString(25,24,"Or press ENTER if you want to take your revenge!", SGR.BOLD);
 
             screen.refresh();
 
@@ -221,11 +224,20 @@ private static TerminalScreen screen;
 
             if(keyStroke.getKeyType() == KeyType.Escape) {
                 screen.close();
-                running = false;
                 System.exit(0);
+            }
+
+            if(keyStroke.getKeyType() == KeyType.Enter){
+                restartGame();
             }
         } catch (IOException e){
             throw new RuntimeException("Issues displaying the Game Over Screen",e);
         }
+    }
+
+    private static void restartGame(){
+        currentLevelIndex = 0; //Goes back to Mercury
+        running = true;
+        screen.clear();
     }
 }
