@@ -18,8 +18,8 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 ## IMPLEMENTED FEATURES
 
-- **Total of features:** 10
-- **Total implemented features:** 10
+- **Total of features:** 11
+- **Total implemented features:** 11
 
 ## Features
 
@@ -42,6 +42,8 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 - **Level transition** - The game is composed of eight levels (each one represents one planet of the Solar System). There are intermediary "tabs" between the various levels. If the player presses Enter while in one of those tabs the next level starts.
 
 - **Game Over and Win Screens** - If the player loses, then a Game Over screen appears. If ENTER is pressed the game restarts (at the first level), if ESCAPE is pressed the program ends. When the player wins the game (passes level "Earth"), then a Win screen appears that has the same functionality as the Game Over tab.
+
+- **Background music** - During the whole execution of the program the player will listen to the epic music "Cornfield Chase" from the soundtrack (Hans Zimmer) of the "Interstellar" movie. This will make the gameplay epic and excitingly thrilling.
 
 **In-game screenshots that illustrate the major features of the game:**
 
