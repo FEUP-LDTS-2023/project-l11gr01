@@ -26,10 +26,6 @@ public class Position {
         this.y = y;
     }
 
-    public Position getPosition(){
-        return new Position(this.x, this.y);
-    }
-
     @Override
     public boolean equals(Object o) {
         if(o == null || o.getClass() != this.getClass()) return false;
