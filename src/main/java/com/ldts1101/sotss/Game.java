@@ -23,6 +23,9 @@ public class Game {
     private static int currentLevelIndex = 0;
     private static boolean running = true;
     private static boolean gameWon = false;
+    private static final String SOUND_FILE_PATH = "background-sound.mp3";
+    private static BackgroundSound backgroundSound;
+
     public static void main(String[] args) {
         levels = new ArrayList<>();
         levels.add(Mercury.class);
@@ -52,6 +55,9 @@ public class Game {
             //Graphics object for outputting to the screen
             TextGraphics graphics = screen.newTextGraphics();
 
+            //Initialize BackgroundSound
+            backgroundSound = new BackgroundSound(SOUND_FILE_PATH);
+            backgroundSound.play();
 
             while (running) {
                 if (!isGameRunning) {
@@ -84,6 +90,7 @@ public class Game {
                                 }
                                 case 2: {
                                     running = false;
+                                    backgroundSound.stop();
                                     break;
                                 }
                             }
@@ -92,6 +99,7 @@ public class Game {
 
                         case Escape, EOF: {
                             running = false;
+                            backgroundSound.stop();
                             break;
                         }
 
@@ -219,6 +227,7 @@ public class Game {
             do {
                 keyStroke = screen.pollInput();
                 if (keyStroke != null && keyStroke.getKeyType() == KeyType.Escape) {
+                    backgroundSound.stop();
                     screen.close();
                     System.exit(0);
                 }
@@ -249,6 +258,7 @@ public class Game {
         do {
             keyStroke = screen.pollInput();
             if (keyStroke != null && keyStroke.getKeyType() == KeyType.Escape) {
+                backgroundSound.stop();
                 screen.close();
                 System.exit(0);
             }
