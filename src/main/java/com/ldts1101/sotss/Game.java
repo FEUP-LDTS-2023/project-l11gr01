@@ -23,7 +23,7 @@ public class Game {
     private static int currentLevelIndex = 0;
     private static boolean running = true;
     private static boolean gameWon = false;
-    private static final String SOUND_FILE_PATH = "background-sound.mp3";
+    private static final String SOUND_FILE_PATH = "src/main/resources/sound/background-sound.mp3";
     private static BackgroundSound backgroundSound;
 
     public static void main(String[] args) {
