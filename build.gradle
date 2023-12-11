@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'info.solidsoft.pitest' version '1.7.0'
+    id 'info.solidsoft.pitest' version '1.15.0'
     id 'application'
 }
 
@@ -29,14 +29,11 @@ test {
 }
 
 pitest {
-    junit5PluginVersion = '0.12'
+    targetClasses = ['org.ProjectLDTS.SaviorsOfTheSOlarSystem.*'] //?
+    junit5PluginVersion = '1.2.0'
     verbose = true
 }
 
-ext {
-    javaMainClass = "com.ldts1101.sotss.Game"
-}
-
 application {
-    mainClassName = javaMainClass
+    mainClassName = 'com.ldts1101.sotss.Game'
 }
