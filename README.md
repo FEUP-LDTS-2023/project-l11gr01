@@ -14,6 +14,36 @@ How to play:
 
 This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira (up202009302@up.pt) and Álvaro Torres (up202208954@up.pt) for LDTS 2023⁄24.
 
+For a more detailed version of this report click [here](docs/README.md)
+
 Screenshots of the game:
 
-???
+- Menus:
+
+Main Menu
+![img](docs/images/mainmenu.png)
+Instructions (How to Play) Menu:
+![img](docs/images/instructionsmenu.png)
+
+- Gameplay:
+
+Level Mercury (first level):
+![img](docs/images/levelmercury.png)
+Level Saturn (fourth level):
+![img](docs/images/levelsaturn.png)
+Level Mars (seventh level):
+![img](docs/images/levelmars.png)
+Level Earth (eight and last level):
+![img](docs/images/levelearth.png)
+
+- Intermediary Screen:
+
+![img](docs/images/intermediaryscreen.png)
+
+- Game Over and Win Screens:
+
+Game Over Screen:
+![img](docs/images/gameoverscreen.png)
+
+Win Screen:
+![img](docs/images/winscreen.png)
