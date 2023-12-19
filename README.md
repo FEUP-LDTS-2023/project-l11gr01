@@ -21,19 +21,29 @@ Screenshots of the game:
 - Menus:
 
 Main Menu
+
 ![img](docs/images/mainmenu.png)
+
 Instructions (How to Play) Menu:
+
 ![img](docs/images/instructionsmenu.png)
 
 - Gameplay:
 
 Level Mercury (first level):
+
 ![img](docs/images/levelmercury.png)
+
 Level Saturn (fourth level):
+
 ![img](docs/images/levelsaturn.png)
+
 Level Mars (seventh level):
+
 ![img](docs/images/levelmars.png)
+
 Level Earth (eight and last level):
+
 ![img](docs/images/levelearth.png)
 
 - Intermediary Screen:
@@ -43,7 +53,9 @@ Level Earth (eight and last level):
 - Game Over and Win Screens:
 
 Game Over Screen:
+
 ![img](docs/images/gameoverscreen.png)
 
 Win Screen:
+
 ![img](docs/images/winscreen.png)
