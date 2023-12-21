@@ -9,8 +9,13 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +40,16 @@ public class Game {
         levels.add(Earth.class);
 
         try {
+
+             AWTTerminalFontConfiguration fontConfig = loadSquareFont();
+
             //Create Terminal
             TerminalSize terminalSize = new TerminalSize(90, 45);
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setTerminalEmulatorTitle("Saviors of the Solar System");
             terminalFactory.setInitialTerminalSize(terminalSize);
+            terminalFactory.setForceAWTOverSwing(true);
+            terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
+
             Terminal terminal = terminalFactory.createTerminal();
 
             //Create screen
@@ -100,6 +111,10 @@ public class Game {
             }
             screen.close();
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (FontFormatException e) {
             throw new RuntimeException(e);
         }
     }
@@ -266,5 +281,18 @@ public class Game {
         while (isGameRunning) {
             startNextLevel(screen);
         }
+    }
+
+    private static AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
+        URL resource = Game.class.getClassLoader().getResource("square.ttf");
+        File fontFile = new File(resource.toURI());
+        Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(font);
+
+        Font loadedFont = font.deriveFont(Font.PLAIN, 13);
+        AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
+        return fontConfig;
     }
 }
