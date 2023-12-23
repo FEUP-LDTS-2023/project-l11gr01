@@ -9,13 +9,8 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +22,12 @@ public class Game {
     private static List<Class<? extends Planet>> levels;
     private static int currentLevelIndex = 0;
     private static boolean running = true;
+    @SuppressWarnings("unused")
     private static boolean gameWon = false;
+    private static final String SOUND_FILE_PATH = "src/main/resources/sound/background-sound.mp3";
+    private static BackgroundSound backgroundSound;
+
+    @SuppressWarnings("MissingCasesInEnumSwitch")
     public static void main(String[] args) {
         levels = new ArrayList<>();
         levels.add(Mercury.class);
@@ -40,16 +40,10 @@ public class Game {
         levels.add(Earth.class);
 
         try {
-
-             AWTTerminalFontConfiguration fontConfig = loadSquareFont();
-
             //Create Terminal
             TerminalSize terminalSize = new TerminalSize(90, 45);
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setTerminalEmulatorTitle("Saviors of the Solar System");
             terminalFactory.setInitialTerminalSize(terminalSize);
-            terminalFactory.setForceAWTOverSwing(true);
-            terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
-
             Terminal terminal = terminalFactory.createTerminal();
 
             //Create screen
@@ -63,6 +57,9 @@ public class Game {
             //Graphics object for outputting to the screen
             TextGraphics graphics = screen.newTextGraphics();
 
+            //Initialize BackgroundSound
+            backgroundSound = new BackgroundSound(SOUND_FILE_PATH);
+            backgroundSound.play();
 
             while (running) {
                 if (!isGameRunning) {
@@ -95,6 +92,7 @@ public class Game {
                                 }
                                 case 2: {
                                     running = false;
+                                    backgroundSound.stop();
                                     break;
                                 }
                             }
@@ -103,6 +101,7 @@ public class Game {
 
                         case Escape, EOF: {
                             running = false;
+                            backgroundSound.stop();
                             break;
                         }
 
@@ -111,10 +110,6 @@ public class Game {
             }
             screen.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        } catch (FontFormatException e) {
             throw new RuntimeException(e);
         }
     }
@@ -234,6 +229,7 @@ public class Game {
             do {
                 keyStroke = screen.pollInput();
                 if (keyStroke != null && keyStroke.getKeyType() == KeyType.Escape) {
+                    backgroundSound.stop();
                     screen.close();
                     System.exit(0);
                 }
@@ -264,6 +260,7 @@ public class Game {
         do {
             keyStroke = screen.pollInput();
             if (keyStroke != null && keyStroke.getKeyType() == KeyType.Escape) {
+                backgroundSound.stop();
                 screen.close();
                 System.exit(0);
             }
@@ -281,18 +278,5 @@ public class Game {
         while (isGameRunning) {
             startNextLevel(screen);
         }
-    }
-
-    private static AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
-        URL resource = Game.class.getClassLoader().getResource("square.ttf");
-        File fontFile = new File(resource.toURI());
-        Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
-
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        ge.registerFont(font);
-
-        Font loadedFont = font.deriveFont(Font.PLAIN, 13);
-        AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
-        return fontConfig;
     }
 }

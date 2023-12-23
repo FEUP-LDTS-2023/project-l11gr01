@@ -1,7 +1,8 @@
 plugins {
     id 'java'
-    id 'info.solidsoft.pitest' version '1.7.0'
+    id 'info.solidsoft.pitest' version '1.15.0'
     id 'application'
+    id 'net.ltgt.errorprone' version '3.1.0'
 }
 
 group = 'org.ProjectLDTS.SaviorsOfTheSolarSystem'
@@ -12,15 +13,15 @@ repositories {
 }
 
 dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-    testImplementation 'org.mockito:mockito-core:3.7.7'
-
     testImplementation 'net.jqwik:jqwik:1.5.1'
-
     implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
-
-
+    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'org.mockito:mockito-core:3.11.2'
+    implementation 'javazoom:jlayer:1.0.1'
+    errorprone 'com.google.errorprone:error_prone_core:2.23.0'
 }
 
 test {
@@ -30,14 +31,11 @@ test {
 }
 
 pitest {
-    junit5PluginVersion = '0.12'
+    targetClasses = ['org.ProjectLDTS.SaviorsOfTheSOlarSystem.*'] //?
+    junit5PluginVersion = '1.2.0'
     verbose = true
 }
 
-ext {
-    javaMainClass = "com.ldts1101.sotss.Game"
-}
-
 application {
-    mainClassName = javaMainClass
+    mainClassName = 'com.ldts1101.sotss.Game'
 }

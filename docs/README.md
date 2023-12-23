@@ -18,8 +18,8 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 ## IMPLEMENTED FEATURES
 
-- **Total of features:** 10
-- **Total implemented features:** 10
+- **Total of features:** 11
+- **Total implemented features:** 11
 
 ## Features
 
@@ -39,57 +39,104 @@ This project was developed by Tiago Martins (up202206640@up.pt), Tiago Oliveira 
 
 - **Extra lives that pop-up during game** - The user can catch special tokens that give an extra life, that is "usable" during the level in which it was collected. The Life tokens appear after one normal token is collected and have a 5% chance of appearing. If you don't catch one of those tokens right away after it appears, and instead you go collect a normal token, there's a chance that the given LifeToken disappears and a new one is created in another position, thus increasing the difficulty of collecting it.
 
-- **Level transition** - The game is composed of eight levels (each one represents one planet of the Solar System). There are intermediary "tabs" between the various levels. If the player presses Enter while in one of those tabs the next level starts.
+- **Level transition** - The game is composed of eight levels (each one represents one planet of the Solar System). There are intermediary screens between the various levels. If the player presses Enter while in one of those tabs the next level starts. Note that it is not able to end the program/quit the game when in these intermediary screens. You either go to the next level and then quit there or you die trying to save a given planet. There is no going back during the trips from one planet to another. You shall always fight the invaders or die trying :)
 
 - **Game Over and Win Screens** - If the player loses, then a Game Over screen appears. If ENTER is pressed the game restarts (at the first level), if ESCAPE is pressed the program ends. When the player wins the game (passes level "Earth"), then a Win screen appears that has the same functionality as the Game Over tab.
 
+- **Background music** - During the whole execution of the program the player will listen to the epic music "Cornfield Chase" from the soundtrack (Hans Zimmer) from the "Interstellar" movie. This will make the gameplay epic and excitingly thrilling.
+
 **In-game screenshots that illustrate the major features of the game:**
 
-????
+- Menus:
 
+Main Menu
 
+![img](images/mainmenu.png)
+
+Instructions (How to Play) Menu:
+
+![img](images/instructionsmenu.png)
+
+- Gameplay:
+
+Level Mercury (first level):
+
+![img](images/levelmercury.png)
+
+Level Saturn (fourth level):
+
+![img](images/levelsaturn.png)
+
+Level Mars (seventh level):
+
+![img](images/levelmars.png)
+
+Level Earth (eight and last level):
+
+![img](images/levelearth.png)
+
+- Intermediary Screen:
+
+![img](images/intermediaryscreen.png)
+
+- Game Over and Win Screens:
+
+Game Over Screen:
+
+![img](images/gameoverscreen.png)
+
+Win Screen:
+
+![img](images/winscreen.png)
 
 ## PLANNED FEATURES
 
-All planned features where implemented for final delivery.
+All planned features where successfully implemented for final delivery.
 
-## DESIGN
+## DESIGN PATTERNS
 
-> This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts:
+- UML classes diagram:
 
-- **Problem in Context.** The description of the design context and the concrete problem that motivated the instantiation of the pattern. Someone else other than the original developer should be able to read and understand all the motivations for the decisions made. When refering to the implementation before the pattern was applied, don’t forget to [link to the relevant lines of code](https://help.github.com/en/articles/creating-a-permanent-link-to-a-code-snippet) in the appropriate version.
-- **The Pattern.** Identify the design pattern to be applied, why it was selected and how it is a good fit considering the existing design context and the problem at hand.
-- **Implementation.** Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
-- **Consequences.** Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with those of alternative solutions.
+  ![img](Diagrams/UMLclasses.png)
 
+- Full UML classes diagram of the project:
+
+  ![img](Diagrams/UMLclassesfull.png)
+
+- Full UML classes diagram with dependencies:
+
+  ![img](Diagrams/UMLdependencies.png)
 
 ### EACH PLANET IS DIFFERENT BUT HAS THE SAME BASIS
 
 **Problem in Context**
 
-Every planet that represents a level of the game (there are eight different ones) has the same basis as all planets. The constructor for a planet has a backgroundColor, name, tokenCount and an asteroidCount. Every concrete planet is different in all these fields.
+Every planet that represents a level of the game (there are eight different ones) has the same basis as all planets. The constructor for a planet has a backgroundColor, name, tokenCount, an asteroidCount, an asteroidDelay and a livesCount. Every concrete planet is different in all these fields (except for the livesCount field).
 
 **The Pattern**
 
-We have applied the **Factory-Method** pattern. This pattern allows you to define an interface for creating the planet object (planet class), but let the subclasses (concrete planets) decide which class to instantiate. We decided to use this design pattern so that we could generalize the planet class once we had eight different concrete planets tha shall be created, thus when running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process. The responsibility knowing what implementation of planet to create is delegated to the several subclasses, so to change the concrete planet that is created we only need to change one class.
+We have applied the **Factory-Method** pattern. This pattern allows you to define an interface for creating the planet object (planet class), but let the subclasses (concrete planets) decide which class to instantiate. We decided to use this design pattern so that we could generalize the planet class once we had eight different concrete planets tha shall be created, thus when running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process. The responsibility of knowing what implementation of planet to create is delegated to the several subclasses, so to change the concrete planet that is created we only need to change one class.
 
 **Implementation**
 
-The following diagrams shows how the creator (Game class), the product (planet class), the concrete creators (subclasses of planet) and the concrete products (concrete planets) interact with each other. 
-
-- UML dependencies diagram:
-![img](Diagrams/UMLdependencies.png)
+The following diagrams shows how the creator (Game class), the product (Planet class), the concrete creators (subclasses of planet) and the concrete products (concrete planets) interact with each other. 
 
 - UML classes diagram:
+
 ![img](Diagrams/UMLclasses.png)
 
 - Full UML classes diagram of game implementation:
+
 ![img](Diagrams/UMLclassesfull.png)
+
+- Full UML classes diagram with dependencies:
+
+![img](Diagrams/UMLdependencies.png)
 
 These classes can be found in the following files:
 
 - [Game](Files/Game.java)
-- [Planet](Files/Planet.java)    !!!!!atualizar!!!!
+- [Planet](Files/Planet.java)
 - [Mercury](Files/Mercury.java)
 
 **Consequences**
@@ -101,9 +148,39 @@ The use of the Factory-Method Pattern in the current design allows the following
 - Hence, it can work with any concrete planet that is created (concrete product).
 - When running the game it will only need to access the concrete planets it needs, enabling a flexible and decoupled object creation process
 
-## KNOWN CODE SMELLS
+### OTHER DESIGN ASPECTS
+We intended to implement the Singleton Pattern that is partially present via the only instance of the Game class that exists during the program execution.
+We also intended to implement the MVC architectural pattern in our project. Our goal was first and foremost to have a solid and functional final product, only then would we think about implementing the MVC architectural pattern. Unfortunately we didn't have the time to implement it into our project.
 
-> This section should describe 3 to 5 different code smells that you have identified in your current implementation.
+## ERROR-PRONE WARNINGS
+
+We corrected some of the error-prone warnings of the code. Nonetheless, there are some that in our opinion, according to our implementation, aren't relevant, so we suppressed them. Here are the respective justifications for the suppressions of the most important error-prone warnings present in our code:
+
+src\main\java\com\ldts1101\sotss\Position.java:31: 
+error: [EqualsHashCode] Classes that override equals should also override hashCode.
+public boolean equals(Object o) {
+
+Justification: We didn't find it relevant to override the hashCode because when we use the equals method we don't store the object that is used in a collection afterward, so no broken behaviour shall arise.
+
+src\main\java\com\ldts1101\sotss\Planet.java:171: 
+warning: [MissingCasesInEnumSwitch] Non-exhaustive switch; either add a default or handle the remaining cases: Character, Escape, Backspace, and 32 others
+switch(keyStroke.getKeyType()){
+
+Justification: There is no need to define an action for Character, Escape, Backspace, and 32 others because they are not used.
+
+src\main\java\com\ldts1101\sotss\Game.java:71: 
+warning: [MissingCasesInEnumSwitch] Non-exhaustive switch; either add a default or handle the remaining cases: Character, Backspace, ArrowLeft, and 31 others
+switch (keyStroke.getKeyType()) {
+
+Justification: There is no need to define an action for Character, Backspace, ArrowLeft, and 31 others because they are not used.
+
+src\main\java\com\ldts1101\sotss\Planet.java:36: 
+warning: [StaticAssignmentInConstructor] This assignment is to a static field. Mutating static state from a constructor is highly error-prone.
+this.livesCount = livesCount;
+
+Justification: We kind of need to mutate static state from the "Planet" constructor because during a level the livesCount changes, either due to collisions with asteroids or due to the collection of LifeTokens. Even if in the beginning of each level the livesCount has the static value of 3 that value may change during each individual level. 
+
+## CODE SMELLS
 
 After the spaceship is hit by an asteroid (for example from above), if the spaceship is moved down against the same asteroid there is no hit registered (again). Each asteroid can only hit the spaceship once.
 
@@ -115,9 +192,11 @@ After the spaceship is hit by an asteroid (for example from above), if the space
 
 - Link to mutation testing report.
 
-!por 
+!por + screenshot
 
 ## SELF-EVALUATION
+
+The work was divided in a mutual way, and we all contributed with our best. It helped us to enrich our Java, design patterns and testing knowledge, as well as our team work.
 
 - Tiago Martins: 33,33333333%
 - Tiago Oliveira: 33,33333333%

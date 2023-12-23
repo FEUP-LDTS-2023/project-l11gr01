@@ -28,7 +28,7 @@ public abstract class Planet{
     private long asteroidCreationDelay;
     protected long asteroidMoveDelay = 100;
 
-
+    @SuppressWarnings("StaticAssignmentInConstructor")
     public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount, long asteroidDelay, int livesCount){
         this.backgroundColor = backgroundColor;
         this.tokenCount = tokenCount;
@@ -67,7 +67,7 @@ public abstract class Planet{
                 spaceship.addLife();
                 return;
             }
-        } while ((tokenCount != 0) && (keyStroke == null) || (keyStroke.getKeyType() != KeyType.EOF && keyStroke.getKeyType() != KeyType.Escape));
+        } while (((tokenCount != 0) && (keyStroke == null)) || (keyStroke.getKeyType() != KeyType.EOF && keyStroke.getKeyType() != KeyType.Escape));
     }
 
     public void draw(TextGraphics graphics) {
@@ -165,6 +165,7 @@ public abstract class Planet{
         }
     }
 
+    @SuppressWarnings("MissingCasesInEnumSwitch")
     void processKey(KeyStroke keyStroke) {
         if(keyStroke != null){
             switch(keyStroke.getKeyType()){
