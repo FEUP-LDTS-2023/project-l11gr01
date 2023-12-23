@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Asteroid</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.ldts1101.sotss</a>
+</div>
+
+<h1>Coverage Summary for Class: Asteroid (com.ldts1101.sotss)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Asteroid</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$dFCSMqA7</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$dSOLVkP8</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$fgKomNzc</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$jmsYgcIw</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$KO7xP6Vu</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$pCPiXauT</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$S7EaChor</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$sjiqMdS8</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$vpGY4jA9</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$y20U2G6q</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$1359206575$auxiliary$Yu9hDQ0m</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$1sG3QqeW</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$1WMjT0aP</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$7zeplSxS</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$8zCJszUH</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$bBJrp5yT</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$e44V0waI</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$F9GHyGn9</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$pOTLQmaZ</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$SBNrXEeM</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$vRMZB9qT</td>
+  </tr>
+  <tr>
+    <td class="name">Asteroid$MockitoMock$550454164$auxiliary$WVjDVPIR</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.ldts1101.sotss;
+&nbsp;
+&nbsp;import com.googlecode.lanterna.TextCharacter;
+&nbsp;import com.googlecode.lanterna.TextColor;
+&nbsp;import com.googlecode.lanterna.graphics.BasicTextImage;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;
+&nbsp;public class Asteroid extends Element {
+&nbsp;
+<b class="fc">&nbsp;    boolean collided = false;</b>
+&nbsp;
+&nbsp;    Asteroid(int x) {
+<b class="fc">&nbsp;        super();</b>
+<b class="fc">&nbsp;        setPosition(new Position(x,3));</b>
+<b class="fc">&nbsp;        image = new BasicTextImage(1,1);</b>
+<b class="fc">&nbsp;        TextGraphics graphics = image.newTextGraphics();</b>
+<b class="fc">&nbsp;        graphics.setCharacter(1,1, new TextCharacter(&#39;^&#39;, TextColor.ANSI.YELLOW_BRIGHT, TextColor.ANSI.BLACK));</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public boolean collided() {return collided;}</b>
+&nbsp;
+<b class="fc">&nbsp;    public void collides() {collided = true;}</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-21 18:49</div>
+</div>
+</body>
+</html>

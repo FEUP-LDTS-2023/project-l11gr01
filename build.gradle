@@ -5,7 +5,7 @@ plugins {
     id 'net.ltgt.errorprone' version '3.1.0'
 }
 
-group = 'org.ProjectLDTS.SaviorsOfTheSolarSystem'
+group = 'com.ldts1101.sotss'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -31,7 +31,7 @@ test {
 }
 
 pitest {
-    targetClasses = ['org.ProjectLDTS.SaviorsOfTheSOlarSystem.*'] //?
+    //targetClasses = ['com.ldts1101.sotss'] //?
     junit5PluginVersion = '1.2.0'
     verbose = true
 }
