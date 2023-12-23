@@ -1,0 +1,420 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Planet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.ldts1101.sotss</a>
+</div>
+
+<h1>Coverage Summary for Class: Planet (com.ldts1101.sotss)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Planet</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98%
+  </span>
+  <span class="absValue">
+    (149/152)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Planet$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98%
+  </span>
+  <span class="absValue">
+    (150/153)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.ldts1101.sotss;
+&nbsp;
+&nbsp;import com.googlecode.lanterna.*;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;import com.googlecode.lanterna.input.KeyStroke;
+&nbsp;import com.googlecode.lanterna.input.KeyType;
+&nbsp;import com.googlecode.lanterna.screen.TerminalScreen;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Random;
+&nbsp;
+&nbsp;public abstract class Planet{
+&nbsp;
+&nbsp;    protected String name;
+&nbsp;    protected TextColor backgroundColor;
+&nbsp;    protected Spaceship spaceship;
+&nbsp;    protected List&lt;Wall&gt; walls;
+&nbsp;    protected List&lt;Asteroid&gt; asteroids;
+&nbsp;    protected int tokenCount;
+<b class="fc">&nbsp;    protected static int livesCount = 3;</b>
+&nbsp;    protected Element token;
+&nbsp;    protected Element lifeToken;
+&nbsp;    protected int asteroidCount;
+<b class="fc">&nbsp;    private long lastAsteroidCreationTime = System.currentTimeMillis();</b>
+<b class="fc">&nbsp;    private long lastAsteroidMoveTime = System.currentTimeMillis();</b>
+&nbsp;    private long asteroidCreationDelay;
+<b class="fc">&nbsp;    protected long asteroidMoveDelay = 100;</b>
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;StaticAssignmentInConstructor&quot;)
+<b class="fc">&nbsp;    public Planet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount, long asteroidDelay, int livesCount){</b>
+<b class="fc">&nbsp;        this.backgroundColor = backgroundColor;</b>
+<b class="fc">&nbsp;        this.tokenCount = tokenCount;</b>
+<b class="fc">&nbsp;        this.asteroidCount = asteroidCount;</b>
+<b class="fc">&nbsp;        this.livesCount = livesCount;</b>
+<b class="fc">&nbsp;        this.spaceship = new Spaceship(backgroundColor);</b>
+<b class="fc">&nbsp;        this.walls = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        this.asteroids = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+<b class="fc">&nbsp;        this.asteroidCreationDelay = asteroidDelay;</b>
+<b class="fc">&nbsp;        this.spaceship.setLives(livesCount);</b>
+<b class="fc">&nbsp;        createWalls();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void run(TerminalScreen screen) throws IOException {
+&nbsp;        KeyStroke keyStroke;
+<b class="fc">&nbsp;        Random random = new Random();</b>
+<b class="fc">&nbsp;        token = new Token(new Position(random.nextInt(1,89), random.nextInt(3,44)), backgroundColor);</b>
+&nbsp;        do {
+<b class="fc">&nbsp;            updateToken();</b>
+<b class="fc">&nbsp;            updateLifeToken();</b>
+<b class="fc">&nbsp;            updateAsteroids();</b>
+<b class="fc">&nbsp;            draw(screen.newTextGraphics());</b>
+<b class="fc">&nbsp;            screen.refresh();</b>
+<b class="fc">&nbsp;            keyStroke = screen.pollInput();</b>
+<b class="fc">&nbsp;            if (keyStroke != null) {</b>
+<b class="fc">&nbsp;                processKey(keyStroke);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if(keyStroke != null &amp;&amp; keyStroke.getKeyType() == KeyType.Escape){</b>
+<b class="nc">&nbsp;                System.exit(0);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if(levelPassed()){</b>
+<b class="fc">&nbsp;                spaceship.addLife();</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="fc">&nbsp;        } while (((tokenCount != 0) &amp;&amp; (keyStroke == null)) || (keyStroke.getKeyType() != KeyType.EOF &amp;&amp; keyStroke.getKeyType() != KeyType.Escape));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void draw(TextGraphics graphics) {
+&nbsp;        //Set planet&#39;s background color
+<b class="fc">&nbsp;        graphics.setBackgroundColor(backgroundColor);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(90,45), &#39; &#39;);</b>
+&nbsp;        //Draw walls
+<b class="fc">&nbsp;        for (Wall wall : walls) {</b>
+<b class="fc">&nbsp;            wall.draw(graphics);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;        //Draw level name
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#000000&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(1,1), name, SGR.BOLD);</b>
+&nbsp;        //Draw spaceship
+<b class="fc">&nbsp;        spaceship.draw(graphics);</b>
+&nbsp;        //Draw asteroids
+<b class="fc">&nbsp;        for (Asteroid asteroid : asteroids) {</b>
+<b class="fc">&nbsp;            asteroid.draw(graphics);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;        //Draw Token
+<b class="fc">&nbsp;        token.draw(graphics);</b>
+&nbsp;        //Draw LifeToken
+<b class="fc">&nbsp;        if (lifeToken != null){</b>
+<b class="fc">&nbsp;            lifeToken.draw(graphics);</b>
+&nbsp;        }
+&nbsp;        //Draw level lives
+<b class="fc">&nbsp;        drawLives(graphics);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateAsteroids() {
+<b class="fc">&nbsp;        Random random = new Random();</b>
+<b class="fc">&nbsp;        long currentTime = System.currentTimeMillis();</b>
+<b class="fc">&nbsp;        if (currentTime - lastAsteroidCreationTime &gt; asteroidCreationDelay) {</b>
+<b class="fc">&nbsp;            if (asteroids.size() &lt; asteroidCount) {</b>
+<b class="fc">&nbsp;                int x = random.nextInt(1, 89);</b>
+<b class="fc">&nbsp;                asteroids.add(new Asteroid(x));</b>
+&nbsp;            }
+<b class="fc">&nbsp;            lastAsteroidCreationTime = currentTime;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (currentTime - lastAsteroidMoveTime &gt; asteroidMoveDelay) {</b>
+<b class="fc">&nbsp;            for (Asteroid asteroid : asteroids) {</b>
+<b class="fc">&nbsp;                asteroid.moveDown();</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;            lastAsteroidMoveTime = currentTime;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        for (int i = 0; i &lt; asteroids.size(); i++) {</b>
+<b class="fc">&nbsp;            for (Position position : asteroids.get(i).getPositions()) {</b>
+<b class="fc">&nbsp;                if (position.getY() == 44) {</b>
+<b class="fc">&nbsp;                    asteroids.remove(i);</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;        verifyAsteroidCollision();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (spaceshipDead()){</b>
+<b class="fc">&nbsp;            Game.displayGameOverScreen();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateToken() {
+<b class="fc">&nbsp;        Random random = new Random();</b>
+<b class="fc">&nbsp;        for (Position spaceshipPosition : spaceship.getPositions()) {</b>
+<b class="fc">&nbsp;            if (spaceshipPosition.equals(token.getPositions().get(0))) {</b>
+<b class="fc">&nbsp;                token = new Token(new Position(random.nextInt(1,89), random.nextInt(3,44)), backgroundColor); //createToken();</b>
+<b class="fc">&nbsp;                tokenCount--;</b>
+<b class="fc">&nbsp;                createLifeToken();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateLifeToken() {
+<b class="fc">&nbsp;        for (Position spaceshipPosition : spaceship.getPositions()) {</b>
+<b class="fc">&nbsp;            if (lifeToken != null) {</b>
+<b class="fc">&nbsp;                if (spaceshipPosition.equals(lifeToken.getPositions().get(0))) {</b>
+<b class="fc">&nbsp;                    spaceship.addLife();</b>
+<b class="fc">&nbsp;                    lifeToken = null;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private void createWalls() {
+&nbsp;        //Create walls for the left and right boundaries
+<b class="fc">&nbsp;        for (int y = 0; y &lt;= 44; y++) {</b>
+<b class="fc">&nbsp;            walls.add(new Wall(0, y));</b>
+<b class="fc">&nbsp;            walls.add(new Wall(89, y));</b>
+&nbsp;        }
+&nbsp;        // Create walls for the top and bottom boundaries
+<b class="fc">&nbsp;        for (int x = 0; x &lt;= 89; x++) {</b>
+<b class="fc">&nbsp;            walls.add(new Wall(x, 0));</b>
+<b class="fc">&nbsp;            walls.add(new Wall(x, 1));</b>
+<b class="fc">&nbsp;            walls.add(new Wall(x, 2));</b>
+<b class="fc">&nbsp;            walls.add(new Wall(x, 44));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;MissingCasesInEnumSwitch&quot;)
+&nbsp;    void processKey(KeyStroke keyStroke) {
+<b class="fc">&nbsp;        if(keyStroke != null){</b>
+<b class="fc">&nbsp;            switch(keyStroke.getKeyType()){</b>
+&nbsp;                case ArrowUp: {
+<b class="fc">&nbsp;                    if (canSpaceShipMoveUp()) {</b>
+<b class="fc">&nbsp;                        spaceship.moveUp();</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case ArrowDown: {
+<b class="fc">&nbsp;                    if (canSpaceShipMoveDown()) {</b>
+<b class="fc">&nbsp;                        spaceship.moveDown();</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case ArrowLeft: {
+<b class="fc">&nbsp;                    if (canSpaceShipMoveLeft()) {</b>
+<b class="fc">&nbsp;                        spaceship.moveLeft();</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;                case ArrowRight: {
+<b class="fc">&nbsp;                    if (canSpaceShipMoveRight()) {</b>
+<b class="fc">&nbsp;                        spaceship.moveRight();</b>
+&nbsp;                    }
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean canSpaceShipMoveUp() {
+<b class="fc">&nbsp;        for (Wall wall : walls) {</b>
+<b class="fc">&nbsp;            for (Position wallPosition : wall.getPositions()) {</b>
+<b class="fc">&nbsp;                for (Position spaceshipPosition : spaceship.getPositions()) {</b>
+<b class="fc">&nbsp;                    if (wallPosition.getX() == spaceshipPosition.getX() &amp;&amp; wallPosition.getY() == spaceshipPosition.getY() - 1) {</b>
+<b class="fc">&nbsp;                        return false;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean canSpaceShipMoveDown() {
+<b class="fc">&nbsp;        for (Wall wall : walls) {</b>
+<b class="fc">&nbsp;            for (Position wallPosition : wall.getPositions()) {</b>
+<b class="fc">&nbsp;                for (Position spaceshipPosition : spaceship.getPositions()) {</b>
+<b class="fc">&nbsp;                    if (wallPosition.getX() == spaceshipPosition.getX() &amp;&amp; wallPosition.getY() == spaceshipPosition.getY() + 1) {</b>
+<b class="fc">&nbsp;                        return false;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean canSpaceShipMoveLeft() {
+<b class="fc">&nbsp;        for (Wall wall : walls) {</b>
+<b class="fc">&nbsp;            for (Position wallPosition : wall.getPositions()) {</b>
+<b class="fc">&nbsp;                for (Position spaceshipPosition : spaceship.getPositions()) {</b>
+<b class="fc">&nbsp;                    if (wallPosition.getX() == spaceshipPosition.getX() - 1 &amp;&amp; wallPosition.getY() == spaceshipPosition.getY()) {</b>
+<b class="fc">&nbsp;                        return false;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean canSpaceShipMoveRight() {
+<b class="fc">&nbsp;        for (Wall wall : walls) {</b>
+<b class="fc">&nbsp;            for (Position wallPosition : wall.getPositions()) {</b>
+<b class="fc">&nbsp;                for (Position spaceshipPosition : spaceship.getPositions()) {</b>
+<b class="fc">&nbsp;                    if (wallPosition.getX() == spaceshipPosition.getX() + 1 &amp;&amp; wallPosition.getY() == spaceshipPosition.getY()) {</b>
+<b class="nc">&nbsp;                        return false;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void verifyAsteroidCollision() {
+<b class="fc">&nbsp;        for (Asteroid asteroid : asteroids) {</b>
+<b class="fc">&nbsp;            Position asteroidPosition = asteroid.getPositions().get(0);</b>
+<b class="fc">&nbsp;            for (Position spaceshipPosition : spaceship.getPositions()) {</b>
+<b class="fc">&nbsp;                if (spaceshipPosition.equals(asteroidPosition)) {</b>
+<b class="fc">&nbsp;                    if (!asteroid.collided()) {</b>
+<b class="fc">&nbsp;                        spaceship.loseLife();</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                    asteroid.collides();</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean levelPassed() {
+<b class="fc">&nbsp;        return tokenCount == 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void drawLives(TextGraphics graphics) {
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#7C0000&quot;));</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; spaceship.getLives(); i++) {</b>
+<b class="fc">&nbsp;            graphics.putString(new TerminalPosition(87 - i * 2, 1), &quot;&lt;3&quot;, SGR.BOLD);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean spaceshipDead() {
+<b class="fc">&nbsp;        return spaceship.died();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void createLifeToken() {
+<b class="fc">&nbsp;        Random random = new Random();</b>
+<b class="fc">&nbsp;        int i = random.nextInt(0,100);</b>
+<b class="fc">&nbsp;        if (i &lt;= 5) {</b>
+<b class="fc">&nbsp;            lifeToken = new LifeToken(new Position(random.nextInt(1,89), random.nextInt(3,44)), backgroundColor);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-23 11:53</div>
+</div>
+</body>
+</html>

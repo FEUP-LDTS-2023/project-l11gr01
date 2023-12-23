@@ -187,23 +187,23 @@ After the spaceship is hit by an asteroid (for example from above), if the space
 ## TESTING
 
 The final test coverage should be 100%, but as one needs to play the game in order to increase the coverage (run 'Game.main()' with Coverage), and it is not possible to make/simulate all possible actions/situations in one execution of the program 
-(game) as there are concurrent/opposing actions (losing and terminating execution vs losing and playing again (via ENTER) or winning the game vs using the ESCAPE key to exit the game), it is not possible to have a coverage of 100% sharp. While running the 'Game.main()' all possible scenarios of the game (that are not concurrent/opposing) shall happen (losing lives, collecting tokens, passing levels, winning or losing the game, etc.) in order to increase the coverage of the tests. One should also add the active suites to the current coverage report after finishing the execution of the 'Game.main()' with Coverage.
+(game) as there are concurrent/opposing actions (losing and terminating execution vs losing and playing again (via ENTER) or winning the game vs using the ESCAPE key to exit the game), it is not possible to have a coverage of 100% sharp. While running the 'Game.main()' all possible scenarios of the game (that are not concurrent/opposing) shall happen (losing lives, collecting tokens, passing levels, winning or losing the game, playing music until the end and letting it replay, etc.) in order to increase the coverage of the tests. One should also add the active suites to the current coverage report after finishing the execution of the 'Game.main()' with Coverage.
 
 - Screenshot of coverage report.
 
-![img](Testing/testcoverage.png)
+![img](Test/testcoverage.png)
 
 - Link to test coverage report.
 
-[Coverage report](Testing/index.html)
+[Coverage report](Test/index.html)
 
 - Screenshot of mutation testing report.
 
-![img](Testing/pitest/pitestreport.png)
+![img](Test/pitest/pitestreport.png)
 
 - Link to mutation testing report.
 
-[Pitest mutation testing](Testing/pitest/index.html)
+[Pitest mutation testing](Test/pitest/index.html)
 
 ## SELF-EVALUATION
 

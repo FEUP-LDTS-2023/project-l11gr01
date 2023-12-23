@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Spaceship</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.ldts1101.sotss</a>
+</div>
+
+<h1>Coverage Summary for Class: Spaceship (com.ldts1101.sotss)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Spaceship</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.ldts1101.sotss;
+&nbsp;
+&nbsp;import com.googlecode.lanterna.Symbols;
+&nbsp;import com.googlecode.lanterna.TextCharacter;
+&nbsp;import com.googlecode.lanterna.TextColor;
+&nbsp;import com.googlecode.lanterna.graphics.BasicTextImage;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;
+&nbsp;public class Spaceship extends Element {
+<b class="fc">&nbsp;    protected static int livesCount = Planet.livesCount;</b>
+&nbsp;
+&nbsp;    public Spaceship(TextColor backgroundColor){
+<b class="fc">&nbsp;        super();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int x = 44; x &lt;= 46; x++) {</b>
+<b class="fc">&nbsp;            for (int y = 39; y &lt;= 41; y++) {</b>
+<b class="fc">&nbsp;                setPosition(new Position(x, y));</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        image = new BasicTextImage(3,3);</b>
+<b class="fc">&nbsp;        TextGraphics graphics = image.newTextGraphics();</b>
+<b class="fc">&nbsp;        graphics.setCharacter(0, 0, new TextCharacter(&#39; &#39;, TextColor.ANSI.BLUE, backgroundColor));</b>
+<b class="fc">&nbsp;        graphics.setCharacter(1, 0, new TextCharacter(Symbols.TRIANGLE_UP_POINTING_BLACK, TextColor.ANSI.BLUE, backgroundColor));</b>
+<b class="fc">&nbsp;        graphics.setCharacter(2, 0, new TextCharacter(&#39; &#39;, TextColor.ANSI.BLUE, backgroundColor));</b>
+<b class="fc">&nbsp;        graphics.setCharacter(0, 1, new TextCharacter(Symbols.TRIANGLE_RIGHT_POINTING_MEDIUM_BLACK, TextColor.ANSI.BLUE, backgroundColor));</b>
+<b class="fc">&nbsp;        graphics.setCharacter(1, 1, new TextCharacter(Symbols.BLOCK_SOLID, TextColor.ANSI.BLUE, backgroundColor));</b>
+<b class="fc">&nbsp;        graphics.setCharacter(2, 1, new TextCharacter(Symbols.TRIANGLE_LEFT_POINTING_MEDIUM_BLACK, TextColor.ANSI.BLUE, backgroundColor));</b>
+<b class="fc">&nbsp;        graphics.setCharacter(0, 2, new TextCharacter(&#39; &#39;, TextColor.ANSI.BLUE, backgroundColor));</b>
+<b class="fc">&nbsp;        graphics.setCharacter(1, 2, new TextCharacter(Symbols.TRIANGLE_UP_POINTING_MEDIUM_BLACK, TextColor.ANSI.RED, backgroundColor));</b>
+<b class="fc">&nbsp;        graphics.setCharacter(2, 2, new TextCharacter(&#39; &#39;, TextColor.ANSI.BLUE, backgroundColor));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLives(int livesCount) {
+<b class="fc">&nbsp;        this.livesCount = livesCount;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public int getLives() {return livesCount;}</b>
+&nbsp;
+&nbsp;    public void loseLife() {
+<b class="fc">&nbsp;        livesCount--;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public void addLife() {livesCount++;}</b>
+&nbsp;
+&nbsp;    public boolean died() {
+<b class="fc">&nbsp;        return livesCount == 0;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-23 11:53</div>
+</div>
+</body>
+</html>
