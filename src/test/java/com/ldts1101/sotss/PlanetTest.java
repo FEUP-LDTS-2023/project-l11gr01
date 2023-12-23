@@ -84,37 +84,6 @@ public class PlanetTest {
         assertTrue(levelPassed);
     }
 
-    /*
-    @Test
-    public void testProcessKey() {
-        // Create a mock for the spaceship
-        Planet mockPlanet = mock(TestPlanet.class);
-        when(mockPlanet.canSpaceShipMoveUp()).thenReturn(true);
-        when(mockPlanet.canSpaceShipMoveDown()).thenReturn(true);
-        when(mockPlanet.canSpaceShipMoveLeft()).thenReturn(true);
-        when(mockPlanet.canSpaceShipMoveRight()).thenReturn(true);
-
-        Spaceship mockSpaceship = mock(Spaceship.class);
-        // Test ArrowUp
-        mockPlanet.processKey(new KeyStroke(KeyType.ArrowUp));
-        verify(mockSpaceship, times(1)).moveUp();
-
-        // Test ArrowDown
-        mockPlanet.processKey(new KeyStroke(KeyType.ArrowDown));
-        verify(mockSpaceship, times(1)).moveDown();
-
-        // Test ArrowLeft
-        mockPlanet.processKey(new KeyStroke(KeyType.ArrowLeft));
-        verify(mockSpaceship, times(1)).moveLeft();
-
-        // Test ArrowRight
-        mockPlanet.processKey(new KeyStroke(KeyType.ArrowRight));
-        verify(mockSpaceship, times(1)).moveRight();
-    }
-    */
-
-
-
     private static class TestPlanet extends Planet {
         public TestPlanet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount, long asteroidDelay, int livesCount) {
             super(backgroundColor, name, tokenCount, asteroidCount, asteroidDelay, livesCount);
