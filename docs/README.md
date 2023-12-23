@@ -186,24 +186,24 @@ After the spaceship is hit by an asteroid (for example from above), if the space
 
 ## TESTING
 
-The final test coverage should be 100%, but as one needs to play the game in order to increase the coverage (run 'Game.main()' with Coverage), and it is not possible to make/simulate all possible actions/situations in one execution of the program 
-(game) as there are concurrent/opposing actions (losing and terminating execution vs losing and playing again (via ENTER) or winning the game vs using the ESCAPE key to exit the game), it is not possible to have a coverage of 100% sharp. While running the 'Game.main()' all possible scenarios of the game (that are not concurrent/opposing) shall happen (losing lives, collecting tokens, passing levels, winning or losing the game, playing music until the end and letting it replay, etc.) in order to increase the coverage of the tests. One should also add the active suites to the current coverage report after finishing the execution of the 'Game.main()' with Coverage.
+The final test coverage should be 100%, but as one needs to play the game in order to increase the coverage (run 'Game.main()' with Coverage once after running all tests with coverage), and it is not possible to make/simulate all possible actions/situations in one execution of the program 
+(game) as there are concurrent/opposing actions (losing and terminating execution vs losing and playing again (via ENTER) or winning the game vs using the ESCAPE key to exit the game), it is not possible to have a coverage of 100% sharp. While running the 'Game.main()' all possible scenarios of the game (that are not concurrent/opposing) shall happen (losing lives, collecting tokens, passing levels, winning and losing the game, playing music until the end and letting it replay, etc.) in order to increase the coverage of the tests (this should be done in one execution of the program only). One should also add the active suites to the current coverage report after finishing the execution of the 'Game.main()' with Coverage. Also, as we have some exceptions in our code (especially in the Game and Background classes) those lines are not covered as those exceptions are never dealt with.
 
 - Screenshot of coverage report.
 
-![img](Test/testcoverage.png)
+![img](Testing/testcoverage.png)
 
 - Link to test coverage report.
 
-[Coverage report](Test/index.html)
+[Coverage report](Testing/index.html)
 
 - Screenshot of mutation testing report.
 
-![img](Test/pitest/pitestreport.png)
+![img](Testing/pitest/pitestreport.png)
 
 - Link to mutation testing report.
 
-[Pitest mutation testing](Test/pitest/index.html)
+[Pitest mutation testing](Testing/pitest/index.html)
 
 ## SELF-EVALUATION
 
