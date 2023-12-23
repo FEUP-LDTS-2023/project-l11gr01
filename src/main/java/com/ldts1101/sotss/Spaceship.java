@@ -31,7 +31,7 @@ public class Spaceship extends Element {
     }
 
     public void setLives(int livesCount) {
-        this.livesCount = livesCount;
+        Spaceship.livesCount = livesCount;
     }
 
     public int getLives() {return livesCount;}
