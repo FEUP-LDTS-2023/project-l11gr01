@@ -1,18 +1,13 @@
 package com.ldts1101.sotss;
-
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@SuppressWarnings({"DirectInvocationOnMock", "MockNotUsedInProduction"})
 public class PlanetTest {
     private Planet planet;
 
@@ -115,6 +110,7 @@ public class PlanetTest {
         mockPlanet.processKey(new KeyStroke(KeyType.ArrowRight));
         verify(mockSpaceship, times(1)).moveRight();
     }
+
 
     private static class TestPlanet extends Planet {
         public TestPlanet(TextColor backgroundColor, String name, int tokenCount, int asteroidCount, long asteroidDelay, int livesCount) {
